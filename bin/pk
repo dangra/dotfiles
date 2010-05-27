@@ -1,0 +1,8 @@
+#!/bin/sh
+telnet $1 20301 &
+pid=$!
+echo telneting
+sleep 2
+kill $pid
+echo sshing
+ssh $@

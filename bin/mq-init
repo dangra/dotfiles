@@ -1,0 +1,32 @@
+#!/bin/bash
+
+pushd $(hg root)
+[ -d .hg ]||{
+    echo 'No repository'
+    exit -1
+}
+
+reponame=$(basename $(hg root))
+
+if hg paths |grep -q 'mydeco.com'; then
+    mqpath="ssh://dev.mydeco.com/hg/users/daniel/mq-$reponame"
+elif hg paths |grep -q 'scrapy.org'; then
+    mqpath="ssh://hg.scrapy.org/users/daniel/mq-$reponame"
+else
+    echo 'no mq path'
+fi
+
+
+cat >>.hg/hgrc <<EOF
+[hooks]
+# Prevent "hg pull" if MQ patches are applied.
+prechangegroup.mq-no-pull = ! hg qtop > /dev/null 2>&1
+# Prevent "hg push" if MQ patches are applied.
+preoutgoing.mq-no-push = ! hg qtop > /dev/null 2>&1
+EOF
+
+hg qinit -c
+cat >>.hg/patches/.hg/hgrc <<EOF
+[paths]
+default = $mqpath
+EOF

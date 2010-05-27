@@ -1,0 +1,45 @@
+[ui]
+username = Daniel Grana <dangra@gmail.com>
+ssh = ssh -C
+ignore = ~/.hgignore
+
+[extensions]
+hgext.hgk =
+hgext.fetch =
+hgext.color =
+hgext.pager =
+hgext.mq =
+hgext.rebase =
+hgext.convert =
+hgext.purge =
+hgext.parentrevspec =
+hgext.bookmarks =
+hgext.graphlog =
+hgpaste = ~/src/hg/hg-paste/paste.py
+#hgext.hg-git = /home/dan/src/git/hg-git
+#hgext.extdiff =
+
+#[extdiff]
+#cdiff = vidiff argv(0) argv(1)
+#vimdiff = vim -f '+next' '+execute "DirDiff" argv(0) argv(1)'
+
+[diff]
+showfunc = 1
+nodates = 1
+git = 1
+
+[pager]
+pager = less -FRSXQ
+quiet = True
+attend = diff,status,log,qdiff,blame,annotate,pdiff,glog
+
+[alias]
+qstatus = status --rev -2:.
+untrack = rm -Af
+ipaste = paste --dest dpaste.org --url "https://paste.insophia.com" --usenetrc --user daniel
+
+[defaults]
+log = --limit 10
+addremove = --similarity 100
+paste = --dest dpaste.org
+

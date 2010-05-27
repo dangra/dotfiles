@@ -1,0 +1,23 @@
+" vim: set ft=vimperator:
+" Mappings
+"map <Right> gt
+"map <Left> gT
+
+map l gt
+map h gT
+map L :tabmove! +1<CR>
+map H :tabmove! -1<CR>
+
+" Options
+"set guioptions=Bn
+set guioptions=B
+"set titlestring=Vimperator Dev
+"set verbose=9
+"set complete=sbfh
+set activate=quickmark,paste
+
+" Abbreviations
+
+
+
+source! ~/.vimperatorrc.local

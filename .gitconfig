@@ -1,0 +1,15 @@
+[user]
+	name = Daniel Graña
+	email = dangra@gmail.com
+	signingkey = F86A39E8
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	showbranch = auto
+	grep = true
+[format]
+	signoff = true
+[color "diff"]
+	func = magenta
+	meta = yellow

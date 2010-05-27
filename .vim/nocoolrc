@@ -1,0 +1,6 @@
+" vim:ft=vim:
+
+nmap sn :split<CR>
+nmap se :split<space>
+nmap sj w_<CR>
+nmap sk W_<CR>

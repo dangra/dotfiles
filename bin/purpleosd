@@ -1,0 +1,72 @@
+#!/usr/bin/python2.4
+# -*- coding: utf8 -*-
+
+import dbus
+from dbus.mainloop.glib import DBusGMainLoop
+import gobject
+from pprint import pprint
+import re
+from htmlentitydefs import entitydefs, name2codepoint
+
+def writetopipe(txt):
+    f = open('/tmp/osd/im','w')
+    f.write(txt.encode('ascii','replace'))
+    f.close()
+
+def reveived_im_handler(*args, **kwargs):
+    sender  = args[1].split('@')[0]
+    message = unquotehtml(re.sub(r'<.*?>','', args[2]))
+    writetopipe("%s: %s" % (sender, message) )
+
+def convertentity2unicode(m): 
+    """ Convert a HTML entity into Unicode string """ 
+    try: 
+        if m.group(1)=='#': 
+            m2 = _NUMBER.search(m.group(2)) 
+            if m2.group(1):            
+                d = int(m2.group(2), 16) 
+            else: 
+                d = int(m2.group(2), 10) 
+            return unichr(d) 
+        else: 
+            return unichr(name2codepoint[m.group(2)])             
+    except ValueError: 
+        return m.group(0) 
+_NUMBER = re.compile('(x?)(.+)', re.IGNORECASE) 
+
+
+def unquotehtml(str):
+    """ Convert a HTML quoted string into Unicode string.   
+    Works with &#XX; and with &nbsp; &gt; etc. 
+    
+    Example:
+    >>> str = u"&lt;1234567890&gt;"
+    >>> s = unquotehtml(str)
+    >>> s
+    u'<1234567890>'
+    """
+    return _HTML_ENTITY.sub(convertentity2unicode, str)
+_HTML_ENTITY = re.compile(u"&(#?)([\da-z]{2,7}?);", re.UNICODE | re.IGNORECASE)
+
+
+if __name__ == '__main__':
+    DBusGMainLoop(set_as_default=True)
+    bus = dbus.SessionBus()
+    loop = gobject.MainLoop()
+
+    obj = None
+    while not obj:
+        try:
+            obj = bus.get_object("im.pidgin.purple.PurpleService", 
+                    "/im/pidgin/purple/PurpleObject")
+            purple = dbus.Interface(obj, "im.pidgin.purple.PurpleInterface")
+            purple.connect_to_signal('ReceivedImMsg',reveived_im_handler)
+            purple.connect_to_signal('ReceivedChatMsg',reveived_im_handler)
+            loop.run()
+        except:
+            import time
+            time.sleep(10)
+        if obj:
+            del obj
+    
+

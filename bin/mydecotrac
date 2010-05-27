@@ -1,0 +1,32 @@
+#!/bin/bash
+
+BASE='https://dev.mydeco.com/trac'
+
+if [ $1 ]; then
+    LOOKUP="$1"
+else
+    LOOKUP=`sselp`
+fi
+
+LOOKUP=`echo "$LOOKUP" |head -n1 |tr '_' ' '`
+LOOKUP=`echo "$LOOKUP" |sed -r -e 's/[^a-zA-Z0-9 #]//g'`
+LOOKUP=`echo "$LOOKUP" |awk '{print $1}'`
+
+shopt -s extglob
+
+case $LOOKUP in
+    "#"+([0-9]) ) 
+        value=${LOOKUP:1}
+        url="$BASE/ticket/$value"
+        ;;
+    r+([0-9]) ) 
+        value=${LOOKUP:1}
+        url="$BASE/changeset/$value"
+        ;;
+    +([0-9]) )
+        url="$BASE/changeset/$LOOKUP"
+        ;;
+esac
+
+[ $url ] && ~/bin/wwwtab "$url"
+

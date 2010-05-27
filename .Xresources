@@ -1,0 +1,39 @@
+! load color-specific resources for clients that have them
+#ifdef COLOR
+*customization: -color
+#endif
+
+XTerm*savedLines: 300
+!XTerm*Foreground: white
+!XTerm*Background: black
+XTerm*Foreground: black
+XTerm*Background: white
+
+xtighvncviewer*passwordDialog: true
+
+URxvt*termName: rxvt
+URxvt*foreground: white
+URxvt*background: black
+URxvt*scrollBar: none
+!URxvt*font: 6x13
+URxvt*font: -*-terminus-medium-r-normal-*-12-*-*-*-*-*-*-*
+URxvt*saveLines: 1024
+
+
+!URxvt.keysym.M-y: perl:mark-and-yank:activate_mark_mode
+!URxvt.keysym.M-u: perl:mark-and-yank:activate_mark_url_mode
+URxvt.keysym.M-u: perl:mark-yank-urls:activate_mark_mode
+!URxvt.reverseVideo: true
+URxvt.perl-lib: /home/dan/.urxvt/
+URxvt.perl-ext: selection,mark-yank-urls
+!URxvt.perl-ext: mark-and-yank
+URxvt.urlLauncher: firefox
+!
+!URxvt.perl-ext: mark-urls
+!URxvt.perl-ext-common: selection,selection-autotransform
+!URxvt.urlLauncher: opera
+!URxvt.urlLauncher: wwwtab
+!URxvt.urlLauncherOptions: -newpage
+
+!URxvt.selection-autotransform.0: s/^([^:[:space:]]+(\\d+):?$/:tabnew \\Q$1\\E\\x0d:$2\\x0d/
+

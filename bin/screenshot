@@ -1,0 +1,19 @@
+#!/bin/sh
+
+. ~/bin/functions
+
+basepath="$HOME/screenshot"
+
+[ ! -d $basepath ] && mkdir -p $basepath
+
+name="$basepath/shot-`date +%F_%H:%M:%S`"
+ifile="$name.xwd"
+ofile="$name.png"
+
+shotter="xwd -screen -root"
+
+$shotter >$ifile && {
+    convert $ifile $ofile && rm $ifile
+    znotify $ofile
+    [ -n $DISPLAY ] && qiv $ofile
+}

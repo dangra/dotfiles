@@ -1,0 +1,121 @@
+#!/usr/bin/python2.4
+
+import threading
+import pyosd
+import os
+import time
+import ConfigParser
+
+class MyOSD(pyosd.osd,object):
+    _type = 'string'
+    _pos = 'bottom'
+    _align = 'center'
+    _lines = 2
+
+    def __init__(self,*args,**kargs):
+        self._lines = int(kargs['lines'])
+        del kargs['lines']
+
+        super(MyOSD, self).__init__(lines=self._lines)
+
+        for k,v in kargs.items():
+            if k in (
+                    'timeout',
+                    'shadow_offset',
+                    'vertical_offset',
+                    'horizontal_offset',
+                    'outline_offset',
+                    ):
+                v = int(v) 
+            self.__getattribute__('set_%s' % k)(v)
+
+    def set_pos(self,arg):
+        self._pos = arg
+
+        if arg == 'top':
+            pos = pyosd.POS_TOP
+        elif arg == 'middle':
+            pos = pyosd.POS_MID
+        else: # arg == 'bottom':
+            pos = pyosd.POS_BOT
+
+        super(MyOSD,self).set_pos(pos)
+
+    def set_align(self,arg):
+        self._align = arg
+
+        if arg == 'left':
+            align = pyosd.ALIGN_LEFT
+        elif arg == 'center':
+            align = pyosd.ALIGN_CENTER
+        else: # arg == 'right':
+            align = pyosd.ALIGN_RIGHT
+
+        super(MyOSD,self).set_align(align)
+    
+    def set_type(self,arg):
+        self._type = arg
+
+    def display(self,arg,line=0):
+        if self._type == 'percent':
+            type = pyosd.TYPE_PERCENT
+            super(MyOSD,self).display(int(arg),type,line)
+
+        if self._type == 'slider':
+            type = pyosd.TYPE_SLIDER
+            super(MyOSD,self).display(int(arg),type,line)
+
+        if self._type == 'string':
+            type = pyosd.TYPE_STRING
+            super(MyOSD,self).display(str(arg),type,line)
+
+    def scroll_and_display(self,arg):
+        line = self._lines-1
+        if line > 0:
+            self.scroll()
+
+        self.display(arg,line=line)
+
+    def display_multiline(self,arg):
+        self.scroll(lines=self._lines-1)
+
+        line = 0
+        for txt in str(arg).split('\n'):
+            if line == self._lines:
+                self.scroll()
+                line-=1
+            self.display(txt,line)
+            line+=1
+
+def listen(fifo,id,widget):
+    f = open(fifo,'r')
+    while True:
+        s = f.read()
+        s = s.strip('\n')
+
+        if s:
+            for line in s.split('\n'):
+                widget.scroll_and_display(line)
+        time.sleep(.2)
+
+FIFO_DIR = "/tmp/osd"
+if not os.path.exists(FIFO_DIR):
+    os.mkdir(FIFO_DIR)
+
+def lunch(id,widget):
+    path = "%s/%s" % (FIFO_DIR,id)
+    
+    if not os.path.exists(path):
+        os.mkfifo(path,0622)
+
+    t = threading.Thread(target=listen, args=(path,s,widget))
+    #t.setDaemon(1)
+    t.start()
+
+cfg = ConfigParser.SafeConfigParser()
+cfg.read(os.path.expanduser('~/.onscreend'))
+
+for s in cfg.sections():
+    kargs = cfg._sections[s].copy()
+    del kargs['__name__']
+    lunch(s,MyOSD(**kargs))
