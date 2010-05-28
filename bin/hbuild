@@ -1,5 +1,0 @@
-#!/bin/sh
-[ x$1 = xclean ] && runhaskell Setup clean
-runhaskell Setup configure --user --prefix=$HOME
-runhaskell Setup build
-runhaskell Setup install --user
