@@ -1,5 +1,0 @@
-#!/bin/sh
-
-for share in `mount |grep ^// |cut -d' ' -f1`; do
-    sudo umount -l "$share"
-done
