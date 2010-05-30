@@ -1,3 +1,2 @@
 #!/bin/sh
-
 rdesktop -a 16 -g 1022x730 -k en-us -P -u admin $1 
