@@ -62,19 +62,15 @@ fi
     export $(xrandr -q | sed -nre 's/.*, current ([0-9]+) x ([0-9]+),.*/SCREEN_WIDTH=\1 SCREEN_HEIGHT=\2/;T;p')
 
 
-CONKY_TEXT='${cpu cpu0} ${loadavg 1 2 3} ${memperc} ${downspeed eth0} ${upspeed eth0}'
-PROMPT_COLOUR=cyan_bold
+PROMPT_COLOUR=yellow_bold
 
 FQDN=`hostname -f || hostname`
 SHORTDN=${FQDN/.*/}
 case $FQDN in
-    filo*)
-        PROMPT_COLOUR=yellow_bold;;
     triosko*)
         PROMPT_COLOUR=magenta_bold;;
     vanqak*)
         PROMPT_COLOUR=green_bold
-        CONKY_TEXT='${cpu cpu0} ${cpu cpu1} ${loadavg 1 2 3} ${memperc} ${downspeed wlan0} ${upspeed wlan0} ${battery}'
         ;;
     *dev.mydeco.com)
         PROMPT_COLOUR=cyan_bold

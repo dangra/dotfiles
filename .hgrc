@@ -15,7 +15,7 @@ hgext.purge =
 hgext.parentrevspec =
 hgext.bookmarks =
 hgext.graphlog =
-hgpaste = ~/src/hg/hg-paste/paste.py
+hgpaste = ~/.hgext/paste.py
 #hgext.hg-git = /home/dan/src/git/hg-git
 #hgext.extdiff =
 
