@@ -1,0 +1,19 @@
+# Sample minimal config file.  Copy this to ~/.offlineimaprc and edit to
+# suit to get started fast.
+
+[general]
+accounts = Insophia
+
+[Account Insophia]
+localrepository = insophia-local
+remoterepository = insophia-remote
+
+[Repository insophia-local]
+type = Maildir
+localfolders = ~/mail/insophia
+
+[Repository insophia-remote]
+type = IMAP
+remotehost = mail.insophia.com
+remoteuser = daniel@insophia.com
+nametrans = lambda foldername: re.sub('^INBOX\.*', '.', foldername)
