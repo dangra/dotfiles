@@ -1,0 +1,6 @@
+:message_patina:
+    :fg: red
+    :bg: default
+:alternate_patina: # next message header
+    :fg: yellow
+    :bg: default
