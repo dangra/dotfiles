@@ -1,6 +1,144 @@
-:message_patina:
-    :fg: red
-    :bg: default
-:alternate_patina: # next message header
-    :fg: yellow
-    :bg: default
+--- 
+:regular_buf: 
+  :fg: white
+  :bg: default
+:to_me: 
+  :fg: green
+  :bg: default
+:labellist_new: 
+  :attrs: 
+  - bold
+  :fg: white
+  :bg: default
+:status: 
+  :attrs: 
+  - bold
+  :fg: white
+  :bg: blue
+:completion_character: 
+  :attrs: 
+  - bold
+  :fg: white
+  :bg: default
+:starred: 
+  :attrs: 
+  - bold
+  :fg: yellow
+  :bg: default
+:cryptosig_unknown: 
+  :fg: cyan
+  :bg: default
+:index_old: 
+  :fg: white
+  :bg: default
+:modified_buffer: 
+  :attrs: 
+  - bold
+  :fg: yellow
+  :bg: default
+:starred_patina: 
+  :attrs: 
+  - bold
+  :fg: yellow
+  :bg: green
+:twiddle: 
+  :fg: blue
+  :bg: default
+:horizontal_selector_selected: 
+  :attrs: 
+  - bold
+  :fg: yellow
+  :bg: default
+:cryptosig_invalid: 
+  :attrs: 
+  - bold
+  :fg: yellow
+  :bg: red
+:index_new: 
+  :attrs: 
+  - bold
+  :fg: white
+  :bg: default
+:alternate_starred_patina: 
+  :attrs: 
+  - bold
+  :fg: yellow
+  :bg: blue
+:message_patina: 
+  :fg: black
+  :bg: green
+:date: 
+  :fg: white
+  :bg: default
+:horizontal_selector_unselected: 
+  :fg: cyan
+  :bg: default
+:quote: 
+  :fg: yellow
+  :bg: default
+:generic_notice_patina: 
+  :fg: cyan
+  :bg: default
+:attachment: 
+  :fg: cyan
+  :bg: default
+:label: 
+  :fg: yellow
+  :bg: default
+:index_starred: 
+  :attrs: 
+  - bold
+  :fg: yellow
+  :bg: default
+:option: 
+  :fg: white
+  :bg: default
+:alternate_patina: 
+  :fg: black
+  :bg: blue
+:search_highlight: 
+  :attrs: 
+  - bold
+  :fg: black
+  :bg: yellow
+:quote_patina: 
+  :fg: yellow
+  :bg: default
+:index_draft: 
+  :attrs: 
+  - bold
+  :fg: red
+  :bg: default
+:tagged: 
+  :attrs: 
+  - bold
+  :fg: yellow
+  :bg: default
+:missing_message: 
+  :fg: black
+  :bg: red
+:system_buf: 
+  :fg: blue
+  :bg: default
+:sig: 
+  :fg: yellow
+  :bg: default
+:sig_patina: 
+  :fg: yellow
+  :bg: default
+:labellist_old: 
+  :fg: white
+  :bg: default
+:draft_notification: 
+  :attrs: 
+  - bold
+  :fg: red
+  :bg: default
+:snippet: 
+  :fg: cyan
+  :bg: default
+:cryptosig_valid: 
+  :attrs: 
+  - bold
+  :fg: yellow
+  :bg: default

@@ -10,7 +10,7 @@
     - daniel@insophia.com
     :name: "Daniel Gra\xC3\xB1a"
 :ask_for_bcc: false
-:editor: /usr/bin/vim
+:editor: /usr/bin/vim + -f -c 'setlocal spell spelllang=en_us' -c 'set filetype=mail'
 :default_attachment_save_dir: ""
 :thread_by_subject: false
 :ask_for_subject: true
