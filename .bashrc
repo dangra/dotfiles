@@ -83,9 +83,10 @@ _prompt_command_oneletter() {
     PS1="${hostcolour}${SHORTDN}:${NOCOLOR}${!PROMPT_COLOUR}"
     PS1+="$shortpwd${NOCOLOR}${WHITE_BOLD}\\$ ${NOCOLOR}"
 
-    [[ $INSIDESCREEN ]] \
-        && echo -ne "\ek$shortpwd\e\\" \
-        || echo -ne "\e]0;$HOSTNAME:$shortpwd\007"
+	# XXX: breaks linux console prompt
+    #[[ $INSIDESCREEN ]] \
+    #    && echo -ne "\ek$shortpwd\e\\" \
+    #    || echo -ne "\e]0;$HOSTNAME:$shortpwd\007"
 }
 _prompt_command () {
     [[ -S $SSH_AUTH_SOCK ]] || source ~/.fwd-auth-sock #2>/dev/null
@@ -105,7 +106,8 @@ _title () {
         && echo -ne "\ek${_last}\e\\" \
         || echo -ne "\e]0;$HOSTNAME:${_last}\007"
 }
-trap _title DEBUG
+#XXX: breaks linux console prompt
+#trap _title DEBUG
 
 ### Others
 # if not inside screen session and a valid ssh auth socked is defined
