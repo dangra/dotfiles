@@ -6,8 +6,8 @@ export PATH=~/bin:/sbin:/usr/sbin:$PATH
 
 ### General
 shopt -s checkwinsize
-export EDITOR=$VI
-export VISUAL=$EDITOR
+export EDITOR=vi
+export VISUAL=vi
 export HISTCONTROL=erasedups
 export ACK_COLOR_FILENAME=magenta
 export ACK_COLOR_MATCH=red
@@ -35,7 +35,7 @@ export MYSQL_PS1="$(hostname -s) \u@\h \d> "
 . ~/.termcolors
 FQDN=`hostname -f || hostname`
 case $FQDN in
-    vanqak*)
+    vanqak*|vostro*)
         PROMPT_COLOUR=GREEN_BOLD
 		SHORTDN=''
         ;;

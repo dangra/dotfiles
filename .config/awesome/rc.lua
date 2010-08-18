@@ -1,4 +1,4 @@
-libpath  = '/home/dan/src/git/awesome/build/lib/'
+-- libpath  = '/home/dan/src/git/awesome/build/lib/'
 --package.path = libpath .. '?.lua;' .. libpath .. '?/init.lua;' .. package.path
 -- Standard awesome library
 require("awful")
@@ -93,7 +93,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
 
     -- Prompt
-    --awful.key({ modkey },            "r",     function () awful.util.spawn("gmrun") end),
+    awful.key({ modkey },            "r",     function () awful.util.spawn("gmrun") end),
     nil -- end
 )
 
