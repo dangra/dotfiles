@@ -16,6 +16,7 @@ hgext.parentrevspec =
 hgext.bookmarks =
 hgext.graphlog =
 hgpaste = ~/.hgext/paste.py
+hggit =
 #hgext.hg-git = /home/dan/src/git/hg-git
 #hgext.extdiff =
 
@@ -36,10 +37,11 @@ attend = diff,status,log,qdiff,blame,annotate,pdiff,glog
 [alias]
 qstatus = status --rev -2:.
 untrack = rm -Af
-ipaste = paste --dest dpaste.org --url "https://paste.insophia.com" --usenetrc --user daniel
+ipaste = paste --dest dpaste.org --url "https://paste.insophia.com" --usenetrc
+mpaste = paste --dest pastebin.dixo.net --url "https://dev.mydeco.com/pastebin/" --usenetrc
+qpaste = paste -r qtip
 
 [defaults]
 log = --limit 10
 addremove = --similarity 100
 paste = --dest dpaste.org
-
