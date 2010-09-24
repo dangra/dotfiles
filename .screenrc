@@ -36,7 +36,7 @@ bindkey -k F2 command   # Ctrl-A
 bindkey ^[1 prev # alt+1
 bindkey ^[2 next # alt+2
 
-deflogin on
+deflogin off
 autodetach on
 
 startup_message off
