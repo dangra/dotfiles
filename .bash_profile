@@ -1,4 +1,4 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
+# vi:ft=sh
 export PATH=~/bin:/sbin:/usr/sbin:$PATH
 
 # If not running interactively, don't do anything
