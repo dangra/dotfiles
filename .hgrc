@@ -17,7 +17,7 @@ hgext.bookmarks =
 hgext.graphlog =
 hgext.transplant =
 hgpaste = ~/.hgext/paste.py
-hggit =
+#hggit =
 #hgext.hg-git = /home/dan/src/git/hg-git
 #hgext.extdiff =
 
