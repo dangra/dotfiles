@@ -2,6 +2,11 @@
 username = Daniel Grana <dangra@gmail.com>
 ssh = ssh -C
 ignore = ~/.hgignore
+merge = vimdiff
+
+[merge-tools]
+vimdiff.executable = vim
+vimdiff.args = -d $base $local $output $other +close +close
 
 [extensions]
 hgext.hgk =
@@ -10,20 +15,12 @@ hgext.color =
 hgext.pager =
 hgext.mq =
 hgext.rebase =
-hgext.convert =
 hgext.purge =
 hgext.parentrevspec =
 hgext.bookmarks =
 hgext.graphlog =
 hgext.transplant =
 hgpaste = ~/.hgext/paste.py
-#hggit =
-#hgext.hg-git = /home/dan/src/git/hg-git
-#hgext.extdiff =
-
-#[extdiff]
-#cdiff = vidiff argv(0) argv(1)
-#vimdiff = vim -f '+next' '+execute "DirDiff" argv(0) argv(1)'
 
 [diff]
 showfunc = 1

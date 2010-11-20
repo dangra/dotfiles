@@ -30,6 +30,10 @@ alias mq='hg -R $(hg root)/.hg/patches'
 VI=`type -p vim || type -p vi`
 [[ -n $VI ]]&& alias vi=$VI vim=$VI
 
+workon () {
+	source ~/envs/$1/bin/activate
+}
+
 ### Prompts
 export MYSQL_PS1="$(hostname -s) \u@\h \d> "
 . ~/.termcolors
