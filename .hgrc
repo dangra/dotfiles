@@ -35,11 +35,11 @@ attend = diff,status,log,qdiff,blame,annotate,pdiff,glog
 [alias]
 qstatus = status --rev -2:.
 untrack = rm -Af
-ipaste = paste --dest dpaste.org --url "https://paste.insophia.com" --usenetrc
 mpaste = paste --dest pastebin.dixo.net --url "https://dev.mydeco.com/pastebin/" --usenetrc
-qpaste = paste -r qtip
+ipaste = paste --dest lodgeit --url "https://paste.insophia.com" --usenetrc
+ipastepy = ipaste --stdin --syntax python
 
 [defaults]
 log = --limit 10
 addremove = --similarity 100
-paste = --dest dpaste.org
+paste = --dest lodgeit
