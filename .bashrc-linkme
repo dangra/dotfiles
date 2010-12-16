@@ -63,9 +63,9 @@ case $FQDN in
 esac
 
 _oneletter_pwd() {
-    local DIRS=() ODIRS=()
+    local DIRS=() ODIRS=() MAX=0 SHORTEDPATH=''
     IFS=/ read -d '' -a DIRS < <(pwd|sed -e "s!^$HOME!~!")
-    local MAX=$((${#DIRS[@]} - 2)) # show 2 complete names at the end of pwd
+    MAX=$((${#DIRS[@]} - 2)) # show 2 complete names at the end of pwd
     for i in ${!DIRS[@]}; do
         if [[ $i -lt $MAX ]]; then
             ODIRS[$i]=${DIRS[$i]:0:1}
@@ -73,40 +73,24 @@ _oneletter_pwd() {
             ODIRS[$i]=${DIRS[$i]}
         fi
     done
-
-    local final=''
-#     local final=${ODIRS[0]}
-#     unset ${ODIRS[0]}
     for i in ${!ODIRS[@]}; do
-        final+=/${ODIRS[$i]}
+        SHORTEDPATH+=/${ODIRS[$i]}
     done
-    echo ${final:1}
+    echo ${SHORTEDPATH:1}
 }
 _prompt_command_oneletter() {
     local shortpwd=$(_oneletter_pwd)
     test `id -u` -eq 0 && hostcolour="$RED_BOLD" || hostcolour="$WHITE_BOLD"
     PS1="${hostcolour}${SHORTDN}:${NOCOLOR}${!PROMPT_COLOUR}"
     PS1+="$shortpwd${NOCOLOR}${WHITE_BOLD}\\$ ${NOCOLOR}"
-
+	[[ $VIRTUAL_ENV ]] && PS1="$YELLOW_BOLD(${VIRTUAL_ENV##*/})$NOCOLOR $PS1"
     [[ $INSIDESCREEN ]] && echo -ne "\ek$shortpwd\e\\"
-    #    || echo -ne "\e]0;$HOSTNAME:$shortpwd\007" # XXX: breaks linux console prompt
 }
 export PS1 PROMPT_COMMAND=_prompt_command_oneletter
 
 ### Completion
 [ -f /etc/bash_completion ] && source /etc/bash_completion
 complete -F _ssh pk
-
-### Title
-_title () {
-    local _last=$(history 1 |awk '{print $2}')
-    _last=$(basename "$_last")
-    [[ $INSIDESCREEN ]] \
-        && echo -ne "\ek${_last}\e\\" \
-        || echo -ne "\e]0;$HOSTNAME:${_last}\007"
-}
-#XXX: breaks linux console prompt
-#trap _title DEBUG
 
 ### Others
 if [ -n $SSH_AUTH_SOCK -a ! -L $SSH_AUTH_SOCK -a -S $SSH_AUTH_SOCK ]; then
