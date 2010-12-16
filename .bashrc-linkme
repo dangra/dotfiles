@@ -30,6 +30,7 @@ alias mq='hg -R $(hg root)/.hg/patches'
 VI=`type -p vim || type -p vi`
 [[ -n $VI ]]&& alias vi=$VI vim=$VI
 
+export VIRTUALENV_USE_DISTRIBUTE=1
 workon () {
 	source ~/envs/$1/bin/activate
 }
@@ -87,16 +88,10 @@ _prompt_command_oneletter() {
     PS1="${hostcolour}${SHORTDN}:${NOCOLOR}${!PROMPT_COLOUR}"
     PS1+="$shortpwd${NOCOLOR}${WHITE_BOLD}\\$ ${NOCOLOR}"
 
-	# XXX: breaks linux console prompt
-    #[[ $INSIDESCREEN ]] \
-    #    && echo -ne "\ek$shortpwd\e\\" \
-    #    || echo -ne "\e]0;$HOSTNAME:$shortpwd\007"
+    [[ $INSIDESCREEN ]] && echo -ne "\ek$shortpwd\e\\"
+    #    || echo -ne "\e]0;$HOSTNAME:$shortpwd\007" # XXX: breaks linux console prompt
 }
-_prompt_command () {
-    [[ -S $SSH_AUTH_SOCK ]] || source ~/.fwd-auth-sock #2>/dev/null
-    _prompt_command_oneletter
-}
-export PS1 PROMPT_COMMAND=_prompt_command
+export PS1 PROMPT_COMMAND=_prompt_command_oneletter
 
 ### Completion
 [ -f /etc/bash_completion ] && source /etc/bash_completion
@@ -114,10 +109,12 @@ _title () {
 #trap _title DEBUG
 
 ### Others
-# if not inside screen session and a valid ssh auth socked is defined
-# overwrite socket pointer file so screen sessions can be updated
-[[ -z "$INSIDESCREEN" && -S "$SSH_AUTH_SOCK" ]] \
-    && echo "export SSH_AUTH_SOCK='$SSH_AUTH_SOCK'" >~/.fwd-auth-sock
+if [ -n $SSH_AUTH_SOCK -a ! -L $SSH_AUTH_SOCK -a -S $SSH_AUTH_SOCK ]; then
+	ln -sf $SSH_AUTH_SOCK ~/.ssh_auth_sock
+	export SSH_AUTH_SOCK=~/.ssh_auth_sock
+fi
+
+# sup mail support
 export PATH=$HOME/src/git/sup/bin:$PATH
 export RUBYLIB=$HOME/src/git/sup/lib
 
