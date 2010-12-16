@@ -47,7 +47,7 @@ filetype indent on
 " Theme
 "
 "set background=light
-colorscheme desert      " colorscheme
+colorscheme desert256      " colorscheme
 hi DiffChange                                           ctermfg=red         ctermbg=gray
 hi Pmenu        guifg=#000000       guibg=#a6a190       ctermfg=black       ctermbg=gray
 hi PmenuSel     guifg=#ffffff       guibg=#133293       ctermfg=white       ctermbg=red
