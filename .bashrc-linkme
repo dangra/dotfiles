@@ -30,11 +30,6 @@ alias mq='hg -R $(hg root)/.hg/patches'
 VI=`type -p vim || type -p vi`
 [[ -n $VI ]]&& alias vi=$VI vim=$VI
 
-export VIRTUALENV_USE_DISTRIBUTE=1
-workon () {
-	source ~/envs/$1/bin/activate
-}
-
 ### Prompts
 export MYSQL_PS1="$(hostname -s) \u@\h \d> "
 . ~/.termcolors
@@ -93,10 +88,18 @@ export PS1 PROMPT_COMMAND=_prompt_command_oneletter
 complete -F _ssh pk
 
 ### Others
+# ssh session agnostic agent path
 if [ -n $SSH_AUTH_SOCK -a ! -L $SSH_AUTH_SOCK -a -S $SSH_AUTH_SOCK ]; then
 	ln -sf $SSH_AUTH_SOCK ~/.ssh_auth_sock
 	export SSH_AUTH_SOCK=~/.ssh_auth_sock
 fi
+
+# virtualenv options and mini wrapper with completion support
+export VIRTUALENV_USE_DISTRIBUTE=1 VIRTUAL_ENV_DISABLE_PROMPT=1
+export WORKON_HOME=~/envs
+workon () { source $WORKON_HOME/$1/bin/activate; }
+_workon() { COMPREPLY=( $(cd $WORKON_HOME; ls -d ${COMP_WORDS[1]}*) ); }
+complete -o default -o nospace -F _workon workon
 
 # sup mail support
 export PATH=$HOME/src/git/sup/bin:$PATH
