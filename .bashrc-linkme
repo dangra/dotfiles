@@ -19,13 +19,11 @@ export ACK_COLOR_MATCH=red
 
 ### Aliases
 [ "$TERM" != "dumb" ] && {
-    eval "`dircolors -b`"
+	eval "$(dircolors -b)"
     alias ls='ls --color=auto' 
 }
 alias ll='ls -l'
 alias grep='grep --color'
-alias ygrep="grep -E -R --include='*.py'"
-alias t=todo.sh
 alias mq='hg -R $(hg root)/.hg/patches'
 VI=`type -p vim || type -p vi`
 [[ -n $VI ]]&& alias vi=$VI vim=$VI
