@@ -95,7 +95,7 @@ hi SpecialKey ctermfg=gray ctermbg=black
 nmap sT :%s/\s\+$//<CR>
 
 " pylint
-map ,y :!export PYTHONPATH=~/src/hg/scrapy/scrapy/xlib ;pylint %<CR>
+map ,y :!pylint %<CR>
 
 " hg
 map ,au :!hg annotate -u % \| less<CR>
