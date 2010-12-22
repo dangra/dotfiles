@@ -27,7 +27,7 @@ ip = IPython.ipapi.get()
 import os   
 
 def main():   
-    execf('~/.ipython/virtualenv.py')
+    #execf('~/.ipython/virtualenv.py')
 
     # uncomment if you want to get ipython -p sh behaviour
     # without having to use command line switches  
