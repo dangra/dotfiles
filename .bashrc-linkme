@@ -19,7 +19,7 @@ export ACK_COLOR_MATCH=red
 
 ### Aliases
 [ "$TERM" != "dumb" ] && {
-	eval "$(dircolors -b)"
+    eval "$(dircolors -b)"
     alias ls='ls --color=auto' 
 }
 alias ll='ls -l'
@@ -28,31 +28,46 @@ alias mq='hg -R $(hg root)/.hg/patches'
 VI=`type -p vim || type -p vi`
 [[ -n $VI ]]&& alias vi=$VI vim=$VI
 
+### Used terminal colours
+# http://en.wikipedia.org/wiki/ANSI_escape_code
+# foreground in range 30-37, # background in range 40-47
+# black=0 red=1 green=2 yellow=3 blue=3 magenta=5 cyan=6 white=7
+# normal=0 bright=1 faint=2
+_term_colour() { eval "$1='\[\e[$2m\]'"; }
+_term_colour ANSIReset 0
+_term_colour NormalRed "0;31"
+_term_colour LightGreen "1;32"
+_term_colour LightYellow "1;33"
+_term_colour LightMagenta "1;35"
+_term_colour LightCyan "1;36"
+_term_colour LightWhite "1;37"
+_term_colour FaintGray "2;37"
+unset _term_colour
+
 ### Prompts
 export MYSQL_PS1="$(hostname -s) \u@\h \d> "
-. ~/.termcolors
 FQDN=`hostname -f || hostname`
 case $FQDN in
     vanqak*|vostro*)
-        PROMPT_COLOUR=GREEN_BOLD
-		SHORTDN=''
+        PROMPT_COLOUR=LightGreen
+        SHORTDN=''
         ;;
     triosko*)
-        PROMPT_COLOUR=MAGENTA_BOLD
-		SHORTDN=${FQDN/.*/}
-		;;
+        PROMPT_COLOUR=LightMagenta
+        SHORTDN=${FQDN/.*/}
+        ;;
     *dev.mydeco.com)
-        PROMPT_COLOUR=CYAN_BOLD
+        PROMPT_COLOUR=LightCyan
         SHORTDN=${FQDN/.mydeco.com/}
         ;;
     *mydeco.com)
-        PROMPT_COLOUR=YELLOW_BOLD
+        PROMPT_COLOUR=LightYellow
         SHORTDN=${FQDN/.mydeco.com/}
         ;;
-	*)
-		PROMPT_COLOUR=YELLOW_BOLD
-		SHORTDN=${FQDN/.*/}
-		;;
+    *)
+        PROMPT_COLOUR=LightYellow
+        SHORTDN=${FQDN/.*/}
+        ;;
 esac
 
 _oneletter_pwd() {
@@ -71,15 +86,18 @@ _oneletter_pwd() {
     done
     echo ${SHORTEDPATH:1}
 }
-_prompt_command_oneletter() {
-    local shortpwd=$(_oneletter_pwd)
-    test `id -u` -eq 0 && hostcolour="$RED_BOLD" || hostcolour="$WHITE_BOLD"
-    PS1="${hostcolour}${SHORTDN}:${NOCOLOR}${!PROMPT_COLOUR}"
-    PS1+="$shortpwd${NOCOLOR}${WHITE_BOLD}\\$ ${NOCOLOR}"
-	[[ $VIRTUAL_ENV ]] && PS1="$YELLOW_BOLD(${VIRTUAL_ENV##*/})$NOCOLOR $PS1"
-    [[ $INSIDESCREEN ]] && echo -ne "\ek$shortpwd\e\\"
+
+_prompt_command() {
+    local sp=$(_oneletter_pwd) hc=$LightWhite ve
+    [[ $USER = root ]] && hc="$NormalRed"
+    [[ $VIRTUAL_ENV ]] && ve=" ${LightYellow}${VIRTUAL_ENV##*/}"
+    PS1="${FaintGray}\A" # prefix time in HH:MM format
+    PS1+="${ve}" # virtualenv
+    PS1+=" ${hc}${SHORTDN}:${!PROMPT_COLOUR}" # hostname
+    PS1+="${sp}${LightWhite}\\$ ${ANSIReset}" # shorted path
+    [[ $INSIDESCREEN ]] && echo -ne "\ek${sp}\e\\" # update screen status line
 }
-export PS1 PROMPT_COMMAND=_prompt_command_oneletter
+export PS1 PROMPT_COMMAND=_prompt_command
 
 ### Completion
 [ -f /etc/bash_completion ] && source /etc/bash_completion
@@ -88,8 +106,8 @@ complete -F _ssh pk
 ### Others
 # ssh session agnostic agent path
 if [ -n "$SSH_AUTH_SOCK" -a ! -L "$SSH_AUTH_SOCK" -a -S "$SSH_AUTH_SOCK" ]; then
-	ln -sf $SSH_AUTH_SOCK ~/.ssh_auth_sock
-	export SSH_AUTH_SOCK=~/.ssh_auth_sock
+    ln -sf $SSH_AUTH_SOCK ~/.ssh_auth_sock
+    export SSH_AUTH_SOCK=~/.ssh_auth_sock
 fi
 
 # virtualenv options and mini wrapper with completion support
