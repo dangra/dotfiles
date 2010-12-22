@@ -31,13 +31,14 @@ VI=`type -p vim || type -p vi`
 ### Used terminal colours
 # http://en.wikipedia.org/wiki/ANSI_escape_code
 # foreground in range 30-37, # background in range 40-47
-# black=0 red=1 green=2 yellow=3 blue=3 magenta=5 cyan=6 white=7
+# black=0 red=1 green=2 yellow=3 blue=4 magenta=5 cyan=6 white=7
 # normal=0 bright=1 faint=2
 _term_colour() { eval "$1='\[\e[$2m\]'"; }
 _term_colour ANSIReset 0
 _term_colour NormalRed "0;31"
 _term_colour LightGreen "1;32"
 _term_colour LightYellow "1;33"
+_term_colour LightBlue "1;34"
 _term_colour LightMagenta "1;35"
 _term_colour LightCyan "1;36"
 _term_colour LightWhite "1;37"
@@ -45,29 +46,22 @@ _term_colour FaintGray "2;37"
 unset _term_colour
 
 ### Prompts
+# mysql client prompt
 export MYSQL_PS1="$(hostname -s) \u@\h \d> "
+
+# bash prompt
 FQDN=`hostname -f || hostname`
 case $FQDN in
     vanqak*|vostro*)
-        PROMPT_COLOUR=LightGreen
-        SHORTDN=''
-        ;;
+        PCOLOUR=$LightGreen; SQDN='' ;;
     triosko*)
-        PROMPT_COLOUR=LightMagenta
-        SHORTDN=${FQDN/.*/}
-        ;;
+        PCOLOUR=$LightMagenta; SQDN=${FQDN/.*/} ;;
     *dev.mydeco.com)
-        PROMPT_COLOUR=LightCyan
-        SHORTDN=${FQDN/.mydeco.com/}
-        ;;
+        PCOLOUR=$LightCyan; SQDN=${FQDN/.mydeco.com/} ;;
     *mydeco.com)
-        PROMPT_COLOUR=LightYellow
-        SHORTDN=${FQDN/.mydeco.com/}
-        ;;
+        PCOLOUR=$LightYellow; SQDN=${FQDN/.mydeco.com/} ;;
     *)
-        PROMPT_COLOUR=LightYellow
-        SHORTDN=${FQDN/.*/}
-        ;;
+        PCOLOUR=$LightBlue; SQDN=${FQDN/.*/} ;;
 esac
 
 _oneletter_pwd() {
@@ -93,15 +87,11 @@ _prompt_command() {
     [[ $VIRTUAL_ENV ]] && ve=" ${LightYellow}${VIRTUAL_ENV##*/}"
     PS1="${FaintGray}\A" # prefix time in HH:MM format
     PS1+="${ve}" # virtualenv
-    PS1+=" ${hc}${SHORTDN}:${!PROMPT_COLOUR}" # hostname
+    PS1+=" ${hc}${SQDN}:${PCOLOUR}" # hostname
     PS1+="${sp}${LightWhite}\\$ ${ANSIReset}" # shorted path
     [[ $INSIDESCREEN ]] && echo -ne "\ek${sp}\e\\" # update screen status line
 }
 export PS1 PROMPT_COMMAND=_prompt_command
-
-### Completion
-[ -f /etc/bash_completion ] && source /etc/bash_completion
-complete -F _ssh pk
 
 ### Others
 # ssh session agnostic agent path
@@ -117,10 +107,8 @@ workon () { source $WORKON_HOME/$1/bin/activate; }
 _workon() { COMPREPLY=( $(cd $WORKON_HOME; ls -d ${COMP_WORDS[1]}*) ); }
 complete -o default -o nospace -F _workon workon
 
-# sup mail support
-export PATH=$HOME/src/git/sup/bin:$PATH
-export RUBYLIB=$HOME/src/git/sup/lib
-
-## #Overrides
-[ -f ~/.bash_aliases ]&&source ~/.bash_aliases
-[ -r ~/.bash.local ]&&source ~/.bash.local
+# load system completions if available
+[ -f /etc/bash_completion ] && {
+    source /etc/bash_completion
+    complete -F _ssh pk
+}
