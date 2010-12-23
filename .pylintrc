@@ -11,6 +11,7 @@ profile=no
 # Add <file or directory> to the black list. It should be a base name, not a
 # path. You may set this option multiple times.
 ignore=.svn
+ignore=.hg
 
 # Pickle collected data for later comparisons.
 persistent=yes
@@ -43,7 +44,7 @@ load-plugins=
 #enable-msg=
 
 # Disable the message(s) with the given id(s).
-disable-msg=W0142,W0201,W0403,W0622,W0613,W0702,W0703,W0704,C0301,C0111,C0103,R0201
+disable=W0142,W0201,W0403,W0622,W0613,W0702,W0703,W0704,C0301,C0111,C0103,R0201
 
 # Reasons for excluding the messages (see pylint --list-msgs)
 # W0142: we use *args **kwargs a lot

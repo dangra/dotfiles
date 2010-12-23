@@ -95,7 +95,7 @@ hi SpecialKey ctermfg=gray ctermbg=black
 nmap sT :%s/\s\+$//<CR>
 
 " pylint
-map ,y :!pylint %<CR>
+map ,y :!python -m pylint.lint %<CR>
 
 " hg
 map ,au :!hg annotate -u % \| less<CR>
