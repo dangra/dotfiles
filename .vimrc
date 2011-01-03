@@ -1,6 +1,6 @@
 " Configuration file for vim
 
-set t_Co=256
+let mapleader = ","     " map leader
 set modelines=5
 set nocompatible        " Use Vim defaults instead of 100% vi compatibility
 "set number             " Show line numbers
@@ -34,50 +34,47 @@ set scrolloff=3         " Maintain more context around the cursor
 set guioptions=         " Disable toolbar, scrollbars, statuslines, etc for gvim
 set guifont=Monospace\ 9
 
-" replace tabs with 4 spaces
-nmap s4 :%s/\t/    /g<CR>
-
-set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-
-let python_highlight_all=1
-syntax on
-filetype on
-filetype plugin on
-filetype indent on
-
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Theme
 "
-"set background=light
-colorscheme desert256      " colorscheme
-hi DiffChange                                           ctermfg=red         ctermbg=gray
-hi Pmenu        guifg=#000000       guibg=#a6a190       ctermfg=black       ctermbg=gray
-hi PmenuSel     guifg=#ffffff       guibg=#133293       ctermfg=white       ctermbg=red
-hi PmenuSbar    guifg=NONE          guibg=#555555       ctermfg=red         ctermbg=black
-hi PmenuThumb   guifg=NONE          guibg=#cccccc       ctermfg=red         ctermbg=white
+set t_Co=256
+set background=dark
+let g:zenburn_high_Contrast = 1
+let g:liquidcarbon_high_contrast = 1
+"let g:molokai_original = 1
+colorscheme jellybeans
+"hi DiffChange                                           ctermfg=red         ctermbg=gray
+"hi Pmenu        guifg=#000000       guibg=#a6a190       ctermfg=black       ctermbg=gray
+"hi PmenuSel     guifg=#ffffff       guibg=#133293       ctermfg=white       ctermbg=red
+"hi PmenuSbar    guifg=NONE          guibg=#555555       ctermfg=red         ctermbg=black
+"hi PmenuThumb   guifg=NONE          guibg=#cccccc       ctermfg=red         ctermbg=white
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " misc
 "
-let mapleader = ","     " map leader
+
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+
+let g:closetag_html_style=1
+let g:python_highlight_all=1
+syntax on
+filetype on
+filetype plugin on
+filetype indent on
 
 " Suffixes that get lower priority when doing tab completion for filenames.
 " These are files we are not likely to want to edit or read.
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
-
 "' jumps to the precise location of a marks (`)
 map ' `
 "rewrap entire paragraph
 map Q vapgq
-
 "comment (#)
 vmap <silent> sc :s/^/# /<CR>:silent noh<CR>
 "uncomment (#)
 vmap <silent> su :s/^# \(.*\)/\1/<CR>:silent noh<CR>
-
 "Line numbers ON/OFF
 map ,n :set number!<CR>
 
@@ -90,24 +87,19 @@ nmap <silent> ,, :silent noh<CR>
 set list
 set listchars=tab:\\-,trail:-
 nmap <silent> <leader>s :set nolist!<CR>
-hi SpecialKey ctermfg=red ctermbg=black
-hi SpecialKey ctermfg=gray ctermbg=black
-
-"hi NonText ctermbg=red
-
 " Remove trailing spaces and tabs
 nmap sT :%s/\s\+$//<CR>
+" replace tabs with 4 spaces
+nmap s4 :%s/\t/    /g<CR>
 
 " pylint
 map ,y :!python -m pylint.lint %<CR>
 
 " hg
 map ,au :!hg annotate -u % \| less<CR>
+map ,hd :!hg cat % \| vimdiff - -R -c ':vnew % \|windo diffthis'<CR>
 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Completion
-"
+" Tab Completion
 function! SuperTab()
     if (strpart(getline('.'),col('.')-2,1)=~'^\W\?$')
         return "\<Tab>"
@@ -117,47 +109,9 @@ function! SuperTab()
 endfunction
 imap <Tab> <C-R>=SuperTab()<CR>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Version control diff from working copy to base or tip
-"
-function! SvnDiff()
-    let ft = &ft
-    let fp = expand("%:p:h")
-    let fn = expand("%")
-    execute ":vert diffsplit ".fp."/.svn/text-base/".fn.".svn-base"
-    execute ":set filetype=".ft
-    unlet fp fn ft
-endfunction
-nmap ,d :call SvnDiff()<CR>
-
-map ,hd :!hg cat % \| vimdiff - -R -c ':vnew % \|windo diffthis'<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Folding
-"
-" set foldtext=MyFoldText()
-" function! MyFoldText()
-"   let line = getline(v:foldstart)
-"   let sub = substitute(line, '/\*\|\*/\|{{{\d\=', '', 'g')
-"   let i = 1
-"   while i < (v:foldend - v:foldstart)
-"       let title = getline(v:foldstart+i)
-"       let title = substitute(title, '<[^>]*>',' ','g')
-"       let title = substitute(title, '^ *', '', '')
-"       let title = substitute(title, ' *$', '', '')
-"       if strlen(title)
-"           echo title
-"           break
-"       endif
-"       let i = i + 1
-"   endwhile
-"   return sub . ' ' . title . ' '
-" endfunction
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" VIM < 700 => downgrade
-
+" VIM < 700 => downgrade and stop vimrc execution
 if version < 700
     source ~/.vim/nocoolrc
     finish
@@ -166,12 +120,8 @@ endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tabbed windows
-
 nmap sn :tabnew<CR>
 nmap se :tabedit<SPACE>
-"nmap sc :tabclose<CR>
-nmap sj :tabprevious<CR>
-nmap sk :tabnext<CR>
 
 "Tab line colours
 hi clear TabLine
@@ -255,5 +205,3 @@ if has("autocmd")
     au Filetype html,xml,xsl source ~/.vim/scripts/closetag.vim
     au BufRead,BufNewFile *.pig set filetype=pig
 endif
-
-let g:closetag_html_style=1
