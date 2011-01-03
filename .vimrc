@@ -1,6 +1,7 @@
 " Configuration file for vim
 
 let mapleader = ","     " map leader
+set showtabline=2       " always show tabline
 set modelines=5
 set nocompatible        " Use Vim defaults instead of 100% vi compatibility
 "set number             " Show line numbers
@@ -122,12 +123,8 @@ endif
 " Tabbed windows
 nmap sn :tabnew<CR>
 nmap se :tabedit<SPACE>
-
-"Tab line colours
-hi clear TabLine
-hi clear TabLineFill
+hi clear TabLine TabLineFill TabLineSel
 hi TabLineSel ctermfg=red ctermbg=black
-
 " This is an attempt to emulate the default Vim-7 tabs as closely as possible but with numbered tabs.
 " TODO: set truncation when tabs don't fit on line, see :h columns
 if exists("+showtabline")
