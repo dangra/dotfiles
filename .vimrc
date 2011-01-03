@@ -31,12 +31,16 @@ set autoindent          " Always set autoindenting on
 set backspace=indent,eol,start " more powerful backspacing
 set smartindent         " Always set autoindenting on
 set scrolloff=3         " Maintain more context around the cursor
+set guioptions=         " Disable toolbar, scrollbars, statuslines, etc for gvim
+set guifont=Monospace\ 9
+
 " replace tabs with 4 spaces
 nmap s4 :%s/\t/    /g<CR>
 
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
+let python_highlight_all=1
 syntax on
 filetype on
 filetype plugin on
@@ -249,6 +253,7 @@ if has("autocmd")
     au FileType xhtml,html,htmldjango,mxml,xml setlocal tabstop=2 shiftwidth=2 expandtab
     au FileType javascript,css,actionscript,sh setlocal tabstop=4 shiftwidth=4 noexpandtab nolist
     au Filetype html,xml,xsl source ~/.vim/scripts/closetag.vim
+    au BufRead,BufNewFile *.pig set filetype=pig
 endif
 
 let g:closetag_html_style=1

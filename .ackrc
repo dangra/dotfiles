@@ -1,1 +1,3 @@
 --nogroup
+--type-set
+pig=.pig
