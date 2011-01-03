@@ -320,7 +320,7 @@ call s:X("SignColumn","a0a8b0","384048","","","")
 call s:X("Title","70b950","","bold","","")
 
 call s:X("Constant","cf6a4c","","","Red","")
-call s:X("Special","799d6a","","","Green","")
+call s:X("Special","66d9ef","","","Green","")
 call s:X("Delimiter","668799","","","Grey","")
 
 call s:X("String","99ad6a","","","Green","")
@@ -332,7 +332,10 @@ call s:X("Function","fad07a","","","Yellow","")
 call s:X("Statement","8197bf","","","DarkBlue","")
 call s:X("PreProc","8fbfdc","","","LightBlue","")
 
-hi link Operator Normal
+
+call s:X("Operator","c6b6ee","","","LightCyan","")
+call s:X("Exception","bfff3f","","","LightGreen","")
+call s:X("Special","a6e22e","","","LightGreen","")
 
 call s:X("Type","ffb964","","","Yellow","")
 call s:X("NonText","606060","151515","","","")
