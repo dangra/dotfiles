@@ -1,3 +1,7 @@
 --nogroup
 --type-set
 pig=.pig
+--type-set
+spec=.spec
+--type-set
+scala=.scala
