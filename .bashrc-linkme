@@ -52,16 +52,17 @@ export MYSQL_PS1="$(hostname -s) \u@\h \d> "
 # bash prompt
 FQDN=`hostname -f || hostname`
 case $FQDN in
-    vanqak*|vostro*)
-        PCOLOUR=$LightGreen; SQDN='' ;;
-    triosko*)
-        PCOLOUR=$LightMagenta; SQDN=${FQDN/.*/} ;;
     *dev.mydeco.com)
         PCOLOUR=$LightCyan; SQDN=${FQDN/.mydeco.com/} ;;
     *mydeco.com)
         PCOLOUR=$LightYellow; SQDN=${FQDN/.mydeco.com/} ;;
     *)
-        PCOLOUR=$LightBlue; SQDN=${FQDN/.*/} ;;
+		if [[ -n $WINDOWID ]]; then
+        	PCOLOUR=$LightGreen; SQDN=''
+		else
+        	PCOLOUR=$LightMagenta; SQDN=${FQDN/.*/}
+		fi
+		;;
 esac
 
 _oneletter_pwd() {
