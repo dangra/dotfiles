@@ -21,6 +21,7 @@ hgext.bookmarks =
 hgext.graphlog =
 hgext.transplant =
 hgpaste = ~/.hgext/paste.py
+hgprompt = ~/.hgext/prompt.py
 
 [diff]
 showfunc = 1

@@ -36,6 +36,7 @@ VI=`type -p vim || type -p vi`
 _term_colour() { eval "$1='\[\e[$2m\]'"; }
 _term_colour ANSIReset 0
 _term_colour NormalRed "0;31"
+_term_colour LightRed "1;31"
 _term_colour LightGreen "1;32"
 _term_colour LightYellow "1;33"
 _term_colour LightBlue "1;34"
@@ -81,13 +82,28 @@ _oneletter_pwd() {
     echo ${SHORTEDPATH:1}
 }
 
+_prompt_vcs() {
+	local dirty prompt vcs branch status=$LightBlue
+	[[ -d .svn ]] && { echo svn; return; }
+
+	prompt=$(hg prompt "hg{:{branch}}{status}{update}" 2>/dev/null)
+	if [[ $prompt ]]; then
+		[[ $prompt =~ '!' ]] && status=$LightRed
+		echo "${status}${prompt}"
+		return
+	fi
+
+	branch=$(git branch |sed -ne '/^*/s/^* //p')
+	[[ $branch ]] && { echo git:$branch; return; }
+}
+
 _prompt_command() {
-    local sp=$(_oneletter_pwd) hc=$LightWhite ve
+    local sp=$(_oneletter_pwd) vcs=$(_prompt_vcs) hc=$LightWhite ve
     [[ $USER = root ]] && hc="$NormalRed"
     [[ $VIRTUAL_ENV ]] && ve="${LightYellow}${VIRTUAL_ENV##*/} "
     PS1="${FaintGray}\A${ANSIReset} " # prefix time in HH:MM format
-    PS1+="${ve}" # virtualenv
-    PS1+="${hc}${SQDN}:${PCOLOUR}" # hostname
+    PS1+="${ve}${vcs} " # virtualenv + vcs
+    PS1+="${ANSIReset}${hc}${SQDN}:${PCOLOUR}" # hostname
     PS1+="${sp}${LightWhite}\\$ ${ANSIReset}" # shorted path
     [[ $INSIDESCREEN ]] && echo -ne "\ek${sp}\e\\" # update screen status line
 }
