@@ -84,18 +84,21 @@ _oneletter_pwd() {
 }
 
 _prompt_vcs() {
-	local dirty prompt vcs branch status=$LightBlue
+	local hgprompt gitbranch status=$LightBlue
 	[[ -d .svn ]] && { echo svn; return; }
 
-	prompt=$(hg prompt "hg{:{branch}}{status}{update}" 2>/dev/null)
-	if [[ $prompt ]]; then
-		[[ $prompt =~ '!' ]] && status=$LightRed
-		echo "${status}${prompt}"
+	hgprompt=$(hg prompt "{:{branch}}{status}{update}" 2>/dev/null)
+	if [[ $hgprompt ]]; then
+		[[ $hgprompt =~ '!' ]] && status=$LightRed
+		echo "${LightWhite}hg${status}${hgprompt}"
 		return
 	fi
 
-	branch=$(git branch |sed -ne '/^*/s/^* //p')
-	[[ $branch ]] && { echo git:$branch; return; }
+	gitbranch=$(git branch |sed -ne '/^*/s/^* //p')
+	if [[ $gitbranch ]]; then
+		echo "${LightWhite}git:$status$gitbranch"
+		return
+	fi
 }
 
 _prompt_command() {

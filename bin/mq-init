@@ -12,6 +12,8 @@ if hg paths |grep -q 'mydeco.com'; then
     mqpath="ssh://dev.mydeco.com/hg/users/daniel/mq-$reponame"
 elif hg paths |grep -q 'scrapy.org'; then
     mqpath="ssh://hg.scrapy.org/users/daniel/mq-$reponame"
+elif hg paths |grep -q 'insophia.com'; then
+    mqpath="ssh://hg.insophia.com/insophia/users/daniel/mq-$reponame"
 else
     echo 'no mq path'
 fi
