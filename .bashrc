@@ -86,18 +86,22 @@ _oneletter_pwd() {
 }
 
 _prompt_vcs() {
-	local hgprompt gitbranch status=$LightBlue
+	local hgprompt gitroot gitbranch gitstat gitstatus
 	[[ -d .svn ]] && { echo svn; return; }
 
-	hgprompt=$(hg prompt --angle-brackets "${LightWhite}hg<:<root|basename>><${LightRed}<status>><update>< ${LightYellow}<patch>>${ANSIReset}" 2>/dev/null)
-	if [[ $hgprompt ]]; then
-		echo -e "$hgprompt"
+	gitroot=$(git rev-parse --show-toplevel 2>/dev/null)
+	if [[ $gitroot ]]; then
+		gitbranch=$(git branch 2>/dev/null |sed -rne '/^\*/s/^\*( | master)//p')
+		gitstat=$(git status 2>/dev/null | grep '\(# Untracked\|# Changes\|# Changed but not updated:\)')
+		[[ $gitstat =~ 'Changes to be committed' ]] && gitstatus='!'
+		[[ $gitstat =~ 'Changed but not updated' || $gitstat =~ 'Untracked files' ]] && gitstatus='?'
+		echo "${LightWhite}± ${gitroot##*/}${gitstatus:+${LightRed}${gitstatus}}${gitbranch:+ ${LightYellow}${gitbranch}}${ANSIReset}"
 		return
 	fi
 
-	gitbranch=$(git branch 2>/dev/null |sed -ne '/^*/s/^* //p')
-	if [[ $gitbranch ]]; then
-		echo "${LightWhite}git:$status$gitbranch"
+	hgprompt=$(hg prompt --angle-brackets "${LightWhite}☿ <root|basename><${LightRed}<status>><update>< ${LightYellow}<patch>>${ANSIReset}" 2>/dev/null)
+	if [[ $hgprompt ]]; then
+		echo -e "$hgprompt"
 		return
 	fi
 }
@@ -108,7 +112,7 @@ _prompt_command() {
     [[ $VIRTUAL_ENV ]] && ve="${LightYellow}${VIRTUAL_ENV##*/}"
     PS1="${FaintGray}\A " # prefix time in HH:MM format
     PS1+="${ve:+$ve }${vcs:+$vcs }" # virtualenv + vcs
-    PS1+="${ANSIReset}${hc}${SQDN}:${PCOLOUR}" # hostname
+    PS1+="${hc}${SQDN:+$SQDN:}${PCOLOUR}" # hostname
     PS1+="${sp}${LightWhite}\\$ ${ANSIReset}" # shorted path
     [[ $INSIDESCREEN ]] && echo -ne "\ek${sp}\e\\" # update screen status line
 }
