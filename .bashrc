@@ -25,7 +25,7 @@ export ACK_COLOR_MATCH=red
 alias ll='ls -l'
 alias grep='grep --color'
 alias mq='hg -R $(hg root)/.hg/patches'
-alias dotfiles="GIT_DIR=~/.dotfiles/.git GIT_WORK_TREE=~ git"
+alias dotfiles="GIT_DIR=~/.dotfiles.git GIT_WORK_TREE=~ git"
 complete -o bashdefault -o default -o nospace -F _git dotfiles
 VI=`type -p vim || type -p vi`
 [[ -n $VI ]]&& alias vi=$VI vim=$VI
