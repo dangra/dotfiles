@@ -25,7 +25,7 @@ export ACK_COLOR_MATCH=red
 alias ll='ls -l'
 alias grep='grep --color'
 alias mq='hg -R $(hg root)/.hg/patches'
-alias dotfiles="GIT_DIR=~/.dotfiles/.git git"
+alias dotfiles="GIT_DIR=~/.dotfiles/.git GIT_WORK_TREE=~ git"
 complete -o bashdefault -o default -o nospace -F _git dotfiles
 VI=`type -p vim || type -p vi`
 [[ -n $VI ]]&& alias vi=$VI vim=$VI
@@ -89,10 +89,9 @@ _prompt_vcs() {
 	local hgprompt gitbranch status=$LightBlue
 	[[ -d .svn ]] && { echo svn; return; }
 
-	hgprompt=$(hg prompt "{:{branch}}{status}{update}" 2>/dev/null)
+	hgprompt=$(hg prompt --angle-brackets "${LightWhite}hg<:<root|basename>><${LightRed}<status>><update>< ${LightYellow}<patch>>${ANSIReset}" 2>/dev/null)
 	if [[ $hgprompt ]]; then
-		[[ $hgprompt =~ '!' ]] && status=$LightRed
-		echo "${LightWhite}hg${status}${hgprompt}"
+		echo -e "$hgprompt"
 		return
 	fi
 
@@ -106,9 +105,9 @@ _prompt_vcs() {
 _prompt_command() {
     local sp=$(_oneletter_pwd) vcs=$(_prompt_vcs) hc=$LightWhite ve
     [[ $USER = root ]] && hc="$NormalRed"
-    [[ $VIRTUAL_ENV ]] && ve="${LightYellow}${VIRTUAL_ENV##*/} "
-    PS1="${FaintGray}\A${ANSIReset} " # prefix time in HH:MM format
-    PS1+="${ve}${vcs} " # virtualenv + vcs
+    [[ $VIRTUAL_ENV ]] && ve="${LightYellow}${VIRTUAL_ENV##*/}"
+    PS1="${FaintGray}\A " # prefix time in HH:MM format
+    PS1+="${ve:+$ve }${vcs:+$vcs }" # virtualenv + vcs
     PS1+="${ANSIReset}${hc}${SQDN}:${PCOLOUR}" # hostname
     PS1+="${sp}${LightWhite}\\$ ${ANSIReset}" # shorted path
     [[ $INSIDESCREEN ]] && echo -ne "\ek${sp}\e\\" # update screen status line
