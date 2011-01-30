@@ -25,6 +25,8 @@ export ACK_COLOR_MATCH=red
 alias ll='ls -l'
 alias grep='grep --color'
 alias mq='hg -R $(hg root)/.hg/patches'
+alias dotfiles="GIT_DIR=~/dotfiles/.git git"
+complete -o bashdefault -o default -o nospace -F _git dotfiles
 VI=`type -p vim || type -p vi`
 [[ -n $VI ]]&& alias vi=$VI vim=$VI
 
@@ -94,7 +96,7 @@ _prompt_vcs() {
 		return
 	fi
 
-	gitbranch=$(git branch |sed -ne '/^*/s/^* //p')
+	gitbranch=$(git branch 2>/dev/null |sed -ne '/^*/s/^* //p')
 	if [[ $gitbranch ]]; then
 		echo "${LightWhite}git:$status$gitbranch"
 		return
