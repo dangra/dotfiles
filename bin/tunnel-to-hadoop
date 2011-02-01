@@ -15,7 +15,7 @@ url=${2:-http://hadoop.ec2.$region.mydeco.com:50030}
 # Dynamic Forward port to localhost:$port
 ssh -C -N -f -D $port indexer.ec2.$region.mydeco.com -o ExitOnForwardFailure=yes
 # Start chrome preconfigured to use previously set socks5 proxy
-google-chrome --user-data-dir=/home/dan/.config/mydeco/chrome-proxy-$port \
+google-chrome --user-data-dir=$HOME/.config/mydeco/chrome-proxy-$port \
 	--proxy-server="socks5://localhost:$port" \
 	$url
 
