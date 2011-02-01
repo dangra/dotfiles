@@ -1,11 +1,15 @@
 #!/bin/bash
 declare -A countryportmap
 countryportmap[eu]=6666
-countryportmap[uk]=6666
 countryportmap[us]=6667
-countryportmap[dev]=6667
-port=${countryportmap[${1:-us}]:-6667}
-url=${2:-http://hadoop:50030}
+country=${1:-us}
+port=${countryportmap[$country]:-6667}
+url=${2:-http://hadoop.ec2.$country.mydeco.com:50030}
+
+# Dynamic Forward port to localhost:$port
+ssh -C -N -f -D $port indexer.ec2.$country.mydeco.com -o ExitOnForwardFailure=yes
+# Start chrome preconfigured to use previously set socks5 proxy
 google-chrome --user-data-dir=/home/dan/.config/mydeco/chrome-proxy-$port \
-	--proxy-server="socks5://localhost:$port" $url
+	--proxy-server="socks5://localhost:$port" \
+	$url
 
