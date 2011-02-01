@@ -6,7 +6,7 @@
 }
 
 set -e -x
-[[ -d dotfiles/.git ]] || git clone git@github.com:dangra/dotfiles.git
+[[ -d dotfiles/.git ]] || git clone git@github.com:dangra/dotfiles.git || git clone https://dangra@github.com/dangra/dotfiles.git
 export GIT_DIR=${1:-~/.dotfiles.git} GIT_WORK_TREE=${2:-~}
 mv dotfiles/.git $GIT_DIR
 rm -rf dotfiles
