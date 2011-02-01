@@ -44,8 +44,13 @@ bell "bell: %n (%t) [%w:%s]^G"
 vbell on
 vbell_msg "   Wuff  ----  Wuff!!  "
 
-# use faint ansi color instead of underline
+# use faint color instead of underline
 termcapinfo * us=\E[2m
+# tell how to set 256 colors
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+#defbce "on"
+
+
 
 defscrollback 2000
 nonblock on
