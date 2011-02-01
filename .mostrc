@@ -1,4 +1,0 @@
-unsetkey "j"
-unsetkey "k"
-setkey "up" "k"
-setkey "down" "j"
