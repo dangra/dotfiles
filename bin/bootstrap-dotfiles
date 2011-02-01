@@ -11,4 +11,4 @@ export GIT_DIR=${1:-~/.dotfiles.git} GIT_WORK_TREE=${2:-~}
 mv dotfiles/.git $GIT_DIR
 rm -rf dotfiles
 echo '*' >>$GIT_DIR/info/exclude
-git status
+git reset --hard
