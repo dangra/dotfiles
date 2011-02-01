@@ -11,5 +11,5 @@
 [format]
 	signoff = true
 [color "diff"]
-    #func = magenta  # not supported by git <1.6
+	#func = magenta  # not supported by git <1.6
 	meta = yellow
