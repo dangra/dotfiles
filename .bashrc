@@ -49,11 +49,10 @@ _term_colour FaintGray "2;37"
 unset _term_colour
 
 ### Prompts
+FQDN=$(hostname -f 2>/dev/null || hostname 2>/dev/null)
 # mysql client prompt
-export MYSQL_PS1="$(hostname -s) \u@\h \d> "
-
+export MYSQL_PS1="${HOSTNAME%%.*} \u@\h \d> "
 # bash prompt
-FQDN=`hostname -f || hostname`
 case $FQDN in
     *dev.mydeco.com)
         PCOLOUR=$LightCyan; SQDN=${FQDN/.mydeco.com/} ;;
