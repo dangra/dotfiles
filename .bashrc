@@ -110,7 +110,7 @@ _prompt_command() {
     local sp=$(_oneletter_pwd) vcs=$(_prompt_vcs) hc=$LightWhite ve
     [[ $USER = root ]] && hc="$NormalRed"
     [[ $VIRTUAL_ENV ]] && ve="${LightYellow}${VIRTUAL_ENV##*/}"
-    PS1="${FaintGray}\A " # prefix time in HH:MM format
+    PS1="${FaintGray}\A${ANSIReset} " # prefix time in HH:MM format
     PS1+="${ve:+$ve }${vcs:+$vcs }" # virtualenv + vcs
     PS1+="${hc}${SQDN:+$SQDN:}${PCOLOUR}" # hostname
     PS1+="${sp}${LightWhite}\\$ ${ANSIReset}" # shorted path
