@@ -5,9 +5,13 @@
 #
 # where "region" is "eu" or "us", by default all regions are started
 #
+
+CHROMEBIN=$(type -p google-chrome || type -p chromium-browser)
 declare -A REGIONPORT
 REGIONPORT[eu]=16666
 REGIONPORT[us]=16667
+
+[[ $CHROMEBIN ]] || { echo "ERROR: chrome or chromium binary not found"; exit -1; }
 
 _forward_and_tunnel() {
 	local region=$1 port=$2 url=$3 userdatadir proxyserver
@@ -18,7 +22,7 @@ _forward_and_tunnel() {
 	# Dynamic Forward port to localhost:$port
 	ssh -C -N -f -o ExitOnForwardFailure=yes -D $port indexer.ec2.$region.mydeco.com
 	# Start chrome preconfigured to use previously set socks5 proxy
-	google-chrome --user-data-dir=$userdatadir --proxy-server=$proxyserver $url
+	$CHROMEBIN --user-data-dir=$userdatadir --proxy-server=$proxyserver $url
 }
 
 main() {
