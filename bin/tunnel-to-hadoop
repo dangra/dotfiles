@@ -1,9 +1,9 @@
 #!/bin/bash
 #
 # usage:
-# 	tunnel-to-hadoop [region]
+# 	tunnel-to-hadoop [region] [url]
 #
-# where "region" is "eu" or "us" (default is "us")
+# where "region" is "eu" or "us", by default all regions are started
 #
 declare -A REGIONPORT
 REGIONPORT[eu]=16666
@@ -14,20 +14,18 @@ _forward_and_tunnel() {
 	userdatadir=$HOME/.config/tunnel-to-hadoop/$region
 	proxyserver=socks5://localhost:$port
 	# touch data dir to skip first run dialogs
-	[[ -d $userdatadir ]] || { mkdir $userdatadir; touch "$userdatadir/First Run"; }
+	[[ -d $userdatadir ]] || { mkdir -p $userdatadir; touch "$userdatadir/First Run"; }
 	# Dynamic Forward port to localhost:$port
-	ssh -C -N -f -D $port indexer.ec2.$region.mydeco.com -o ExitOnForwardFailure=yes
+	ssh -C -N -f -o ExitOnForwardFailure=yes -D $port indexer.ec2.$region.mydeco.com
 	# Start chrome preconfigured to use previously set socks5 proxy
-	google-chrome --user-data-dir=$HOME/.config/tunnel-to-hadoop/$region \
-		--proxy-server="socks5://localhost:$port" \
-		$url
+	google-chrome --user-data-dir=$userdatadir --proxy-server=$proxyserver $url
 }
 
 main() {
-	local regions url region port
-	regions=${1:-us eu}
+	local regions=${1:-us eu} url region port
 	for region in $regions; do
-		port=${REGIONPORT[$region]:-6667}
+		port=${REGIONPORT[$region]}
+		[[ $port ]] || { echo "ERROR: invalid region '$region'"; exit -1; }
 		url=${2:-http://hadoop.ec2.$region.mydeco.com:50030}
 		_forward_and_tunnel $region $port $url &
 	done 
