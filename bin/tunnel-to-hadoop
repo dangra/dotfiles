@@ -5,17 +5,32 @@
 #
 # where "region" is "eu" or "us" (default is "us")
 #
-declare -A regionport
-regionport[eu]=6666
-regionport[us]=6667
-region=${1:-us}
-port=${regionport[$region]:-6667}
-url=${2:-http://hadoop.ec2.$region.mydeco.com:50030}
+declare -A REGIONPORT
+REGIONPORT[eu]=16666
+REGIONPORT[us]=16667
 
-# Dynamic Forward port to localhost:$port
-ssh -C -N -f -D $port indexer.ec2.$region.mydeco.com -o ExitOnForwardFailure=yes
-# Start chrome preconfigured to use previously set socks5 proxy
-google-chrome --user-data-dir=$HOME/.config/mydeco/chrome-proxy-$port \
-	--proxy-server="socks5://localhost:$port" \
-	$url
+_forward_and_tunnel() {
+	local region=$1 port=$2 url=$3 userdatadir proxyserver
+	userdatadir=$HOME/.config/tunnel-to-hadoop/$region
+	proxyserver=socks5://localhost:$port
+	# touch data dir to skip first run dialogs
+	[[ -d $userdatadir ]] || { mkdir $userdatadir; touch "$userdatadir/First Run"; }
+	# Dynamic Forward port to localhost:$port
+	ssh -C -N -f -D $port indexer.ec2.$region.mydeco.com -o ExitOnForwardFailure=yes
+	# Start chrome preconfigured to use previously set socks5 proxy
+	google-chrome --user-data-dir=$HOME/.config/tunnel-to-hadoop/$region \
+		--proxy-server="socks5://localhost:$port" \
+		$url
+}
 
+main() {
+	local regions url region port
+	regions=${1:-us eu}
+	for region in $regions; do
+		port=${REGIONPORT[$region]:-6667}
+		url=${2:-http://hadoop.ec2.$region.mydeco.com:50030}
+		_forward_and_tunnel $region $port $url &
+	done 
+}
+
+main "$@"
