@@ -198,6 +198,7 @@ if has("autocmd")
     au FileType xhtml,html,htmldjango,mxml,xml setlocal tabstop=2 shiftwidth=2 expandtab
     au FileType javascript,css,actionscript,sh setlocal tabstop=4 shiftwidth=4 noexpandtab nolist
     au Filetype html,xml,xsl source ~/.vim/scripts/closetag.vim
+    au BufRead,BufNewFile *.tac set filetype=python
     au BufRead,BufNewFile *.pig set filetype=pig
     au BufRead,BufNewFile *.md,*.mkd set filetype=mkd
     au BufRead *.md,*.mkd  set ai formatoptions=tcroqn2 comments=n:&gt;

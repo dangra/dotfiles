@@ -41,6 +41,6 @@ ipaste = paste --dest lodgeit --url "https://paste.insophia.com" --usenetrc
 ipastepy = ipaste --stdin --syntax python
 
 [defaults]
-log = --limit 10
+#log = --limit 10
 addremove = --similarity 100
 paste = --dest lodgeit
