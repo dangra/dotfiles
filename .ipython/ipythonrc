@@ -193,7 +193,7 @@ color_info 1
 # the magic functions %Exit or %Quit you can force a direct exit, bypassing
 # any confirmation.
 
-confirm_exit 1
+confirm_exit 0
 
 # Use deep_reload() as a substitute for reload() by default. deep_reload() is
 # still available as dreload() and appears as a builtin.
@@ -219,7 +219,7 @@ log 0
 logfile ''
 
 # banner 0 -> same as ipython -nobanner
-banner 1
+banner 0
 
 # messages 0 -> same as ipython -nomessages
 messages 1
@@ -243,19 +243,19 @@ pprint 1
 
 # Use \# to represent the current prompt number, and quote them to protect
 # spaces.
-prompt_in1 'In [\#]: '
+prompt_in1 '>>> '
 
 # \D is replaced by as many dots as there are digits in the
 # current value of \#.
-prompt_in2 '   .\D.: '
+prompt_in2 '... '
 
-prompt_out 'Out[\#]: '
+prompt_out ''
 
 # Select whether to left-pad the output prompts to match the length of the
 # input ones.  This allows you for example to use a simple '>' as an output
 # prompt, and yet have the output line up with the input.  If set to false,
 # the output prompts will be unpadded (flush left).
-prompts_pad_left 1
+prompts_pad_left 0
 
 # Pylab support: when ipython is started with the -pylab switch, by default it
 # executes 'from matplotlib.pylab import *'.  Set this variable to false if you
@@ -304,7 +304,7 @@ separate_out2 0
 
 # 'nosep 1' is a shorthand for '-SeparateIn 0 -SeparateOut 0 -SeparateOut2 0'.
 # Simply removes all input/output separators, overriding the choices above.
-nosep 0
+nosep 1
 
 # Wildcard searches - IPython has a system for searching names using
 # shell-like wildcards; type %psearch? for details.  This variables sets
