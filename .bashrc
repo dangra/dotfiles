@@ -8,6 +8,7 @@ export PATH=~/bin:/sbin:/usr/sbin:$PATH
 shopt -s checkwinsize
 export EDITOR=vi
 export VISUAL=vi
+export LESS=-FRSXQ
 export HISTCONTROL=erasedups
 export ACK_COLOR_FILENAME=magenta
 export ACK_COLOR_MATCH=red
