@@ -120,14 +120,16 @@ _prompt_vcs() {
 }
 
 _prompt_command() {
-    local sp=$(_oneletter_pwd) vcs=$(_prompt_vcs) hc=$LightWhite ve
+    local shortpwd=$(_oneletter_pwd) vcs=$(_prompt_vcs) sign='\$' hc=$LightWhite ve noescapes
     [[ $USER = root ]] && hc="$NormalRed"
     [[ $VIRTUAL_ENV ]] && ve="${LightYellow}${VIRTUAL_ENV##*/}"
     PS1="${FaintGray}\A${ANSIReset} " # prefix time in HH:MM format
     PS1+="${ve:+$ve }${vcs:+$vcs }" # virtualenv + vcs
-    PS1+="${hc}${SQDN:+$SQDN:}${PCOLOUR}" # hostname
-    PS1+="${sp}${LightWhite}\\$ ${ANSIReset}" # shorted path
-    [[ $INSIDESCREEN ]] && echo -ne "\ek${sp}\e\\" # update screen status line
+    PS1+="${hc}${SQDN:+$SQDN:}${PCOLOUR}${shortpwd}"
+	noescapes=${PS1//+(????\[?;??m\\]|????\[?m\\])} # only useful to aprox prompt length
+	(( ${#noescapes} * 2 > $COLUMNS )) && sign="\n$sign"
+    PS1+="${LightWhite}${sign}${ANSIReset} " # shorted path
+    [[ $INSIDESCREEN ]] && echo -ne "\ek${shortpwd}\e\\" # update screen status line
 }
 export PS1 PROMPT_COMMAND=_prompt_command
 
