@@ -12,7 +12,6 @@ export LESS=-FRSXQ
 export HISTCONTROL=erasedups
 export ACK_COLOR_FILENAME=magenta
 export ACK_COLOR_MATCH=red
-[[ ${TERM:0:6} == screen ]] && INSIDESCREEN=1
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 [ "$TERM" == "rxvt-unicode" ] && [ ! -r /usr/share/terminfo/r/rxvt-unicode ] && {
     export TERM=rxvt
@@ -129,7 +128,7 @@ _prompt_command() {
 	noescapes=${PS1//+(????\[?;??m\\]|????\[?m\\])} # only useful to aprox prompt length
 	(( ${#noescapes} * 2 > $COLUMNS )) && sign="\n$sign"
     PS1+="${LightWhite}${sign}${ANSIReset} " # shorted path
-    [[ $INSIDESCREEN ]] && echo -ne "\ek${shortpwd}\e\\" # update screen status line
+    [[ $WINDOW ]] && echo -ne "\ek${shortpwd}\e\\" # update screen status line
 }
 export PS1 PROMPT_COMMAND=_prompt_command
 
