@@ -5,7 +5,7 @@ export PATH=~/bin:/sbin:/usr/sbin:$PATH
 [ -z "$PS1" ] && return
 
 ### General
-shopt -s checkwinsize
+shopt -s checkwinsize extglob
 export EDITOR=vi
 export VISUAL=vi
 export LESS=-FRSXQ
