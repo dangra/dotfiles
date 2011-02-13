@@ -52,7 +52,7 @@ ec2_metadata() { curl -fsm1 http://169.254.169.254/latest/meta-data/$1; }
 ec2_sqdn() {
 	[[ $1 = '-force' || -e /etc/sysconfig/aws ]] || return
 	echo $(ec2_metadata security-groups) $(ec2_metadata instance-id) \
-		|sed -rne 's/default//;s/ +/-/gp'
+		|sed -rne 's/default\s?//;s/ +/-/gp'
 }
 ### Prompts
 FQDN=$(hostname -f 2>/dev/null || hostname 2>/dev/null)
