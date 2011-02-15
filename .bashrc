@@ -56,23 +56,18 @@ ec2_sqdn() {
 }
 ### Prompts
 FQDN=$(hostname -f 2>/dev/null || hostname 2>/dev/null)
+PCOLOUR=$LightMagenta
 # bash prompt
 case $FQDN in
-    *dev.mydeco.com)
+	*.ec2.*|mydeco.com)
 		SQDN=$(ec2_sqdn)
-        PCOLOUR=$LightCyan;
-		[[ -z $SQDN ]] && SQDN=${FQDN/.mydeco.com/}
-		;;
-    *mydeco.com)
-		SQDN=$(ec2_sqdn)
-        PCOLOUR=$LightYellow
 		[[ -z $SQDN ]] && SQDN=${FQDN/.mydeco.com/}
 		;;
     *)
 		if [[ -n $WINDOWID ]]; then
         	PCOLOUR=$LightGreen; SQDN=''
 		else
-        	PCOLOUR=$LightMagenta; SQDN=${FQDN/.*/}
+        	SQDN=${FQDN/.*/}
 		fi
 		;;
 esac
