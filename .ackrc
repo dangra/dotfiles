@@ -5,3 +5,5 @@ pig=.pig
 spec=.spec
 --type-set
 scala=.scala
+--type-set
+tac=.tac
