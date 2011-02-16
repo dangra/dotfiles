@@ -60,7 +60,7 @@ PCOLOUR=$LightMagenta
 # bash prompt
 case $FQDN in
 	*.mydeco.com) SQDN=${FQDN/.mydeco.com} ;;
-	*.ec2.*) SQDN=$(ec2_sqdn) ;;
+	*.ec2.*|*.compute.internal) SQDN=$(ec2_sqdn) ;;
     *)
 		if [[ -n $WINDOWID ]]; then
         	PCOLOUR=$LightGreen; SQDN=''
