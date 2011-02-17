@@ -59,15 +59,13 @@ FQDN=$(hostname -f 2>/dev/null || hostname 2>/dev/null)
 PCOLOUR=$LightMagenta
 # bash prompt
 case $FQDN in
-	*.ec2.*|mydeco.com)
-		SQDN=$(ec2_sqdn)
-		[[ -z $SQDN ]] && SQDN=${FQDN/.mydeco.com/}
-		;;
+	*.mydeco.com) SQDN=${FQDN/.mydeco.com} ;;
+	domU-*.internal|ip-*.internal) SQDN=$(ec2_sqdn) ;;
     *)
 		if [[ -n $WINDOWID ]]; then
         	PCOLOUR=$LightGreen; SQDN=''
 		else
-        	SQDN=${FQDN/.*/}
+        	SQDN=${FQDN/.*}
 		fi
 		;;
 esac
