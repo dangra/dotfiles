@@ -128,6 +128,10 @@ _prompt_command() {
 export PS1 PROMPT_COMMAND=_prompt_command
 
 ### Others
+# debian packaging
+export DEBFULLNAME='Daniel Graña'
+export DEBEMAIL='dangra@gmail.com'
+
 # ssh session agnostic agent path
 if [ -n "$SSH_AUTH_SOCK" -a ! -L "$SSH_AUTH_SOCK" -a -S "$SSH_AUTH_SOCK" ]; then
     ln -sf $SSH_AUTH_SOCK ~/.ssh_auth_sock

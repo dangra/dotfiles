@@ -30,7 +30,7 @@ main() {
 	for region in $regions; do
 		port=${REGIONPORT[$region]}
 		[[ $port ]] || { echo "ERROR: invalid region '$region'"; exit -1; }
-		url=${2:-http://hadoop.ec2.$region.mydeco.com:50030}
+		url=${2:-http://hadoop.ec2.$region.mydeco.com:50030/scheduler}
 		_forward_and_tunnel $region $port $url &
 	done 
 }
