@@ -30,6 +30,7 @@ complete -o bashdefault -o default -o nospace -F _git dotfiles
 VI=`type -p vim || type -p vi`
 [[ -n $VI ]]&& alias vi=$VI vim=$VI
 [[ $(python -c 'import sys; print sys.version[:3]') < 2.5 ]] && alias python=python2.5
+alias egg="python setup.py bdist_egg"
 
 ### Used terminal colours
 # http://en.wikipedia.org/wiki/ANSI_escape_code
