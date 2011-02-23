@@ -13,3 +13,5 @@
 [color "diff"]
 	#func = magenta  # not supported by git <1.6
 	meta = yellow
+[core]
+	excludesfile = /home/dan/.gitexcludesfile
