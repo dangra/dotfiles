@@ -97,7 +97,7 @@ nmap s4 :%s/\t/    /g<CR>
 map ,y :!python -m pylint.lint %<CR>
 
 " hg
-map ,au :!hg annotate -u % \| less<CR>
+map ,au :!hg annotate -nu % \| less<CR>
 map ,hd :!hg cat % \| vimdiff - -R -c ':vnew % \|windo diffthis'<CR>
 
 " Tab Completion

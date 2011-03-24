@@ -105,7 +105,7 @@ _prompt_vcs() {
 		return
 	fi
 
-	hgprompt=$(test -r /.hg || hg prompt --angle-brackets "${LightWhite}☿ <root|basename><${LightRed}<status>><update>< ${LightYellow}<patch>>${ANSIReset}" 2>/dev/null)
+	hgprompt=$(test -r /.hg || hg prompt --angle-brackets "${LightWhite}☿ <root|basename><${LightYellow}#<branch|quiet>><${LightRed}<status>><update>< ${LightYellow}<patch>>${ANSIReset}" 2>/dev/null)
 	if [[ $hgprompt ]]; then
 		echo -e "$hgprompt"
 		return
