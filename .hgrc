@@ -22,6 +22,7 @@ hgext.graphlog =
 hgext.transplant =
 hgpaste = ~/.hgext/paste.py
 hgprompt = ~/.hgext/prompt.py
+histedit = ~/.hgext/hg_histedit.py
 
 [diff]
 showfunc = 1
