@@ -355,10 +355,10 @@ hi link diffAdded String
 
 " VimDiff
 
-call s:X("DiffAdd","","032218","","Black","DarkGreen")
-call s:X("DiffChange","","100920","","Black","DarkMagenta")
-call s:X("DiffDelete","220000","220000","","DarkRed","DarkRed")
-call s:X("DiffText","","000940","","","DarkRed")
+"call s:X("DiffAdd","","032218","","Black","DarkGreen")
+"call s:X("DiffChange","","100920","","Black","DarkMagenta")
+"call s:X("DiffDelete","220000","220000","","DarkRed","DarkRed")
+"call s:X("DiffText","","000940","","","DarkRed")
 
 " PHP
 
