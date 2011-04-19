@@ -117,8 +117,8 @@ _prompt_command() {
     local shortpwd=$(_oneletter_pwd) vcs=$(_prompt_vcs) sign='\$' hc=$LightWhite ve noescapes
     [[ $USER = root ]] && hc="$NormalRed"
     [[ $VIRTUAL_ENV ]] && ve="${LightYellow}${VIRTUAL_ENV##*/}"
-    PS1="${FaintGray}\A${ANSIReset} " # prefix time in HH:MM format
-    PS1+="${ve:+$ve }${vcs:+$vcs }" # virtualenv + vcs
+    #PS1="${FaintGray}\A${ANSIReset} " # prefix time in HH:MM format
+    PS1="${ve:+$ve }${vcs:+$vcs }" # virtualenv + vcs
     PS1+="${hc}${SQDN:+$SQDN:}${PCOLOUR}${shortpwd}"
 	noescapes=${PS1//+(????\[?;??m\\]|????\[?m\\])} # only useful to aprox prompt length
 	(( ${#noescapes} * 2 > $COLUMNS )) && sign="\n$sign"
