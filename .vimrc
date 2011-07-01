@@ -196,7 +196,8 @@ if has("autocmd")
     au FileType c          set omnifunc=ccomplete#Complete
     au FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
     au FileType xhtml,html,htmldjango,mxml,xml,java setlocal tabstop=2 shiftwidth=2 expandtab
-    au FileType javascript,css,actionscript,sh setlocal tabstop=4 shiftwidth=4 noexpandtab nolist
+    au FileType sh setlocal tabstop=4 shiftwidth=4 noexpandtab nolist
+    au FileType javascript,css,actionscript setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
     au Filetype html,xml,xsl source ~/.vim/scripts/closetag.vim
     au BufRead,BufNewFile *.tac set filetype=python
     au BufRead,BufNewFile *.pig set filetype=pig

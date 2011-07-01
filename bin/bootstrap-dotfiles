@@ -1,6 +1,6 @@
 #!/bin/bash
 [[ $1 = '-h' || -z $1 && -d ~/.dotfiles.git ]] && {
-	echo "curl -s https://github.com/dangra/dotfiles/raw/master/bin/bootstrap-dotfiles |bash -"
+	echo "curl -Ls https://github.com/dangra/dotfiles/raw/master/bin/bootstrap-dotfiles |bash -"
 	echo "wget --no-check-certificate -nv -O - https://github.com/dangra/dotfiles/raw/master/bin/bootstrap-dotfiles |bash -"
 	exit
 }

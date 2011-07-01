@@ -18,15 +18,6 @@ else
     echo 'no mq path'
 fi
 
-
-cat >>.hg/hgrc <<EOF
-[hooks]
-# Prevent "hg pull" if MQ patches are applied.
-prechangegroup.mq-no-pull = ! hg qtop > /dev/null 2>&1
-# Prevent "hg push" if MQ patches are applied.
-preoutgoing.mq-no-push = ! hg qtop > /dev/null 2>&1
-EOF
-
 hg qinit -c
 cat >>.hg/patches/.hg/hgrc <<EOF
 [paths]
