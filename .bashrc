@@ -19,7 +19,7 @@ export ACK_COLOR_MATCH=red
 
 ### Aliases
 [ "$TERM" != "dumb" ] && {
-    eval "$(dircolors -b)"
+    eval "$(dircolors -b ~/.dircolors)"
     alias ls='ls --color=auto' 
 }
 alias ll='ls -l'
