@@ -1,36 +1,33 @@
 #!/bin/bash
 #
 # usage:
-# 	tunnel-to-hadoop [region] [url]
-#
-# where "region" is "eu" or "us", by default all regions are started
-#
+# 	tunnel [region] [url]
 
 CHROMEBIN=$(type -p google-chrome || type -p chromium-browser)
 declare -A REGIONPORT
-REGIONPORT[eu]=16666
-REGIONPORT[us]=16667
+REGIONPORT[web1.scrapinghub.com]=3003
+REGIONPORT[ork]=18989
 
 [[ $CHROMEBIN ]] || { echo "ERROR: chrome or chromium binary not found"; exit -1; }
 
 _forward_and_tunnel() {
 	local region=$1 port=$2 url=$3 userdatadir proxyserver
-	userdatadir=$HOME/.config/tunnel-to-hadoop/$region
+	userdatadir=$HOME/.config/tunnel-$port/$region
 	proxyserver=socks5://localhost:$port
 	# touch data dir to skip first run dialogs
 	[[ -d $userdatadir ]] || { mkdir -p $userdatadir; touch "$userdatadir/First Run"; }
 	# Dynamic Forward port to localhost:$port
-	ssh -C -N -f -o ExitOnForwardFailure=yes -D $port indexer.ec2.$region.mydeco.com
+	ssh -C -N -f -o ExitOnForwardFailure=yes -D $port $region
 	# Start chrome preconfigured to use previously set socks5 proxy
 	$CHROMEBIN --user-data-dir=$userdatadir --proxy-server=$proxyserver $url
 }
 
 main() {
-	local regions=${1:-us eu} url region port
+	local regions=${1:-web1.scrapinghub.com} url region port
 	for region in $regions; do
 		port=${REGIONPORT[$region]}
 		[[ $port ]] || { echo "ERROR: invalid region '$region'"; exit -1; }
-		url=${2:-http://hadoop.ec2.$region.mydeco.com:50030/scheduler}
+		url=${2:-http://$region:8989/}
 		_forward_and_tunnel $region $port $url &
 	done 
 }
