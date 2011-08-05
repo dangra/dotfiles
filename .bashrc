@@ -139,6 +139,7 @@ if [ -n "$SSH_AUTH_SOCK" -a ! -L "$SSH_AUTH_SOCK" -a -S "$SSH_AUTH_SOCK" ]; then
 fi
 
 # virtualenv options and mini wrapper with completion support
+export PIP_DOWNLOAD_CACHE=~/.pip_download_cache
 export VIRTUALENV_USE_DISTRIBUTE=1 VIRTUAL_ENV_DISABLE_PROMPT=1
 export WORKON_HOME=~/envs
 workon () { source $WORKON_HOME/$1/bin/activate; }
