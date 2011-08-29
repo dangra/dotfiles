@@ -3,3 +3,4 @@ syntax: glob
 .*.sw?
 .svn
 .git
+*egg-info
