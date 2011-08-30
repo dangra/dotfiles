@@ -1,0 +1,15 @@
+#!/bin/bash
+[[ $1 ]] || exit
+
+cat >$1 <<EOF
+from optparse import OptionParser
+
+
+def main():
+	op = OptionParser()
+	opts, args = op.parse_args()
+
+
+if __name__ == '__main__':
+	main()
+EOF
