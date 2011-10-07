@@ -2,13 +2,13 @@
 [[ $1 ]] || exit
 
 cat >$1 <<EOF
+#!/usr/bin/env python
 from optparse import OptionParser
 
 
 def main():
     op = OptionParser()
     opts, args = op.parse_args()
-
 
 if __name__ == '__main__':
     main()
