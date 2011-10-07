@@ -45,3 +45,6 @@ ipastepy = ipaste --stdin --syntax python
 #log = --limit 10
 addremove = --similarity 100
 paste = --dest lodgeit
+
+[trusted]
+groups = vboxsf
