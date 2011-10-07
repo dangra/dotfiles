@@ -80,6 +80,7 @@ globalkeys = awful.util.table.join(
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
+    awful.key({ modkey,           }, "x", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
@@ -94,6 +95,12 @@ globalkeys = awful.util.table.join(
 
     -- Prompt
     awful.key({ modkey },            "r",     function () awful.util.spawn("gmrun") end),
+    awful.key({ modkey, "Shift"   }, "n",     function ()
+        awful.util.spawn("xrandr --output VGA1 --off --output LVDS1 --auto --primary")
+    end),
+    awful.key({ modkey, "Shift"   }, "m",     function ()
+        awful.util.spawn("xrandr --output LVDS1 --off --output VGA1 --auto --primary")
+    end),
     nil -- end
 )
 
