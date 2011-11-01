@@ -26,6 +26,13 @@ alias ll='ls -l'
 alias grep='grep --color'
 alias mq='hg -R $(hg root)/.hg/patches'
 alias dotfiles="GIT_DIR=~/.dotfiles.git GIT_WORK_TREE=~ git"
+
+# be virtualenv friendly
+alias pylint="env python -m pylint.lint"
+alias nosetests="env python -m nose.core"
+alias trial="env python /usr/bin/trial"
+alias twistd="env python /usr/bin/twistd"
+
 complete -o bashdefault -o default -o nospace -F _git dotfiles
 VI=`type -p vim || type -p vi`
 [[ -n $VI ]]&& alias vi=$VI vim=$VI
