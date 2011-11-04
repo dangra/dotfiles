@@ -76,4 +76,6 @@ myKeys =
     , ("M-s",          scratchpadSpawnActionCustom "gnome-terminal --disable-factory --name scratchpad")
 
     , ("M-|",          sendMessage $ ToggleStrut L)
+    , ("M-n",          spawn "xrandr --output VGA1 --off --output LVDS1 --auto --primary")
+    , ("M-m",          spawn "xrandr --output LVDS1 --off --output VGA1 --auto --primary")
     ]
