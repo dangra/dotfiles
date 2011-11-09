@@ -127,8 +127,8 @@ _prompt_command() {
     #PS1="${FaintGray}\A${ANSIReset} " # prefix time in HH:MM format
     PS1="${ve:+$ve }${vcs:+$vcs }" # virtualenv + vcs
     PS1+="${hc}${SQDN:+$SQDN:}${PCOLOUR}${shortpwd}"
-	noescapes=${PS1//+(????\[?;??m\\]|????\[?m\\])} # only useful to aprox prompt length
-	(( ${#noescapes} * 2 > $COLUMNS )) && sign="\n$sign"
+    noescapes="${PS1//\\\[+([!\]])\]/}" # only useful to aprox prompt length
+    (( ${#noescapes} * 2 > $COLUMNS )) && sign="\n$sign"
     PS1+="${LightWhite}${sign}${ANSIReset} " # shorted path
     [[ $WINDOW ]] && echo -ne "\ek${shortpwd}\e\\" # update screen status line
 }
