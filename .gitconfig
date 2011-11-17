@@ -15,3 +15,5 @@
 	meta = yellow
 [core]
 	excludesfile = /home/dan/.gitexcludesfile
+	autocrlf = input
+	safecrlf = true
