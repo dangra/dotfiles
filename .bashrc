@@ -149,9 +149,12 @@ fi
 export PIP_DOWNLOAD_CACHE=~/.pip_download_cache
 export VIRTUALENV_USE_DISTRIBUTE=1 VIRTUAL_ENV_DISABLE_PROMPT=1
 export WORKON_HOME=~/envs
-workon () { source $WORKON_HOME/$1/bin/activate; }
-_workon() { COMPREPLY=( $(cd $WORKON_HOME; ls -d ${COMP_WORDS[1]}*) ); }
-complete -o default -o nospace -F _workon workon
+if ! type -p mkvirtualenv >/dev/null; then
+    mkvirtualenv() { virtualenv $WORKON_HOME/$1; }
+    workon () { source $WORKON_HOME/$1/bin/activate; }
+    _workon() { COMPREPLY=( $(cd $WORKON_HOME; ls -d ${COMP_WORDS[1]}* 2>/dev/null) ); }
+    complete -o default -o nospace -F _workon workon
+fi
 
 # load system completions if available
 [ -f /etc/bash_completion ] && {
