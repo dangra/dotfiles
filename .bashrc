@@ -25,7 +25,7 @@ export ACK_COLOR_MATCH=red
 alias ll='ls -l'
 alias grep='grep --color'
 alias mq='hg -R $(hg root)/.hg/patches'
-alias dotfiles="GIT_DIR=~/.dotfiles.git GIT_WORK_TREE=~ git"
+alias egg="python setup.py bdist_egg"
 
 # be virtualenv friendly
 alias pylint="env python -m pylint.lint"
@@ -33,11 +33,13 @@ alias nosetests="env python -m nose.core"
 alias trial="env python /usr/bin/trial"
 alias twistd="env python /usr/bin/twistd"
 
+# dotfiles git wrapper
+alias dotfiles="GIT_DIR=~/.dotfiles.git GIT_WORK_TREE=~ git"
 complete -o bashdefault -o default -o nospace -F _git dotfiles
+
+# find vim or vi
 VI=`type -p vim || type -p vi`
 [[ -n $VI ]]&& alias vi=$VI vim=$VI
-[[ $(python -c 'import sys; print sys.version[:3]') < 2.5 ]] && alias python=python2.5
-alias egg="python setup.py bdist_egg"
 
 ### Used terminal colours
 # http://en.wikipedia.org/wiki/ANSI_escape_code
@@ -57,6 +59,7 @@ _term_colour LightWhite "1;37"
 _term_colour FaintGray "2;37"
 unset _term_colour
 
+# AWS
 ec2_metadata() { curl -fsm1 http://169.254.169.254/latest/meta-data/$1; }
 ec2_sqdn() {
 	[[ $1 = '-force' || -e /etc/sysconfig/aws ]] || return
