@@ -7,3 +7,9 @@ spec=.spec
 scala=.scala
 --type-set
 tac=.tac
+--ignore-dir
+_data
+--ignore-dir
+_index
+--ignore-dir
+.scrapy
