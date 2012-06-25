@@ -164,3 +164,5 @@ fi
     source /etc/bash_completion
     complete -F _ssh pk
 }
+
+[[ -s "$HOME/.pythonbrew/etc/bashrc" ]] && source "$HOME/.pythonbrew/etc/bashrc"
