@@ -49,6 +49,7 @@ VI=`type -p vim || type -p vi`
 _term_colour() { eval "$1='\[\e[$2m\]'"; }
 _term_colour ANSIReset 0
 _term_colour NormalRed "0;31"
+_term_colour NormalYellow "0;33"
 _term_colour LightRed "1;31"
 _term_colour LightGreen "1;32"
 _term_colour LightYellow "1;33"
@@ -103,7 +104,7 @@ _oneletter_pwd() {
 }
 
 _prompt_vcs() {
-	local hgprompt gitroot gitbranch gitstat gitstatus
+	local hgprompt gitroot gitbranch gitstat gitstatus HGPROMPT
 	[[ -d .svn ]] && { echo svn; return; }
 
 	gitroot=$(git rev-parse --show-toplevel 2>/dev/null)
@@ -116,7 +117,8 @@ _prompt_vcs() {
 		return
 	fi
 
-	hgprompt=$(test -r /.hg || hg prompt --angle-brackets "${LightWhite}☿ <root|basename><${LightYellow}#<branch|quiet>><${LightRed}<status>><update>< ${LightYellow}<patch>>${ANSIReset}" 2>/dev/null)
+	HGPROMPT="${LightWhite}☿ <root|basename><${LightYellow}#<branch|quiet>><${NormalYellow}#<bookmark>><${LightRed}<status>><update>< ${LightYellow}<patch>>${ANSIReset}"
+	hgprompt=$(test -r /.hg || hg prompt --angle-brackets "$HGPROMPT"  2>/dev/null)
 	if [[ $hgprompt ]]; then
 		echo -e "$hgprompt"
 		return
