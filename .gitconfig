@@ -14,6 +14,6 @@
 	#func = magenta  # not supported by git <1.6
 	meta = yellow
 [core]
-	excludesfile = /home/dan/.gitexcludesfile
+	excludesfile = /home/dan/.cvsignore
 	autocrlf = input
 	safecrlf = true
