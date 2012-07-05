@@ -1,4 +1,11 @@
 " Configuration file for vim
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+call pathogen#infect()
+syntax on
+filetype indent on
+" filetype on
+" filetype plugin on
+
 
 let mapleader = ","     " map leader
 set showtabline=2       " always show tabline
@@ -60,10 +67,6 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
 let g:closetag_html_style=1
 let g:python_highlight_all=1
-syntax on
-filetype on
-filetype plugin on
-filetype indent on
 
 " Suffixes that get lower priority when doing tab completion for filenames.
 " These are files we are not likely to want to edit or read.

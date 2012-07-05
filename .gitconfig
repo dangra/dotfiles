@@ -17,3 +17,5 @@
 	excludesfile = /home/dan/.cvsignore
 	autocrlf = input
 	safecrlf = true
+[github]
+	user = dangra
