@@ -35,6 +35,7 @@ alias twistd="env python /usr/bin/twistd"
 
 # dotfiles git wrapper
 alias dotfiles="GIT_DIR=~/.dotfiles.git GIT_WORK_TREE=~ git"
+alias dottig="GIT_DIR=~/.dotfiles.git GIT_WORK_TREE=~ tig"
 complete -o bashdefault -o default -o nospace -F _git dotfiles
 
 # find vim or vi

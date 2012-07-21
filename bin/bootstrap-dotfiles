@@ -1,14 +1,17 @@
 #!/bin/bash
-[[ $1 = '-h' || -z $1 && -d ~/.dotfiles.git ]] && {
-	echo "curl -Ls https://github.com/dangra/dotfiles/raw/master/bin/bootstrap-dotfiles |bash -"
-	echo "wget --no-check-certificate -nv -O - https://github.com/dangra/dotfiles/raw/master/bin/bootstrap-dotfiles |bash -"
-	exit
-}
+set -e
+export GIT_WORK_TREE=${1:-~}
+export GIT_DIR=$GIT_WORK_TREE/.dotfiles.git
 
-set -e -x
-[[ -d dotfiles/.git ]] || git clone git@github.com:dangra/dotfiles.git || git clone https://dangra@github.com/dangra/dotfiles.git
-export GIT_DIR=${1:-~/.dotfiles.git} GIT_WORK_TREE=${2:-~}
-mv dotfiles/.git $GIT_DIR
-rm -rf dotfiles
+if [[ $1 = '-h' || -z $1 && -d $GIT_DIR ]]; then
+    echo "curl -Ls http://git.io/~dangra |bash -"
+    echo "wget --no-check-certificate -nv -O - http://git.io/~dangra |bash -"
+    exit
+fi
+
+set -x
+git clone --bare https://github.com/dangra/dotfiles $GIT_DIR
+git config --add remote.origin.pushurl git@github.com:dangra/dotfiles
 echo '*' >>$GIT_DIR/info/exclude
+#git submodule update --init
 git reset --hard
