@@ -13,5 +13,5 @@ set -x
 git clone --bare https://github.com/dangra/dotfiles $GIT_DIR
 git config --add remote.origin.pushurl git@github.com:dangra/dotfiles
 echo '*' >>$GIT_DIR/info/exclude
-#git submodule update --init
 git reset --hard
+git dotmodule update --init
