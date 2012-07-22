@@ -4,8 +4,8 @@ export GIT_WORK_TREE=${1:-~}
 export GIT_DIR=$GIT_WORK_TREE/.dotfiles.git
 
 if [[ $1 = '-h' || -z $1 && -d $GIT_DIR ]]; then
-    echo "curl -Lfs http://git.io/~dangra |bash -"
-    echo "wget -qO- http://git.io/~dangra |bash -"
+    echo "curl -Lfs http://git.io/~dangra |bash"
+    echo "wget -qO- http://git.io/~dangra |bash"
     exit
 fi
 
