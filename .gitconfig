@@ -19,3 +19,8 @@
 	safecrlf = true
 [github]
 	user = dangra
+[sendemail]
+	smtpencryption = tls
+	smtpserver = smtp.gmail.com
+	smtpuser = dangra@gmail.com
+	smtpserverport = 587
