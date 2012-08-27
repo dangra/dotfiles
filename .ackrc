@@ -13,3 +13,5 @@ _data
 _index
 --ignore-dir
 .scrapy
+--ignore-dir
+.eunit
