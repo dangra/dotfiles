@@ -1,0 +1,4 @@
+# vim:ft=ruby
+Vagrant::Config.run do |config|
+  config.vm.provision :shell, :path => '~/.vagrant.d/default.sh'
+end
