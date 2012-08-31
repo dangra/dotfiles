@@ -27,7 +27,7 @@ main() {
 	for region in $regions; do
 		port=${REGIONPORT[$region]}
 		[[ $port ]] || { echo "ERROR: invalid region '$region'"; exit -1; }
-		url=${2:-http://$region:8989/}
+		url=${2:-http://disco:8989/}
 		_forward_and_tunnel $region $port $url &
 	done 
 }
