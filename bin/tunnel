@@ -1,35 +1,31 @@
-#!/bin/bash
+#!/bin/bash -x
 #
 # usage:
-# 	tunnel [region] [url]
+#     tunnel [endpoint]
+
+declare -A ENDPOINT
+ENDPOINT[sh]="disco.scrapinghub.com 3003 disco:8989"
 
 CHROMEBIN=$(type -p google-chrome || type -p chromium-browser)
-declare -A REGIONPORT
-REGIONPORT[web1.scrapinghub.com]=3003
-REGIONPORT[ork]=18989
-
 [[ $CHROMEBIN ]] || { echo "ERROR: chrome or chromium binary not found"; exit -1; }
 
-_forward_and_tunnel() {
-	local region=$1 port=$2 url=$3 userdatadir proxyserver
-	userdatadir=$HOME/.config/tunnel-$port/$region
-	proxyserver=socks5://localhost:$port
-	# touch data dir to skip first run dialogs
-	[[ -d $userdatadir ]] || { mkdir -p $userdatadir; touch "$userdatadir/First Run"; }
-	# Dynamic Forward port to localhost:$port
-	ssh -C -N -f -o ExitOnForwardFailure=yes -D $port $region
-	# Start chrome preconfigured to use previously set socks5 proxy
-	$CHROMEBIN --user-data-dir=$userdatadir --proxy-server=$proxyserver $url
+_tunnel() {
+    local host=$1 port=$2 url=$3
+    local proxy=socks5://localhost:$port
+    local userdata=$HOME/.config/tunnel-$host-$port
+    # touch data dir to skip first run dialogs
+    mkdir -p "$userdata" && touch "$userdata/First Run";
+    # Dynamic Forward port to localhost:$port
+    ssh -C -N -f -o ExitOnForwardFailure=yes $host -D $port
+    # Start chrome preconfigured to use previously set socks5 proxy
+    $CHROMEBIN --user-data-dir=$userdata --proxy-server=$proxy $url
 }
 
 main() {
-	local regions=${1:-web1.scrapinghub.com} url region port
-	for region in $regions; do
-		port=${REGIONPORT[$region]}
-		[[ $port ]] || { echo "ERROR: invalid region '$region'"; exit -1; }
-		url=${2:-http://disco:8989/}
-		_forward_and_tunnel $region $port $url &
-	done 
+    local name=${1:-${!ENDPOINT[@]}}
+    local endpoint=(${ENDPOINT[$name]})
+    [[ $endpoint ]] || { echo "invalid endpoint for: $name"; exit -1; }
+    _tunnel ${endpoint[@]} &
 }
 
 main "$@"
