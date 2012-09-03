@@ -19,19 +19,6 @@ bind I login on
 bind O login off
 bind } history
 
-bindkey -k k1 select 0 # F1
-bindkey -k k2 select 1
-bindkey -k k3 select 2
-bindkey -k k4 select 3
-bindkey -k k5 select 4
-bindkey -k k6 select 5
-bindkey -k k7 select 6
-bindkey -k k8 select 7
-bindkey -k k9 select 8
-bindkey -k k; select 9  # F10
-bindkey -k F1 select 10 # F11
-bindkey -k F2 command   # Ctrl-A
-
 # ALT+j  y ALT+k
 bindkey ^[1 prev # alt+1
 bindkey ^[2 next # alt+2
