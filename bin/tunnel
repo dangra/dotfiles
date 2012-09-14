@@ -4,7 +4,8 @@
 #     tunnel [endpoint]
 
 declare -A ENDPOINT
-ENDPOINT[sh]="disco.scrapinghub.com 3003 disco:8989"
+ENDPOINT[us]="disco.scrapinghub.com 3002 disco:8989"
+ENDPOINT[eu]="disco.eu.scrapinghub.com 3003 disco:8989"
 
 CHROMEBIN=$(type -p google-chrome || type -p chromium-browser)
 [[ $CHROMEBIN ]] || { echo "ERROR: chrome or chromium binary not found"; exit -1; }
