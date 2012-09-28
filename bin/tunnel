@@ -4,21 +4,23 @@
 #     tunnel [endpoint]
 
 declare -A ENDPOINT
-ENDPOINT[us]="disco.scrapinghub.com 3002 disco:8989"
-ENDPOINT[eu]="disco.eu.scrapinghub.com 3003 disco:8989"
+ENDPOINT[hadoop]="hadoop.scrapinghub.com hadoop:8088"
+ENDPOINT[disco]="disco.eu.scrapinghub.com disco:8989"
+ENDPOINT[disco-us]="disco.scrapinghub.com disco:8989"
+ENDPOINT[disco-bh]="disco.bitehunter.com disco:8989"
 
 CHROMEBIN=$(type -p google-chrome || type -p chromium-browser)
 [[ $CHROMEBIN ]] || { echo "ERROR: chrome or chromium binary not found"; exit -1; }
 
 _tunnel() {
-    local host=$1 port=$2 url=$3
-    local proxy=socks5://localhost:$port
-    local userdata=$HOME/.config/tunnel-$host-$port
-    # touch data dir to skip first run dialogs
+    local name=$1 host=$2 url=$3 port proxy
+    local userdata=$HOME/.config/tunnel-$name
+    local portfn=$userdata/socksport
     mkdir -p "$userdata" && touch "$userdata/First Run";
-    # Dynamic Forward port to localhost:$port
+    [[ -r $portfn ]] || echo $(($RANDOM%10000+10000)) >$portfn
+    port=$(cat $portfn)
+    proxy=socks5://localhost:$port
     ssh -C -N -f -o ExitOnForwardFailure=yes $host -D $port
-    # Start chrome preconfigured to use previously set socks5 proxy
     $CHROMEBIN --user-data-dir=$userdata --proxy-server=$proxy $url
 }
 
@@ -26,7 +28,7 @@ main() {
     local name=${1:-${!ENDPOINT[@]}}
     local endpoint=(${ENDPOINT[$name]})
     [[ $endpoint ]] || { echo "invalid endpoint for: $name"; exit -1; }
-    _tunnel ${endpoint[@]} &
+    _tunnel $name ${endpoint[@]} &
 }
 
 main "$@"
