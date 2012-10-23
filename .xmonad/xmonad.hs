@@ -78,6 +78,7 @@ myKeys =
     , ("M-<Tab>",      toggleWS)
 
     , ("M-p",          spawn "gmrun")
+    , ("M-r",          spawn "gmrun")
     -- , ("M-p",          spawn "dbus-send --dest=com.canonical.Unity2d.Dash --type=method_call /Dash com.canonical.Unity2d.Dash.activateHome")
 
 
