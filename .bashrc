@@ -160,6 +160,11 @@ if ! type -p mkvirtualenv >/dev/null; then
     workon () { source $WORKON_HOME/$1/bin/activate; }
     _workon() { COMPREPLY=( $(cd $WORKON_HOME; ls -d ${COMP_WORDS[1]}* 2>/dev/null) ); }
     complete -o default -o nospace -F _workon workon
+    enable_system_package() {
+        local src=$(/usr/bin/python -c "import os, $1 as x; print os.path.dirname(x.__file__)")
+        local dst=$(python -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")
+        ln -sf $src $dst
+    }
 fi
 
 # load system completions if available
@@ -169,3 +174,6 @@ fi
 }
 
 [[ -s "$HOME/.pythonbrew/etc/bashrc" ]] && source "$HOME/.pythonbrew/etc/bashrc"
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
