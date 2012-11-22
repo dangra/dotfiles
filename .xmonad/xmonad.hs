@@ -17,6 +17,7 @@ import XMonad.Layout.NoBorders
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.Reflect
 import XMonad.Layout.Tabbed
+import XMonad.Layout.Fullscreen
 
 import XMonad.Util.EZConfig
 import XMonad.Util.Scratchpad
@@ -62,7 +63,7 @@ myManageHook = composeAll
 myLayouts = desktopLayoutModifiers $ smartBorders
   $ onWorkspace "3" im
   $ onWorkspace "2" (tabs ||| tiled)
-  $ (tiled ||| mirror ||| tabs)
+  $ (tiled ||| mirror ||| tabs ||| full)
   where
     im = reflectHoriz $ withIM (1/8) imRoster $ reflectHoriz imLayouts
     imRoster = Or (Title "Buddy List") (Title "Contact List")
@@ -70,6 +71,7 @@ myLayouts = desktopLayoutModifiers $ smartBorders
     tiled = Tall 1 (3/100) (1/2)
     mirror = Mirror tiled
     tabs = simpleTabbedBottom
+    full = noBorders (fullscreenFull Full)
 
 myKeys =
     [ ("M-<Return>",   spawn myTerminal)
