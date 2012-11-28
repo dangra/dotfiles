@@ -10,4 +10,4 @@ apt-get update -qq
 apt-get install libdvdcss2 ubuntu-restricted-extras non-free-codecs
 
 wget https://dl.google.com/linux/direct/google-talkplugin_current_amd64.deb
-debi google-talkplugin_current_amd64.deb
+software-center google-talkplugin_current_amd64.deb
