@@ -47,21 +47,12 @@ set guifont=Monospace\ 9
 "
 set t_Co=256
 set background=dark
-let g:zenburn_high_Contrast = 1
-let g:liquidcarbon_high_contrast = 1
-"let g:molokai_original = 1
+let g:jellybeans_background_color_256 = 232
 colorscheme jellybeans
-"hi DiffChange                                           ctermfg=red         ctermbg=gray
-"hi Pmenu        guifg=#000000       guibg=#a6a190       ctermfg=black       ctermbg=gray
-"hi PmenuSel     guifg=#ffffff       guibg=#133293       ctermfg=white       ctermbg=red
-"hi PmenuSbar    guifg=NONE          guibg=#555555       ctermfg=red         ctermbg=black
-"hi PmenuThumb   guifg=NONE          guibg=#cccccc       ctermfg=red         ctermbg=white
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " misc
 "
-
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
