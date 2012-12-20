@@ -1,8 +1,9 @@
 " Configuration file for vim
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
+call pathogen#helptags()
 syntax on
-filetype indent on
+filetype plugin indent on
 " filetype on
 " filetype plugin on
 
