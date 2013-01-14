@@ -47,41 +47,48 @@ VI=`type -p vim || type -p vi`
 # foreground in range 30-37, # background in range 40-47
 # black=0 red=1 green=2 yellow=3 blue=4 magenta=5 cyan=6 white=7
 # normal=0 bright=1 faint=2
-_term_colour() { eval "$1='\[\e[$2m\]'"; }
-_term_colour ANSIReset 0
-_term_colour NormalRed "0;31"
-_term_colour NormalYellow "0;33"
-_term_colour LightRed "1;31"
-_term_colour LightGreen "1;32"
-_term_colour LightYellow "1;33"
-_term_colour LightBlue "1;34"
-_term_colour LightMagenta "1;35"
-_term_colour LightCyan "1;36"
-_term_colour LightWhite "1;37"
-_term_colour FaintGray "2;37"
-unset _term_colour
+_termcol() { local co="\\[\\e[$1m\\]"; shift; for n in "$@"; do eval "$n='$co';"; done;}
+_termcol "0" ANSIReset
+_termcol "0;30" Black Base02
+_termcol "0;31" Red
+_termcol "0;32" Green
+_termcol "0;33" Yellow
+_termcol "0;34" Blue
+_termcol "0;35" Magenta
+_termcol "0;36" Cyan
+_termcol "0;37" White Base2
+_termcol "1;30" BrBlack Base03
+_termcol "1;31" BrRed Orange
+_termcol "1;32" BrGreen Base01
+_termcol "1;33" BrYellow Base00
+_termcol "1;34" BrBlue Base0
+_termcol "1;35" BrMagenta Violet
+_termcol "1;36" BrCyan Base1
+_termcol "1;37" BrWhite Base3
+_termcol "2;37" FaintGray
+unset _termcol
 
 # AWS
 ec2_metadata() { curl -fsm1 http://169.254.169.254/latest/meta-data/$1; }
 ec2_sqdn() {
-	[[ $1 = '-force' || -e /etc/sysconfig/aws ]] || return
-	echo $(ec2_metadata security-groups) $(ec2_metadata instance-id) \
-		|sed -rne 's/default\s?//;s/ +/-/gp'
+    [[ $1 = '-force' || -e /etc/sysconfig/aws ]] || return
+    echo $(ec2_metadata security-groups) $(ec2_metadata instance-id) \
+        |sed -rne 's/default\s?//;s/ +/-/gp'
 }
 ### Prompts
 FQDN=$(hostname -f 2>/dev/null || hostname 2>/dev/null)
-PCOLOUR=$LightMagenta
+PCOLOUR=$Magenta
 # bash prompt
 case $FQDN in
-	*.mydeco.com) SQDN=${FQDN/.mydeco.com} ;;
-	domU-*|ip-*) SQDN=$(ec2_sqdn) ;;
+    *.mydeco.com) SQDN=${FQDN/.mydeco.com} ;;
+    domU-*|ip-*) SQDN=$(ec2_sqdn) ;;
     *)
-		if [[ -n $WINDOWID ]]; then
-        	PCOLOUR=$LightGreen; SQDN=''
-		else
-        	SQDN=${FQDN/.*}
-		fi
-		;;
+        if [[ -n $WINDOWID ]]; then
+            PCOLOUR=$Blue; SQDN=''
+        else
+            SQDN=${FQDN/.*}
+        fi
+        ;;
 esac
 
 # mysql client prompt
@@ -105,37 +112,37 @@ _oneletter_pwd() {
 }
 
 _prompt_vcs() {
-	local hgprompt gitroot gitbranch gitstat gitstatus HGPROMPT
-	[[ -d .svn ]] && { echo svn; return; }
+    local hgprompt gitroot gitbranch gitstat gitstatus HGPROMPT
+    [[ -d .svn ]] && { echo svn; return; }
 
-	gitroot=$(git rev-parse --show-toplevel 2>/dev/null)
-	if [[ $gitroot ]]; then
-		gitbranch=$(git branch 2>/dev/null |sed -rne '/^\*/s/^\*( | master)//p')
-		gitstat=$(git status 2>/dev/null | grep '\(# Untracked\|# Changes\|# Changed but not updated:\)')
-		[[ $gitstat =~ 'Changes to be committed' ]] && gitstatus='!'
-		[[ $gitstat =~ 'Changed but not updated' || $gitstat =~ 'Untracked files' ]] && gitstatus='?'
-		echo "${LightWhite}± ${gitroot##*/}${gitstatus:+${LightRed}${gitstatus}}${gitbranch:+ ${LightYellow}${gitbranch}}${ANSIReset}"
-		return
-	fi
+    gitroot=$(git rev-parse --show-toplevel 2>/dev/null)
+    if [[ $gitroot ]]; then
+        gitbranch=$(git branch 2>/dev/null |sed -rne '/^\*/s/^\*( | master)//p')
+        gitstat=$(git status 2>/dev/null | grep '\(# Untracked\|# Changes\|# Changed but not updated:\)')
+        [[ $gitstat =~ 'Changes to be committed' ]] && gitstatus='!'
+        [[ $gitstat =~ 'Changed but not updated' || $gitstat =~ 'Untracked files' ]] && gitstatus='?'
+        echo "${Green}± ${gitroot##*/}${gitstatus:+${Red}${gitstatus}}${gitbranch:+ ${Yellow}${gitbranch}}${ANSIReset}"
+        return
+    fi
 
-	HGPROMPT="${LightWhite}☿ <root|basename><${LightYellow}#<branch|quiet>><${NormalYellow}#<bookmark>><${LightRed}<status>><update>< ${LightYellow}<patch>>${ANSIReset}"
-	hgprompt=$(test -r /.hg || hg prompt --angle-brackets "$HGPROMPT"  2>/dev/null)
-	if [[ $hgprompt ]]; then
-		echo -e "$hgprompt"
-		return
-	fi
+    HGPROMPT="${Green}☿ <root|basename><${Yellow}#<branch|quiet>><${Yellow}#<bookmark>><${Red}<status>><update>< ${Yellow}<patch>>${ANSIReset}"
+    hgprompt=$(test -r /.hg || hg prompt --angle-brackets "$HGPROMPT"  2>/dev/null)
+    if [[ $hgprompt ]]; then
+        echo -e "$hgprompt"
+        return
+    fi
 }
 
 _prompt_command() {
-    local shortpwd=$(_oneletter_pwd) vcs=$(_prompt_vcs) sign='\$' hc=$LightWhite ve noescapes
-    [[ $USER = root ]] && hc="$NormalRed"
-    [[ $VIRTUAL_ENV ]] && ve="${LightYellow}${VIRTUAL_ENV##*/}"
+    local shortpwd=$(_oneletter_pwd) vcs=$(_prompt_vcs) sign='\$' hc=$Green ve noescapes
+    [[ $USER = root ]] && hc="$Red"
+    [[ $VIRTUAL_ENV ]] && ve="${Yellow}${VIRTUAL_ENV##*/}"
     #PS1="${FaintGray}\A${ANSIReset} " # prefix time in HH:MM format
     PS1="${ve:+$ve }${vcs:+$vcs }" # virtualenv + vcs
     PS1+="${hc}${SQDN:+$SQDN:}${PCOLOUR}${shortpwd}"
     noescapes="${PS1//\\\[+([!\]])\]/}" # only useful to aprox prompt length
     (( ${#noescapes} * 2 > $COLUMNS )) && sign="\n$sign"
-    PS1+="${LightWhite}${sign}${ANSIReset} " # shorted path
+    PS1+="${Green}${sign}${ANSIReset} " # shorted path
     [[ $WINDOW ]] && echo -ne "\ek${shortpwd}\e\\" # update screen status line
 }
 export PS1 PROMPT_COMMAND=_prompt_command
