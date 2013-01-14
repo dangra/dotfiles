@@ -24,3 +24,5 @@
 	smtpserver = smtp.gmail.com
 	smtpuser = dangra@gmail.com
 	smtpserverport = 587
+[push]
+	default = upstream
