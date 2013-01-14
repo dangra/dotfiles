@@ -26,26 +26,34 @@ GREEN = '#859900'
 # 16 colors palette
 PALETTE = [BASE02, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, BASE2,
            BASE03, ORANGE, BASE01, BASE00, BASE0, VIOLET, BASE1, BASE3]
-# scheme = (background, foreground, bold)
-DARK = (BASE03, BASE0, BASE1)
-LIGHT = (BASE3, BASE00, BASE01)
+SCHEMES = {'dark': {'background_color': BASE03,
+                    'foreground_color': BASE0,
+                    'bold_color': BASE1},
+           'light': {'background_color': BASE3,
+                     'foreground_color': BASE00,
+                     'bold_color': BASE01}}
 
 
-def _set_profile(profile, palette, background, foreground, bold, **extras):
+def _solarize(profile, scheme):
+    conf = {
+        'solarized_scheme': scheme,
+        'visible_name': profile,
+        'palette': ':'.join(PALETTE),
+        'use_theme_colors': False,
+        'use_theme_background': False,
+        'bold_color_same_as_fg': False,
+        'default_show_menubar': False,
+        'use_system_font': False,
+        'font': 'Inconsolata Medium 10',
+    }
+    conf.update(SCHEMES[scheme])
+    _set_profile(profile, **conf)
+
+
+def _set_profile(profile, **conf):
     c = gconf.client_get_default()
-
     pp = lambda k: _gpath('profiles', profile, k)
-    # Solarized specifics
-    c.set_string(pp('visible_name'), profile)
-    c.set_string(pp('palette'), ':'.join(palette))
-    c.set_string(pp('bold_color'), bold)
-    c.set_string(pp('background_color'), background)
-    c.set_string(pp('foreground_color'), foreground)
-    c.set_bool(pp('use_theme_colors'), False)
-    c.set_bool(pp('use_theme_background'), False)
-    c.set_bool(pp('bold_color_same_as_fg'), False)
-    # profile extras
-    for k, v in extras.iteritems():
+    for k, v in conf.iteritems():
         _set_value(c, pp(k), v)
 
     # Add name to profile list
@@ -55,17 +63,6 @@ def _set_profile(profile, palette, background, foreground, bold, **extras):
         c.set_list(_gpath('global/profile_list'), gconf.VALUE_STRING, profiles)
     # Set profile as default for new windows
     c.set_string(_gpath('global/default_profile'), profile)
-
-
-def _solarize(profile='Solarized', scheme='dark'):
-    extras = {
-        'solarized_scheme': scheme,  # used to support scheme toggling
-        'default_show_menubar': False,
-        'use_system_font': False,
-        'font': 'Inconsolata Medium 10',
-    }
-    bg, fg, bd = DARK if scheme == 'dark' else LIGHT
-    _set_profile(profile, PALETTE, bg, fg, bd, **extras)
 
 
 def _next_scheme(profile):
