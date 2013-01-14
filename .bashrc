@@ -37,6 +37,12 @@ alias twistd="env python /usr/bin/twistd"
 alias dotfiles="GIT_DIR=~/.dotfiles.git GIT_WORK_TREE=~ git"
 alias dottig="GIT_DIR=~/.dotfiles.git GIT_WORK_TREE=~ tig"
 complete -o bashdefault -o default -o nospace -F _git dotfiles
+dotsync (){
+    dotfiles pull origin master -u
+    dotfiles dotmodule init
+    dotfiles dotmodule foreach git fetch
+    dotfiles dotmodule update
+}
 
 # find vim or vi
 VI=`type -p vim || type -p vi`
