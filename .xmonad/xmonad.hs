@@ -78,19 +78,14 @@ myKeys =
     , ("M-S-<Return>", windows W.shiftMaster)
     , ("M-c", kill)
     , ("M-<Tab>",      toggleWS)
-
-    , ("M-p",          spawn "gmrun")
     , ("M-r",          spawn "gmrun")
-    -- , ("M-p",          spawn "dbus-send --dest=com.canonical.Unity2d.Dash --type=method_call /Dash com.canonical.Unity2d.Dash.activateHome")
-
-
     , ("M-d",          scratchpadSpawnActionTerminal myTerminal)
     , ("M-s",          scratchpadSpawnActionCustom "gnome-terminal --disable-factory --name scratchpad")
-
     , ("M-|",          sendMessage $ ToggleStrut L)
     , ("M-n",          spawn "xrandr --output VGA1 --off --output LVDS1 --auto --primary")
     , ("M-m",          spawn "xrandr --output LVDS1 --off --output VGA1 --auto --primary")
     , ("M-S-q",        spawn "gnome-session-quit")
+    , ("M-<F5>",         spawn "solarize")
     ]
 
 
