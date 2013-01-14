@@ -53,6 +53,7 @@ nmap <leader>sp0 :setlocal nospell<CR>
 " misc
 let g:closetag_html_style=1
 let g:python_highlight_all=1
+let g:gist_detect_filetype = 1
 "' jumps to the precise location of a marks (`)
 map ' `
 "rewrap entire paragraph
