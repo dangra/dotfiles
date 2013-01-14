@@ -23,18 +23,15 @@ VIOLET = '#6C71C4'
 BLUE = '#268BD2'
 CYAN = '#2AA198'
 GREEN = '#859900'
-
+# 16 colors palette
 PALETTE = [BASE02, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, BASE2,
            BASE03, ORANGE, BASE01, BASE00, BASE0, VIOLET, BASE1, BASE3]
-DARK_BD = BASE1
-DARK_BG = BASE03
-DARK_FG = BASE0
-LIGHT_BD = BASE01
-LIGHT_BG = BASE3
-LIGHT_FG = BASE00
+# scheme = (background, foreground, bold)
+DARK = (BASE03, BASE0, BASE1)
+LIGHT = (BASE3, BASE00, BASE01)
 
 
-def _set_profile(profile, palette, bold, background, foreground, **extras):
+def _set_profile(profile, palette, background, foreground, bold, **extras):
     c = gconf.client_get_default()
 
     pp = lambda k: _gpath('profiles', profile, k)
@@ -60,24 +57,21 @@ def _set_profile(profile, palette, bold, background, foreground, **extras):
     c.set_string(_gpath('global/default_profile'), profile)
 
 
-def _solarize(profile='Solarized', bgmode='dark'):
+def _solarize(profile='Solarized', scheme='dark'):
     extras = {
-        'background_mode': bgmode,  # used to support bg mode toggling
+        'solarized_scheme': scheme,  # used to support scheme toggling
         'default_show_menubar': False,
         'use_system_font': False,
         'font': 'Inconsolata Medium 10',
     }
-
-    if bgmode == 'dark':
-        _set_profile(profile, PALETTE, DARK_BD, DARK_BG, DARK_FG, **extras)
-    else:
-        _set_profile(profile, PALETTE, LIGHT_BD, LIGHT_BG, LIGHT_FG, **extras)
+    bg, fg, bd = DARK if scheme == 'dark' else LIGHT
+    _set_profile(profile, PALETTE, bg, fg, bd, **extras)
 
 
-def _next_bgmode(profile):
+def _next_scheme(profile):
     c = gconf.client_get_default()
-    bgmode = c.get_string(_gpath('profiles', profile, 'background_mode'))
-    return 'light' if bgmode == 'dark' else 'dark'
+    scheme = c.get_string(_gpath('profiles', profile, 'solarized_scheme'))
+    return 'light' if scheme == 'dark' else 'dark'
 
 
 def _gpath(*parts):
@@ -101,11 +95,11 @@ def main():
                   help='gnome-terminal profile name to set, default="%default"')
     opts, args = op.parse_args()
 
-    cmd = args[0] if args else _next_bgmode(opts.profile)
-    if cmd in ('dark', 'light'):
-        _solarize(profile=opts.profile, bgmode=cmd)
+    scheme = args[0] if args else _next_scheme(opts.profile)
+    if scheme in ('dark', 'light'):
+        _solarize(profile=opts.profile, scheme=scheme)
     else:
-        op.error('Unknown command: %s' % cmd)
+        op.error('Unknown scheme: %s' % scheme)
 
 
 if __name__ == '__main__':
