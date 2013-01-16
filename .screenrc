@@ -1,44 +1,25 @@
-bind c screen 1
-#bind 0 select 10
-#screen 1
-# screen 2
-# screen 3
-# screen 4
-# screen 5
-# screen 9 mutt
-# select 1
-
+bind c screen 0
 # Remove some stupid / dangerous key bindings
 bind ^k
-#bind L
 bind ^\
-# Make them better
 bind \\ quit
 bind K kill
 bind I login on
 bind O login off
-bind } history
 
-# ALT+j  y ALT+k
-bindkey ^[1 prev # alt+1
-bindkey ^[2 next # alt+2
-
+defutf8 on
 deflogin off
+defscrollback 2000
 autodetach on
-
+nonblock on
+shelltitle ""
 startup_message off
 bell "bell: %n (%t) [%w:%s]^G"
 vbell on
 vbell_msg "   Wuff  ----  Wuff!!  "
 
-defscrollback 2000
-nonblock on
-defutf8 on
-msgwait 2
 altscreen on
-
-# remove window title
-shelltitle ""
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'   # tell screen how to set colors. AB = background, AF=foreground
 
 hardstatus off
 hardstatus alwayslastline
