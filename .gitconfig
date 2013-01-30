@@ -25,4 +25,4 @@
 	smtpuser = dangra@gmail.com
 	smtpserverport = 587
 [push]
-	default = upstream
+	default = current
