@@ -70,7 +70,7 @@ vmap <leader>w   :w! $HOME/.vimxfer<CR>
 nmap <silent> <leader><leader> :silent noh<CR>
 " highlight tabs and trailing whitespaces
 set list
-set listchars=tab:\\\ ,trail:\  " Do not remove trailing whitespace on this line
+set listchars=tab:\ \ ,trail:\  " Do not remove trailing whitespace on this line
 " Remove trailing spaces and tabs, and replace tabs with 4 spaces
 nmap sT :%s/\s\+$//<CR>
 nmap s4 :%s/\t/    /g<CR>
@@ -150,12 +150,13 @@ endif
 " File type detection
 if has("autocmd")
     au BufRead,BufNewFile .followup,.article,.letter,/tmp/pico*,nn.*,snd.*,/tmp/mutt* :set ft=mail 
-    au FileType python     set omnifunc=pythoncomplete#Complete
-    au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-    au FileType html       set omnifunc=htmlcomplete#CompleteTags
-    au FileType css        set omnifunc=csscomplete#CompleteCSS
-    au FileType xml        set omnifunc=xmlcomplete#CompleteTags
-    au FileType c          set omnifunc=ccomplete#Complete
+    "au FileType python     setlocal omnifunc=pythoncomplete#Complete
+    au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    au FileType html       setlocal omnifunc=htmlcomplete#CompleteTags
+    au FileType css        setlocal omnifunc=csscomplete#CompleteCSS
+    au FileType xml        setlocal omnifunc=xmlcomplete#CompleteTags
+    au FileType c          setlocal omnifunc=ccomplete#Complete
+    au FileType go         setlocal nolist tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab
     au FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
     au FileType xhtml,html,htmldjango,mxml,xml,java setlocal tabstop=2 shiftwidth=2 expandtab
     au FileType sh setlocal tabstop=4 shiftwidth=4 expandtab list
