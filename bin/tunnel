@@ -25,7 +25,7 @@ _tunnel() {
 }
 
 main() {
-    local name=${1:-${!ENDPOINT[@]}}
+    local name=${1:-hadoop}
     local endpoint=(${ENDPOINT[$name]})
     [[ $endpoint ]] || { echo "invalid endpoint for: $name"; exit -1; }
     _tunnel $name ${endpoint[@]} &
