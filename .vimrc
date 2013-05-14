@@ -33,6 +33,7 @@ set backspace=indent,eol,start " more powerful backspacing
 set smartindent         " Always set autoindenting on
 set scrolloff=3         " Maintain more context around the cursor
 set guioptions=         " Disable toolbar, scrollbars, statuslines, etc for gvim
+set colorcolumn=80
 set guifont=Monospace\ 9
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
@@ -41,9 +42,9 @@ set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.i
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Theme
 set t_Co=16
-set background=light
+set background=dark
 call togglebg#map("<F5>")
-colorscheme solarized
+colorscheme molokai
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Spell checker
 nmap <leader>spes :set spell spelllang=es<CR>
