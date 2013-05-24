@@ -1,2 +1,2 @@
 #!/bin/sh
-find . -name '*.py[co]' -delete
+find . -name '*.py[co]' -o -name '*$py.class' -delete
