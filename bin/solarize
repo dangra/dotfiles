@@ -44,7 +44,7 @@ def _solarize(profile, scheme):
         'bold_color_same_as_fg': False,
         'default_show_menubar': False,
         'use_system_font': False,
-        'font': 'Inconsolata Medium 10',
+        'font': 'Inconsolata Medium 11',
     }
     conf.update(SCHEMES[scheme])
     _set_profile(profile, **conf)
