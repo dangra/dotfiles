@@ -4,7 +4,8 @@
 #     tunnel [endpoint]
 
 declare -A ENDPOINT
-ENDPOINT[hadoop]="hadoop.scrapinghub.com hadoop:8088"
+ENDPOINT[hadoop]="hadoop.scrapinghub.com 172.16.1.1:8088 172.16.1.1:60010"
+ENDPOINT[hadoop-dev]="disco1.eu.scrapinghub.com 172.16.1.1:8088 172.16.1.1:60010"
 ENDPOINT[disco]="disco.eu.scrapinghub.com disco:8989"
 ENDPOINT[disco-us]="disco.scrapinghub.com disco:8989"
 ENDPOINT[disco-bh]="disco.bitehunter.com disco:8989"
@@ -13,15 +14,18 @@ CHROMEBIN=$(type -p google-chrome || type -p chromium-browser)
 [[ $CHROMEBIN ]] || { echo "ERROR: chrome or chromium binary not found"; exit -1; }
 
 _tunnel() {
-    local name=$1 host=$2 url=$3 port proxy
+    local name=$1 host=$2
+    shift 2
+    local urls=("$@")
     local userdata=$HOME/.config/tunnel-$name
     local portfn=$userdata/socksport
+    local port proxy
     mkdir -p "$userdata" && touch "$userdata/First Run";
     [[ -r $portfn ]] || echo $(($RANDOM%10000+10000)) >$portfn
     port=$(cat $portfn)
     proxy=socks5://localhost:$port
     ssh -C -N -f -o ExitOnForwardFailure=yes $host -D $port
-    $CHROMEBIN --user-data-dir=$userdata --proxy-server=$proxy $url
+    $CHROMEBIN --user-data-dir=$userdata --proxy-server=$proxy ${urls[@]}
 }
 
 main() {
