@@ -10,6 +10,7 @@ set showtabline=2       " always show tabline
 set modelines=5
 set nocompatible        " Use Vim defaults instead of 100% vi compatibility
 set number             " Show line numbers
+set cryptmethod=blowfish
 set textwidth=0         " Wrap words by default
 set viminfo='20,\"50    " Read/write a .viminfo file, don't store more than 50 lines of registers
 set history=50          " Keep 50 lines of command line history
@@ -42,8 +43,10 @@ set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.i
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Theme
 set t_Co=256
+set background=dark
 colorscheme molokai
-set background=light
+"set background=light
+"colorscheme solarized
 call togglebg#map("<F5>")
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Spell checker
