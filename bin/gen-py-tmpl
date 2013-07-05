@@ -3,12 +3,13 @@
 
 cat >$1 <<EOF
 #!/usr/bin/env python
-from optparse import OptionParser
+from argparse import ArgumentParser
 
 
 def main():
-    op = OptionParser()
-    opts, args = op.parse_args()
+    ap = ArgumentParser()
+    ap.add_argument('--debug', action='store_true')
+    args = ap.parse_args()
 
 if __name__ == '__main__':
     main()
