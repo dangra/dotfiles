@@ -10,7 +10,6 @@ set showtabline=2       " always show tabline
 set modelines=5
 set nocompatible        " Use Vim defaults instead of 100% vi compatibility
 set number             " Show line numbers
-set cryptmethod=blowfish
 set textwidth=0         " Wrap words by default
 set viminfo='20,\"50    " Read/write a .viminfo file, don't store more than 50 lines of registers
 set history=50          " Keep 50 lines of command line history
@@ -42,6 +41,7 @@ set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.i
 
 if version >= 703
     set colorcolumn=80
+    set cryptmethod=blowfish
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
