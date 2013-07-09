@@ -34,12 +34,16 @@ set backspace=indent,eol,start " more powerful backspacing
 set smartindent         " Always set autoindenting on
 set scrolloff=3         " Maintain more context around the cursor
 set guioptions=         " Disable toolbar, scrollbars, statuslines, etc for gvim
-set colorcolumn=80
 set guifont=Monospace\ 9
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 " Lower priority suffixes for tab completion
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc,$py.class
+
+if version >= 703
+    set colorcolumn=80
+endif
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Theme
 set t_Co=256
