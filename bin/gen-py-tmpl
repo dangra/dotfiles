@@ -3,6 +3,7 @@
 
 cat >$1 <<EOF
 #!/usr/bin/env python
+import sys
 from argparse import ArgumentParser
 
 
@@ -12,6 +13,6 @@ def main():
     args = ap.parse_args()
 
 if __name__ == '__main__':
-    main()
+    sys.exit(main())
 EOF
 chmod +x $1

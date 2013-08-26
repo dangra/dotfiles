@@ -196,3 +196,8 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 ### GO lang
 export GOPATH=~/gocode GOROOT=~/src/go PATH="~/src/go/bin:~/gocode/bin:$PATH"
+
+# SH
+hsapi () {
+    curl -sn http://storage.scrapinghub.com/$1
+}
