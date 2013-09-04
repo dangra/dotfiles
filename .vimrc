@@ -46,11 +46,11 @@ endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Theme
-set t_Co=256
-set background=dark
-colorscheme molokai
-"set background=light
-"colorscheme solarized
+set t_Co=16
+"set background=dark
+"colorscheme molokai
+set background=light
+colorscheme solarized
 call togglebg#map("<F5>")
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Spell checker
