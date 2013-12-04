@@ -202,3 +202,8 @@ export GOPATH=~/gocode GOROOT=~/src/go PATH="~/src/go/bin:~/gocode/bin:$PATH"
 hsapi () {
     curl -sn http://storage.scrapinghub.com/$1
 }
+
+[ -d ~/.pyenv ] && eval "$(pyenv init -)"
+
+# added by travis gem
+[ -f /home/daniel/.travis/travis.sh ] && source /home/daniel/.travis/travis.sh

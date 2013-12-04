@@ -40,7 +40,7 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc,$py.class
 
 if version >= 703
-    set colorcolumn=80
+    set colorcolumn=100
     set cryptmethod=blowfish
 endif
 

@@ -17,3 +17,5 @@ _index
 .scrapy
 --ignore-dir
 .eunit
+--ignore-dir
+.tox

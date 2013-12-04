@@ -4,11 +4,12 @@
 #     tunnel [endpoint]
 
 declare -A ENDPOINT
-ENDPOINT[hadoop]="hadoop.scrapinghub.com hadoop:8088 head1:60010 head2:60010 head1:50070 head2:50070" 
+ENDPOINT[hadoop]="hadoop.scrapinghub.com hadoop:8088 hadoop:19888 head1:60010 head2:60010 head1:50070 head2:50070" 
 ENDPOINT[hadoop-dev]="disco1.eu.scrapinghub.com 172.16.1.1:8088 172.16.1.1:60010"
 ENDPOINT[disco]="disco.eu.scrapinghub.com disco:8989"
 ENDPOINT[disco-us]="disco.scrapinghub.com disco:8989"
 ENDPOINT[disco-bh]="disco.bitehunter.com disco:8989"
+ENDPOINT[dev]="dev.scrapinghub.com"
 
 CHROMEBIN=$(type -p google-chrome || type -p chromium-browser)
 [[ $CHROMEBIN ]] || { echo "ERROR: chrome or chromium binary not found"; exit -1; }
