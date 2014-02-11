@@ -173,6 +173,8 @@ if has("autocmd")
     au Filetype html,xml,xsl source ~/.vim/scripts/closetag.vim
     au BufRead,BufNewFile *.tac set filetype=python
     au BufRead,BufNewFile *.pig set filetype=pig
+    au BufRead,BufNewFile *.jinja set filetype=jinja
     au BufRead,BufNewFile *.md,*.mkd set filetype=mkd
     au BufRead *.md,*.mkd  set ai formatoptions=tcroqn2 comments=n:&gt;
+    au BufReadCmd   *.egg		call zip#Browse(expand("<amatch>"))
 endif

@@ -127,7 +127,7 @@ _prompt_vcs() {
     gitroot=$(git rev-parse --show-toplevel 2>/dev/null)
     if [[ $gitroot ]]; then
         #gitbranch=$(git branch 2>/dev/null |sed -rne '/^\*/s/^\*( | master)//p')
-        gitbranch=$(git describe --all)
+        gitbranch=$(git describe --all --always)
         gitstat=$(git status 2>/dev/null | grep '\(# Untracked\|# Changes\|# Changed but not updated:\)')
         [[ $gitstat =~ 'Changes to be committed' ]] && gitstatus='!'
         [[ $gitstat =~ 'Changed but not updated' || $gitstat =~ 'Untracked files' ]] && gitstatus='?'
