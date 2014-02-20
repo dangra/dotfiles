@@ -1,5 +1,10 @@
 " VIM configuration file
 runtime bundle/vim-pathogen/autoload/pathogen.vim
+
+let g:pathogen_disabled = []
+if !has('python')
+    call add(g:pathogen_disabled, 'python-mode')
+endif
 call pathogen#infect()
 call pathogen#helptags()
 syntax on
@@ -46,11 +51,11 @@ endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Theme
-set t_Co=16
-"set background=dark
-"colorscheme molokai
+set t_Co=256
 set background=light
-colorscheme solarized
+colorscheme molokai
+"set background=light
+"colorscheme solarized
 call togglebg#map("<F5>")
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Spell checker
