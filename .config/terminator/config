@@ -1,0 +1,17 @@
+# vim:ft=dosini:
+[global_config]
+  focus = sloopy
+  handle_size = 1
+  window_state = maximise
+  borderless = True
+  tab_position = bottom
+
+[keybindings]
+  cycle_next = <Alt>j
+  cycle_prev = <Alt>k
+
+[profiles]
+  [[default]]
+    scrollbar_position = disabled
+    show_titlebar = False
+    copy_on_selection = True
