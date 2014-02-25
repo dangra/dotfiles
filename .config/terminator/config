@@ -1,6 +1,6 @@
 # vim:ft=dosini:
 [global_config]
-  focus = sloopy
+  focus = sloppy
   handle_size = 1
   window_state = maximise
   borderless = True
