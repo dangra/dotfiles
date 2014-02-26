@@ -172,8 +172,9 @@ fi
 export PIP_DOWNLOAD_CACHE=~/.pip_download_cache
 export VIRTUALENV_USE_DISTRIBUTE=1 VIRTUAL_ENV_DISABLE_PROMPT=1
 export WORKON_HOME=~/envs
+_virtualenv=$(type -p virtualenv2 || type -p virtualenv)
 if ! type -p mkvirtualenv >/dev/null; then
-    mkvirtualenv() { virtualenv $WORKON_HOME/$1; workon $1; }
+    mkvirtualenv() { $_virtualenv $WORKON_HOME/$1; workon $1; }
     workon () { source $WORKON_HOME/$1/bin/activate; }
     _workon() { COMPREPLY=( $(cd $WORKON_HOME; ls -d ${COMP_WORDS[1]}* 2>/dev/null) ); }
     complete -o default -o nospace -F _workon workon
@@ -196,7 +197,8 @@ fi
 export PATH="/usr/local/heroku/bin:$PATH"
 
 ### GO lang
-export GOPATH=~/gocode GOROOT=~/src/go PATH="~/src/go/bin:~/gocode/bin:$PATH"
+export GOPATH=~/go PATH=$PATH:~/go/bin
+
 
 # SH
 hsapi () {
