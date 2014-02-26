@@ -1,17 +1,26 @@
-# vim:ft=dosini:
 [global_config]
-  focus = sloppy
-  handle_size = 1
+  tab_position = bottom
   window_state = maximise
   borderless = True
-  tab_position = bottom
-
+  handle_size = 1
+  focus = mouse
 [keybindings]
-  cycle_next = <Alt>j
   cycle_prev = <Alt>k
-
+  cycle_next = <Alt>j
 [profiles]
   [[default]]
-    scrollbar_position = disabled
+    scrollbar_position = hidden
+    font = Terminus 10
+    background_image = None
+    use_system_font = False
     show_titlebar = False
     copy_on_selection = True
+[layouts]
+  [[default]]
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+    [[[window0]]]
+      type = Window
+      parent = ""
+[plugins]
