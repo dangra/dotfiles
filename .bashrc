@@ -1,5 +1,5 @@
 # vi:ft=sh
-export PATH=~/bin:/sbin:/usr/sbin:$PATH
+export PATH=~/bin:~/.gem/ruby/2.1.0/bin:/sbin:/usr/sbin:$PATH
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -105,7 +105,7 @@ export MYSQL_PS1="${SQDN%%.*} \u@\h \d> "
 
 _oneletter_pwd() {
     local DIRS=() ODIRS=() MAX=0 SHORTEDPATH=''
-    IFS=/ read -d '' -a DIRS <<<"${PWD/#$HOME/~}"
+    IFS=/ read -d '' -a DIRS <<<"${PWD/#$HOME/\~}"
     MAX=$((${#DIRS[@]} - 2)) # show 2 complete names at the end of pwd
     for i in ${!DIRS[@]}; do
         if [[ $i -lt $MAX ]]; then
@@ -206,6 +206,9 @@ hsapi () {
 }
 
 [ -d ~/.pyenv ] && eval "$(pyenv init -)"
+
+# ruby bundle
+type -p ruby >/dev/null && export GEM_HOME=$(ruby -e 'puts Gem.user_dir')
 
 # added by travis gem
 [ -f /home/daniel/.travis/travis.sh ] && source /home/daniel/.travis/travis.sh

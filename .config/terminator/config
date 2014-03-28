@@ -1,18 +1,21 @@
 [global_config]
-  tab_position = bottom
   window_state = maximise
-  borderless = True
   handle_size = 1
+  enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
   focus = mouse
+  borderless = True
+  tab_position = bottom
 [keybindings]
   cycle_prev = <Alt>k
   cycle_next = <Alt>j
 [profiles]
   [[default]]
     scrollbar_position = hidden
-    font = Terminus 10
-    background_image = None
     use_system_font = False
+    font = Terminus 10
+    scrollback_lines = 1500
+    background_image = None
+    scroll_on_output = False
     show_titlebar = False
     copy_on_selection = True
 [layouts]

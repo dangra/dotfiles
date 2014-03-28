@@ -11,7 +11,7 @@ ENDPOINT[disco-us]="disco.scrapinghub.com disco:8989"
 ENDPOINT[disco-bh]="disco.bitehunter.com disco:8989"
 ENDPOINT[dev]="dev.scrapinghub.com"
 
-CHROMEBIN=$(type -p google-chrome || type -p chromium-browser)
+CHROMEBIN=$(type -p google-chrome || type -p google-chrome-unstable || type -p chromium-browser)
 [[ $CHROMEBIN ]] || { echo "ERROR: chrome or chromium binary not found"; exit -1; }
 
 _tunnel() {
