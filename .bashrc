@@ -28,10 +28,10 @@ alias mq='hg -R $(hg root)/.hg/patches'
 alias egg="python setup.py bdist_egg"
 
 # be virtualenv friendly
-alias pylint="env python -m pylint.lint"
-alias nosetests="env python -m nose.core"
-alias trial="env python /usr/bin/trial"
-alias twistd="env python /usr/bin/twistd"
+#alias pylint="env python -m pylint.lint"
+#alias nosetests="env python -m nose.core"
+#alias trial="env python /usr/bin/trial"
+#alias twistd="env python /usr/bin/twistd"
 
 # dotfiles git wrapper
 alias dotfiles="GIT_DIR=~/.dotfiles.git GIT_WORK_TREE=~ git"
@@ -212,3 +212,4 @@ type -p ruby >/dev/null && export GEM_HOME=$(ruby -e 'puts Gem.user_dir')
 
 # added by travis gem
 [ -f /home/daniel/.travis/travis.sh ] && source /home/daniel/.travis/travis.sh
+
