@@ -344,13 +344,23 @@ def prompt(ui, repo, fs='', **opts):
         return _with_groups(g, str(tip)) if rev >= 0 else ''
 
     def _update(m):
-        if not repo.branchtags():
+        current_rev = repo[None].parents()[0]
+
+        # Get the tip of the branch for the current branch
+        try:
+            heads = repo.branchmap()[current_rev.branch()]
+            tip = heads[-1]
+        except (KeyError, IndexError):
             # We are in an empty repository.
+
             return ''
 
-        current_rev = repo[None].parents()[0]
-        to = repo[repo.branchtags()[current_rev.branch()]]
-        return _with_groups(m.groups(), '^') if current_rev != to else ''
+        for head in reversed(heads):
+            if not repo[head].closesbranch():
+                tip = head
+                break
+
+        return _with_groups(m.groups(), '^') if current_rev != repo[tip] else ''
 
 
     if opts.get("angle_brackets"):

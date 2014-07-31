@@ -4,17 +4,18 @@
 #     tunnel [endpoint]
 
 declare -A ENDPOINT
-ENDPOINT[c1]="head1.scrapinghub.com head1:8088 head1:19888 head1:60010 head2:60010 head1:50070 head2:50070" 
-ENDPOINT[c2]="head1.c2.scrapinghub.com head1:8088 head1:19888 head1:60010 head2:60010 head1:50070 head2:50070" 
-ENDPOINT[hadoop-dev]="disco1.eu.scrapinghub.com 172.16.1.1:8088 172.16.1.1:60010"
-ENDPOINT[disco]="disco.eu.scrapinghub.com disco:8989"
-ENDPOINT[disco-us]="disco.scrapinghub.com disco:8989"
-ENDPOINT[disco-bh]="disco.bitehunter.com disco:8989"
+ENDPOINT[c1]="head1.scrapinghub.com http://head1:8088 http://head1:19888 http://head1:60010 http://head2:60010 http://head1:50070 http://head2:50070 http://head2:9000" 
+ENDPOINT[c2]="head1.c2.scrapinghub.com http://head1:8088 http://head1:19888 http://head1:60010 http://head2:60010 http://head1:50070 http://head2:50070 http://head2:9000" 
+ENDPOINT[hadoop-dev]="disco1.eu.scrapinghub.com http://172.16.1.1:8088 http://172.16.1.1:60010"
+ENDPOINT[disco]="disco.eu.scrapinghub.com http://disco:8989"
+ENDPOINT[disco-us]="disco.scrapinghub.com http://disco:8989"
+ENDPOINT[disco-bh]="disco.bitehunter.com http://disco:8989"
 ENDPOINT[dev]="dev.scrapinghub.com"
-ENDPOINT[os]="es2.scrapinghub.com localhost:80"
-ENDPOINT[uk]="proxy1.scrapinghub.com wuaki.tv"
 
-CHROMEBIN=$(type -p google-chrome || type -p google-chrome-unstable || type -p chromium-browser)
+for bin in google-chrome{,-stable,-beta,-unstable} chromium-browser; do
+  CHROMEBIN=$(type -p $bin)
+  [[ -z $CHROMEBIN ]] || break
+done
 [[ $CHROMEBIN ]] || { echo "ERROR: chrome or chromium binary not found"; exit -1; }
 
 _tunnel() {
@@ -28,7 +29,7 @@ _tunnel() {
     [[ -r $portfn ]] || echo $(($RANDOM%10000+10000)) >$portfn
     port=$(cat $portfn)
     proxy=socks5://localhost:$port
-    ssh -C -N -f -o ExitOnForwardFailure=yes $host -D $port
+    ssh -q -C -N -f -o ExitOnForwardFailure=yes $host -D $port
     $CHROMEBIN --user-data-dir=$userdata --proxy-server=$proxy ${urls[@]}
 }
 
