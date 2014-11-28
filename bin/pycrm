@@ -1,2 +1,2 @@
 #!/bin/sh
-find . \( -name '*.py[co]' -o -name '*$py.class' -o -name '__pycache__' \) -delete
+find . \( -name '*.py[co]' -o -name '*$py.class' -o -path '__pycache__' \) -delete
