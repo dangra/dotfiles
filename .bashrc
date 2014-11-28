@@ -80,17 +80,15 @@ unset _termcol
 # AWS
 ec2_metadata() { curl -fsm1 http://169.254.169.254/latest/meta-data/$1; }
 ec2_sqdn() {
-    [[ $1 = '-force' || -e /etc/sysconfig/aws ]] || return
     echo $(ec2_metadata security-groups) $(ec2_metadata instance-id) \
         |sed -rne 's/default\s?//;s/ +/-/gp'
 }
 ### Prompts
 FQDN=$(hostname -f 2>/dev/null || hostname 2>/dev/null)
 PCOLOUR=$Magenta
-# bash prompt
 case $FQDN in
-    *.mydeco.com) SQDN=${FQDN/.mydeco.com} ;;
     domU-*|ip-*) SQDN=$(ec2_sqdn) ;;
+    *.scrapinghub.com) SQDN=${FQDN/.scrapinghub.com} ;;
     *)
         if [[ -n $WINDOWID ]]; then
             PCOLOUR=$Blue; SQDN=''
