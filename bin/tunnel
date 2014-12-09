@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 #
 # usage:
 #     tunnel [endpoint]
@@ -11,6 +11,7 @@ ENDPOINT[disco]="disco.eu.scrapinghub.com http://disco:8989"
 ENDPOINT[disco-us]="disco.scrapinghub.com http://disco:8989"
 ENDPOINT[disco-bh]="disco.bitehunter.com http://disco:8989"
 ENDPOINT[dev]="dev.scrapinghub.com"
+ENDPOINT[dc21]="node3.dc21.scrapinghub.com http://head1.dc21.scrapinghub.com:5050/ http://head1.dc21.scrapinghub.com:8080/"
 
 for bin in google-chrome{,-stable,-beta,-unstable} chromium-browser; do
   CHROMEBIN=$(type -p $bin)
@@ -29,15 +30,16 @@ _tunnel() {
     [[ -r $portfn ]] || echo $(($RANDOM%10000+10000)) >$portfn
     port=$(cat $portfn)
     proxy=socks5://localhost:$port
-    ssh -q -C -N -f -o ExitOnForwardFailure=yes $host -D $port
-    $CHROMEBIN --user-data-dir=$userdata --proxy-server=$proxy ${urls[@]}
+    if ssh -q -C -N -f -o ExitOnForwardFailure=yes $host -D $port; then
+      $CHROMEBIN --user-data-dir=$userdata --proxy-server=$proxy ${urls[@]} &
+    fi
 }
 
 main() {
     local name=${1:-hadoop}
     local endpoint=(${ENDPOINT[$name]})
     [[ $endpoint ]] || { echo "invalid endpoint for: $name"; exit -1; }
-    _tunnel $name ${endpoint[@]} &
+    _tunnel $name ${endpoint[@]}
 }
 
 main "$@"
