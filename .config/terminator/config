@@ -3,6 +3,7 @@
   handle_size = 1
   enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
   focus = mouse
+  suppress_multiple_term_dialog = True
   borderless = True
   tab_position = bottom
 [keybindings]
@@ -18,6 +19,15 @@
     scroll_on_output = False
     show_titlebar = False
     copy_on_selection = True
+  [[daylight]]
+    scrollbar_position = hidden
+    use_system_font = False
+    font = Terminus 10
+    background_image = None
+    foreground_color = "#657b83"
+    show_titlebar = False
+    copy_on_selection = True
+    background_color = "#fdf6e3"
 [layouts]
   [[default]]
     [[[child1]]]
