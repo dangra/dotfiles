@@ -56,7 +56,7 @@ set background=light
 colorscheme molokai
 "set background=light
 "colorscheme solarized
-call togglebg#map("<F5>")
+"call togglebg#map("<F5>")
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Spell checker
 nmap <leader>spes :set spell spelllang=es<CR>
