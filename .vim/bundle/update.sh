@@ -14,7 +14,6 @@ while read line; do
       git remote add origin $remote
     fi
     git fetch origin master --tags
-    git checkout $ref
-    #git reset --hard $ref
+    git checkout -qf $ref
   )
 done <SOURCES.txt

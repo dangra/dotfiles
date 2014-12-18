@@ -2,7 +2,6 @@ https://github.com/tpope/vim-pathogen.git v2.3
 https://github.com/altercation/vim-colors-solarized
 https://github.com/ekalinin/Dockerfile.vim.git
 https://github.com/gabrielelana/vim-markdown.git
-https://github.com/jnwhiteh/vim-golang
 https://github.com/kchmck/vim-coffee-script.git v003
 https://github.com/klen/python-mode 0.8.1
 https://github.com/mattn/gist-vim.git 7.2
@@ -12,3 +11,4 @@ https://github.com/saltstack/salt-vim
 https://github.com/scrooloose/nerdtree.git 4.2.0
 https://github.com/xolox/vim-lua-ftplugin 0.8
 https://github.com/xolox/vim-misc 1.17.1
+https://github.com/fatih/vim-go
