@@ -119,17 +119,17 @@ _oneletter_pwd() {
 }
 
 _prompt_vcs() {
-    local hgprompt gitroot gitbranch gitstat gitstatus HGPROMPT
+    local hgprompt gitroot gitshortrev gitbranch gitstat gitstatus HGPROMPT
     [[ -d .svn ]] && { echo svn; return; }
 
     gitroot=$(git rev-parse --show-toplevel 2>/dev/null)
     if [[ $gitroot ]]; then
-        #gitbranch=$(git branch 2>/dev/null |sed -rne '/^\*/s/^\*( | master)//p')
+        gitshortrev=$(git rev-parse --short HEAD)
         gitbranch=$(git describe --all --always)
         gitstat=$(git status 2>/dev/null | grep '\(# Untracked\|# Changes\|# Changed but not updated:\)')
         [[ $gitstat =~ 'Changes to be committed' ]] && gitstatus='!'
         [[ $gitstat =~ 'Changed but not updated' || $gitstat =~ 'Untracked files' ]] && gitstatus='?'
-        echo "${Green}± ${gitroot##*/}${gitstatus:+${Red}${gitstatus}}${gitbranch:+ ${Yellow}${gitbranch}}${ANSIReset}"
+        echo "${Green}± ${gitroot##*/}${gitstatus:+${Red}${gitstatus}}${gitbranch:+ ${Yellow}${gitbranch}(${gitshortrev})}${ANSIReset}"
         return
     fi
 
