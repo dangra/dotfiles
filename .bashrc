@@ -1,5 +1,5 @@
 # vi:ft=sh
-export PATH=~/bin:~/.gem/ruby/2.1.0/bin:/sbin:/usr/sbin:$PATH
+export PATH=~/bin:~/.gem/ruby/2.2.0/bin:/sbin:/usr/sbin:$PATH
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
