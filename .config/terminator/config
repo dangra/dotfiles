@@ -1,7 +1,7 @@
 [global_config]
   window_state = maximise
   handle_size = 1
-  enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+  enabled_plugins = ,
   focus = mouse
   suppress_multiple_term_dialog = True
   borderless = True
@@ -13,10 +13,11 @@
   [[default]]
     scrollbar_position = hidden
     use_system_font = False
-    font = Terminus 10
+    font = Lekton 10
     scrollback_lines = 1500
     background_image = None
     scroll_on_output = False
+    icon_bell = False
     show_titlebar = False
     copy_on_selection = True
   [[daylight]]
@@ -33,6 +34,7 @@
     [[[child1]]]
       type = Terminal
       parent = window0
+      profile = default
     [[[window0]]]
       type = Window
       parent = ""
