@@ -17,6 +17,7 @@
     excludesfile = ~/.cvsignore
 	autocrlf = input
 	safecrlf = true
+	editor = vim
 [github]
 	user = dangra
 [sendemail]

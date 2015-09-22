@@ -13,7 +13,7 @@ while read line; do
       git init .
       git remote add origin $remote
     fi
-    git fetch origin master --tags
+    git fetch origin --tags
     git checkout -qf $ref
   )
-done <SOURCES.txt
+done <${1:-SOURCES.txt}

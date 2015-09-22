@@ -11,11 +11,18 @@
 'g:pymode_lint_message'	pymode.txt	/*'g:pymode_lint_message'*
 'g:pymode_lint_on_fly'	pymode.txt	/*'g:pymode_lint_on_fly'*
 'g:pymode_lint_on_write'	pymode.txt	/*'g:pymode_lint_on_write'*
+'g:pymode_lint_options_mccabe'	pymode.txt	/*'g:pymode_lint_options_mccabe'*
+'g:pymode_lint_options_pep257'	pymode.txt	/*'g:pymode_lint_options_pep257'*
+'g:pymode_lint_options_pep8'	pymode.txt	/*'g:pymode_lint_options_pep8'*
+'g:pymode_lint_options_pyflakes'	pymode.txt	/*'g:pymode_lint_options_pyflakes'*
+'g:pymode_lint_options_pylint'	pymode.txt	/*'g:pymode_lint_options_pylint'*
 'g:pymode_lint_select'	pymode.txt	/*'g:pymode_lint_select'*
 'g:pymode_lint_sort'	pymode.txt	/*'g:pymode_lint_sort'*
 'g:pymode_lint_unmodified'	pymode.txt	/*'g:pymode_lint_unmodified'*
 'g:pymode_motion'	pymode.txt	/*'g:pymode_motion'*
 'g:pymode_options'	pymode.txt	/*'g:pymode_options'*
+'g:pymode_options_colorcolumn'	pymode.txt	/*'g:pymode_options_colorcolumn'*
+'g:pymode_options_max_line_length'	pymode.txt	/*'g:pymode_options_max_line_length'*
 'g:pymode_paths'	pymode.txt	/*'g:pymode_paths'*
 'g:pymode_python'	pymode.txt	/*'g:pymode_python'*
 'g:pymode_quickfix_maxheight'	pymode.txt	/*'g:pymode_quickfix_maxheight'*
@@ -92,6 +99,7 @@ pymode-indent	pymode.txt	/*pymode-indent*
 pymode-intro	pymode.txt	/*pymode-intro*
 pymode-license	pymode.txt	/*pymode-license*
 pymode-lint	pymode.txt	/*pymode-lint*
+pymode-lint-options	pymode.txt	/*pymode-lint-options*
 pymode-motion	pymode.txt	/*pymode-motion*
 pymode-motion-keys	pymode.txt	/*pymode-motion-keys*
 pymode-python-version	pymode.txt	/*pymode-python-version*

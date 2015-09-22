@@ -10,6 +10,8 @@ call pathogen#helptags()
 syntax on
 filetype plugin indent on
 
+let g:pymode_rope = 0  " https://github.com/klen/python-mode/issues/525
+
 let mapleader = ","     " map leader
 set showtabline=2       " always show tabline
 set modelines=5
