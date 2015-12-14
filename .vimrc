@@ -1,10 +1,10 @@
 " VIM configuration file
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 
-let g:pathogen_disabled = []
-if !has('python')
-    call add(g:pathogen_disabled, 'python-mode')
-endif
+"let g:pathogen_disabled = []
+"if !(has('python') || has('python3'))
+"    call add(g:pathogen_disabled, 'python-mode')
+"endif
 call pathogen#infect()
 call pathogen#helptags()
 syntax on
@@ -54,10 +54,11 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Theme
 set t_Co=256
-set background=light
-"colorscheme molokai
-colorscheme solarized
-call togglebg#map("<F5>")
+"set background=light
+set background=dark
+colorscheme molokai
+"colorscheme solarized
+"call togglebg#map("<F5>")
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Spell checker
 nmap <leader>spes :set spell spelllang=es<CR>
