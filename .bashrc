@@ -1,8 +1,24 @@
 # vi:ft=sh
-export PATH=~/bin:~/.gem/ruby/2.2.0/bin:/sbin:/usr/sbin:$PATH
 
-# If not running interactively, don't do anything
+OS=$(uname -s)
+case $OS in
+  Darwin)
+    PATH=~/Library/Python/2.7/bin/:$(printf '%s:' /usr/local/opt/coreutils/libexec/gnubin)$PATH
+    MANPATH=$(printf '%s:' /usr/local/opt/coreutils/libexec/gnuman/)$MANPATH
+    ;;
+  Linux)
+    PATH=~/.gem/ruby/2.2.0/bin:/sbin:/usr/sbin:$PATH
+    ;;
+esac
+export MANPATH PATH=~/bin:~/bin/$OS:$PATH
+
+# No-op if running interactively
 [ -z "$PS1" ] && return
+
+# Brew installed bash
+if [ -f /usr/local/etc/bash_completion ]; then
+  . /usr/local/etc/bash_completion
+fi
 
 ### General
 shopt -s checkwinsize extglob
