@@ -3,8 +3,8 @@
 OS=$(uname -s)
 case $OS in
   Darwin)
-    PATH=~/Library/Python/2.7/bin/:$(printf '%s:' /usr/local/opt/coreutils/libexec/gnubin)$PATH
-    MANPATH=$(printf '%s:' /usr/local/opt/coreutils/libexec/gnuman/)$MANPATH
+    PATH=~/Library/Python/2.7/bin:$(printf '%s:' /usr/local/opt/*/libexec/gnubin)$PATH
+    MANPATH=$(printf '%s:' /usr/local/opt/*/libexec/gnuman/)$MANPATH
     ;;
   Linux)
     PATH=~/.gem/ruby/2.2.0/bin:/sbin:/usr/sbin:$PATH
