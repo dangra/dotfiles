@@ -3,14 +3,15 @@
 OS=$(uname -s)
 case $OS in
   Darwin)
-    PATH=~/Library/Python/2.7/bin:$(printf '%s:' /usr/local/opt/*/libexec/gnubin)$PATH
-    MANPATH=$(printf '%s:' /usr/local/opt/*/libexec/gnuman/)$MANPATH
+    PATH=~/Library/Python/2.7/bin:~/.gem/ruby/2.0.0/bin:$(printf '%s:' /usr/local/opt/*/libexec/gnubin)/usr/local/sbin:$PATH
+    MANPATH=$(printf '%s:' /usr/local/opt/*/libexec/gnuman)$MAPATH
     ;;
   Linux)
     PATH=~/.gem/ruby/2.2.0/bin:/sbin:/usr/sbin:$PATH
     ;;
 esac
-export MANPATH PATH=~/bin:~/bin/$OS:$PATH
+PATH=~/bin/$OS:~/bin:$PATH
+export MANPATH PATH
 
 # No-op if running interactively
 [ -z "$PS1" ] && return
@@ -42,6 +43,7 @@ alias ll='ls -l'
 alias grep='grep --color'
 alias mq='hg -R $(hg root)/.hg/patches'
 alias egg="python setup.py bdist_egg"
+alias enabledocker='eval $(docker-machine env default)'
 
 # be virtualenv friendly
 #alias pylint="env python -m pylint.lint"
@@ -227,3 +229,10 @@ type -p ruby >/dev/null && export GEM_HOME=$(ruby -e 'puts Gem.user_dir')
 # added by travis gem
 [ -f /home/daniel/.travis/travis.sh ] && source /home/daniel/.travis/travis.sh
 
+# GPG agent 
+[ -f ~/.gpg-agent-info ] && source ~/.gpg-agent-info
+if [ -S "${GPG_AGENT_INFO%%:*}" ]; then
+  export GPG_AGENT_INFO
+else
+  eval $(gpg-agent --daemon --write-env-file ~/.gpg-agent-info )
+fi
