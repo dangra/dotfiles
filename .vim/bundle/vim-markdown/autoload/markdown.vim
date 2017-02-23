@@ -93,6 +93,13 @@ function! markdown#EditBlock() range abort
     \ '^\s*`\{3,}\s*$'
     \ )
   if code_block['from'] == 0 || code_block['to'] == 0
+    " Github fenced code blocks with metadata like ```{ruby, <WHATEVER>}
+    let code_block = s:LocateFencedCodeBlock(a:firstline,
+      \ '^\s*`\{3,}{\(\w\+\),[^}]\+}\%(\s.*$\|$\)',
+      \ '^\s*`\{3,}\s*$'
+      \ )
+  endif
+  if code_block['from'] == 0 || code_block['to'] == 0
     " Github fenced code blocks alternate style like ~~~ruby
     let code_block = s:LocateFencedCodeBlock(a:firstline,
       \ '^\s*\~\{3,}\(\w\+\)\%(\s.*$\|$\)',
@@ -497,16 +504,16 @@ endfunction
 " {{{ SWITCH STATUS
 function! markdown#SwitchStatus()
   let current_line = getline('.')
-  if match(current_line, '^\s*[*-+] \[ \]') >= 0
-    call setline('.', substitute(current_line, '^\(\s*[*-+]\) \[ \]', '\1 [x]', ''))
+  if match(current_line, '^\s*[*\-+] \[ \]') >= 0
+    call setline('.', substitute(current_line, '^\(\s*[*\-+]\) \[ \]', '\1 [x]', ''))
     return
   endif
-  if match(current_line, '^\s*[*-+] \[x\]') >= 0
-    call setline('.', substitute(current_line, '^\(\s*[*-+]\) \[x\]', '\1', ''))
+  if match(current_line, '^\s*[*\-+] \[x\]') >= 0
+    call setline('.', substitute(current_line, '^\(\s*[*\-+]\) \[x\]', '\1', ''))
     return
   endif
-  if match(current_line, '^\s*[*-+] \(\[[x ]\]\)\@!') >= 0
-    call setline('.', substitute(current_line, '^\(\s*[*-+]\)', '\1 [ ]', ''))
+  if match(current_line, '^\s*[*\-+] \(\[[x ]\]\)\@!') >= 0
+    call setline('.', substitute(current_line, '^\(\s*[*\-+]\)', '\1 [ ]', ''))
     return
   endif
   if match(current_line, '^\s*#\{1,5}\s') >= 0

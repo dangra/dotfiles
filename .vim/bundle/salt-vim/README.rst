@@ -2,22 +2,53 @@
 Vim files for working on Salt files
 ===================================
 
-Installing
+Installation
 ==========
+
+Using the Pathogen Plugin Manager
+---------------------------------
+
+The recommended method is to use
+`Pathogen <https://github.com/tpope/vim-pathogen>`_.
+Install Pathogen as described
+`here <https://github.com/tpope/vim-pathogen#installation>`_,
+then do:
 
 ::
 
+    cd ~/.vim/bundle && \
+    git clone git@github.com:saltstack/salt-vim.git
+
+Using the Vundle Plugin Manager
+-------------------------------
+
+See 
+`Vundle <https://github.com/gmarik/vundle>`_.
+
+Manual Method #1:
+-----------------
+
+::
+
+    git clone git@github.com:saltstack/salt-vim.git
+    cd salt-vim && \
     cp -r ftdetect ftplugin syntax  ~/.vim/
 
-Or (preferably) use one of the popular tools to (sanely) manage plugins:
+Manual Method #2:
+-----------------
 
-- `Pathogen <https://github.com/tpope/vim-pathogen>`_
-- `Vundle <https://github.com/gmarik/vundle>`_
+Alternately, files can be copied into any other directory where Vim looks for
+its runtime files, like ``/etc/vim/``. The command ``:set runtimepath`` will
+show all such paths. Read ``:help runtimepath`` for more info.
+
+For all installation methods:
+-----------------------------
 
 You will also need to specify the following settings in your ``~/.vimrc``:
 
 .. code-block:: vim
 
+    syntax on
     set nocompatible
     filetype plugin indent on
 
@@ -31,25 +62,27 @@ If you get this, specify the following settings in your ``~/.vimrc`` instead:
 
 .. code-block:: vim
 
+    syntax on
     set nocompatible
     set tabstop=2
     set shiftwidth=2
     set expandtab
 
-Alternately, files can be copied into any other directory where Vim looks for
-its runtime files, like ``/etc/vim/``. The command ``:set runtimepath`` will
-show all such paths. Read ``:help runtimepath`` for more info.
+Too slow?
+==========
+Note that the default yaml highlighting that ships with vim is very slow with
+long lines (e.g., ssh keys, or certificates). You might want to switch to a 
+faster yaml highlighter, like `vim-yaml <https://github.com/stephpy/vim-yaml>`_.
 
 Configuration
 =============
 
-By default, if Pathogen is installed, the syntax file will search for the
-existence of a Jinja syntax file (as described in the `Jinja docs`_ or via a
-`Vim bundle`_) in the ``runtimepath``, and load that if found. If it is not
-found or Pathogen is not installed, the Django template syntax file (which is
-slightly different, but bundled with Vim) will be used. You can force using
-either syntax file using the global variable ``g:sls_use_jinja_syntax``. If it
-is set, autodetection will be turned off.
+By default, the syntax file will search for the existence of a Jinja syntax
+file (as described in the `Jinja docs`_ or via a `Vim bundle`_) in the
+``runtimepath``, and load that if found. If it is not found, the Django
+template syntax file (which is slightly different, but bundled with Vim) will
+be used. You can force using either syntax file using the global variable
+``g:sls_use_jinja_syntax``. If it is set, autodetection will be turned off.
 
 .. _Jinja docs: http://jinja.pocoo.org/docs/integration/#vim
 .. _Vim bundle: https://github.com/Glench/Vim-Jinja2-Syntax

@@ -15,7 +15,7 @@ A complete environment to create Markdown files with a syntax highlight that doe
   * At last, on an empty line, with `<Leader>e` asks for a file type and then opens a temporary buffer with that file type
   * You see that when you leave the temporary buffer the content syncs back to the main file
   ![EditCodeBlock](https://github.com/gabrielelana/vim-markdown/raw/master/images/vim_markdown_edit_code_block.gif)
-* Folding for: headers, code blocks, html blocks and lists
+* Folding for: headers, code blocks and html blocks
 * Format tables automatically (require [`Tabular`](https://github.com/godlygeek/tabular) plugin)
 * Automatically detects Jekyll files and adds support for Liquid template engine
 * This is a work in progress, more goodies and improvements are coming (see [TODO](#TODO)), stay tuned
@@ -75,20 +75,25 @@ If you like this plugin, then consider to:
 I would use this section until I have a proper documentation
 
 ### Configuration
-* `let g:markdown_include_jekyll_support = 0` to enable/disable support for Jekyll files (default: 1)
-* `let g:markdown_enable_folding = 1` to enable/disable the fold expression `markdown#FoldLevelOfLine` to fold markdown files, this is disabled by default because it's a huge performance hit even when folding is disabled with `nofoldenable` option (default: 0)
-* `let g:markdown_enable_mappings = 0` to enable/disable default mappings (default: `1`)
-  * `let g:markdown_enable_insert_mode_mappings = 0` to enable/disable insert mode mappings (default: `1`)
-  * `let g:markdown_enable_insert_mode_leader_mappings = 1` to enable/disable insert mode leader mappings (default: `0`)
+* `let g:markdown_include_jekyll_support = 0` to disable support for Jekyll files (enabled by default with: `1`)
+* `let g:markdown_enable_folding = 1` to enable the fold expression `markdown#FoldLevelOfLine` to fold markdown files, this is disabled by default because it's a huge performance hit even when folding is disabled with `nofoldenable` option (disabled by default with: `0`)
+* `let g:markdown_enable_mappings = 0` to disable default mappings (enabled by default with: `1`)
+  * `let g:markdown_enable_insert_mode_mappings = 0` to disable insert mode mappings (enabled by default with: `1`)
+  * `let g:markdown_enable_insert_mode_leader_mappings = 1` to enable insert mode leader mappings (disabled by default with: `0`)
+* `let g:markdown_enable_spell_checking = 0` to disable spell checking (enabled by default with: `1`)
+* `let g:markdown_enable_input_abbreviations = 0` to disable abbreviations for punctuations and emoticons (enabled by default with: `1`)
+* `let g:markdown_enable_conceal = 1` to enable conceal for italic, bold, inline-code and link (disabled by default with: `0`)
 
 ### Default Mappings (normal and visual mode)
 _mappings are local to markdown buffers_
 * `<Space>` (`NORMAL_MODE`) switch status of things:
-  * A list item `* item` becomes a check list item `* [ ] item`
-  * A check list item `* [ ] item` becomes a checked list item `* [x] item`
-  * A checked list item `* [x] item` becomes a list item `* item`
+  * Cases
+    * A list item `* item` becomes a check list item `* [ ] item`
+    * A check list item `* [ ] item` becomes a checked list item `* [x] item`
+    * A checked list item `* [x] item` becomes a list item `* item`
+  * Can be changed with `g:markdown_mapping_switch_status = '<Leader>s`
 * `<Leader>ft` (`NORMAL_MODE`) format the current table
-* `<Leader>e` (`NORMAL_MODE`, `VISUAL_MODE`) `:MarkdownEditCodeBlock` edit the current code block in another buffer with a guessed file type. The guess is based on the start of the range for `VISUAL_MODE`. If it's not possibile to guess (you are not in a recognizable code block like a fenced code block) then the default is `markdown`. If it's not possibile to guess and the current range is a single line and the line is empty then a new code block is created. It's asked to the user the file type of the new code block. The default file type is `markdown`.
+* `<Leader>e` (`NORMAL_MODE`, `VISUAL_MODE`) `:MarkdownEditCodeBlock` edit the current code block in another buffer with a guessed file type. The guess is based on the start of the range for `VISUAL_MODE`. If it's not possible to guess (you are not in a recognizable code block like a fenced code block) then the default is `markdown`. If it's not possible to guess and the current range is a single line and the line is empty then a new code block is created. It's asked to the user the file type of the new code block. The default file type is `markdown`.
 
 ### Optional Mappings (insert mode)
 _mappings are local to markdown buffers_

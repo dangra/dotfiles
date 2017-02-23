@@ -1,4 +1,4 @@
-### Gist.vim
+# Gist.vim
 
 This is a vimscript for creating gists (http://gist.github.com).
 
@@ -98,6 +98,36 @@ For the latest version please see https://github.com/mattn/gist-vim.
 - Open the gist on browser after you post or update it.
 
         :Gist -b
+
+## List Feature
+
+- Useful mappings on the gist-listing buffer:
+    - Both `o` or `Enter` open the gist file in a new buffer, and close the
+      gist-vim listing one.
+    - `b` opens the gist file in a browser; this is necessary because
+      `Shift-Enter` (as was originally) only works for GUI vim.
+    - `y` copies the contents of the selected gist to the clipboard, and
+      closes the gist-vim buffer.
+    - `p` pastes the contents of the selected gist to the buffer from where
+      gist-vim was called, and closes the gist-vim buffer.
+    - Hitting `Escape` or `Tab` at the gist-vim buffer closes it.
+
+- Gist listing has fixed-length columns now, more amenable to eye inspection.
+  Every line on the gist-listing buffer contains the gist id, name and
+  description, in that order. Columns are now padded and truncated to offer a
+  faster browsing, in the following way:
+  - The gist id string is fixed at 32 characters.
+  - The length (in characters) of the name of the gist is fixed and
+    can be set by the user using, for example:
+
+    `let g:gistvim_namelength = 20`
+
+    The default value for `gistvim_namelength` is 30. If the gist (file)name
+    exceeds that length, it is truncated to the specified length.
+  - Finally, the gist description is truncated in length to fit the remaining
+    of the line, avoiding wrapped lines that mess up the table layout.
+  - Note that the gist listing buffer now does not show the field 'code'
+    (not sure what that did in the first place).
 
 ## Tips:
 
@@ -201,14 +231,14 @@ You need to install webapi-vim also:
 If you want to use latest one:
 
   https://github.com/mattn/webapi-vim
-  
+
 ### Install with [Vundle](https://github.com/gmarik/vundle)
 
 Add the following lines to your `.vimrc`.
 
     Bundle 'mattn/webapi-vim'
     Bundle 'mattn/gist-vim'
-    
+
 Now restart Vim and run `:BundleInstall`.
 
 ### Install with [NeoBundle](https://github.com/Shougo/neobundle.vim)

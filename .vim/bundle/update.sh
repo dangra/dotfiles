@@ -3,8 +3,9 @@
 while read line; do
   echo $line
   row=($line)
+  [[ $row ]] || continue
   remote=${row[0]}
-  ref=${row[1]:-master}
+  ref=${row[1]:-origin/master}
   dir=$(basename $remote .git)
   [[ -d $dir ]] || mkdir $dir
   (

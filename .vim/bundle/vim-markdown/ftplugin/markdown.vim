@@ -36,6 +36,18 @@ if !exists('g:markdown_drop_empty_blockquotes')
     let g:markdown_drop_empty_blockquotes = 0
 endif
 
+if !exists('g:markdown_mapping_switch_status')
+  let g:markdown_mapping_switch_status = '<space>'
+endif
+
+if !exists('g:markdown_enable_spell_checking')
+  let g:markdown_enable_spell_checking = 1
+endif
+
+if !exists('g:markdown_enable_input_abbreviations')
+  let g:markdown_enable_input_abbreviations = 1
+endif
+
 " }}}
 
 
@@ -43,29 +55,33 @@ endif
 
 setlocal textwidth=0
 setlocal ts=2 sw=2 expandtab smarttab
-setlocal comments=b:*,b:-,b:+,n:> commentstring=>\ %s
-setlocal formatoptions+=tcrqon formatoptions-=wa
-setlocal formatlistpat="^\s*\d\.\s\+"
+setlocal comments=b:*,b:-,b:+,n:>,se:``` commentstring=>\ %s
+setlocal formatoptions=tron
+setlocal formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\\|^\\s*[+-\\*]\\s\\+
+setlocal nolisp
+setlocal autoindent
 
 " Enable spelling and completion based on dictionary words
-if &spelllang !~# '^\s*$'
+if &spelllang !~# '^\s*$' && g:markdown_enable_spell_checking
   setlocal spell
 endif
 
 " Custom dictionary for emoji
-execute 'setlocal dictionary+=' . expand('<sfile>:p:h:h') . '/dict/emoticons.dict'
+execute 'setlocal dictionary+=' . shellescape(expand('<sfile>:p:h:h')) . '/dict/emoticons.dict'
 setlocal iskeyword+=:,+,-
 setlocal complete+=k
 
-" Replace common ascii emoticons with supported emoji
-iabbrev <buffer> :-) :smile:
-iabbrev <buffer> :-D :laughing:
-iabbrev <buffer> :-( :disappointed:
+if g:markdown_enable_input_abbreviations
+  " Replace common ascii emoticons with supported emoji
+  iabbrev <buffer> :-) :smile:
+  iabbrev <buffer> :-D :laughing:
+  iabbrev <buffer> :-( :disappointed:
 
-" Replace common punctuation
-iabbrev <buffer> ... …
-iabbrev <buffer> << «
-iabbrev <buffer> >> »
+  " Replace common punctuation
+  iabbrev <buffer> ... …
+  iabbrev <buffer> << «
+  iabbrev <buffer> >> »
+endif
 
 " Folding
 if g:markdown_enable_folding
@@ -79,16 +95,23 @@ endif
 " {{{ FUNCTIONS
 
 function! s:JumpToHeader(forward, visual)
+  let cnt = v:count1
+  let save = @/
   let pattern = '\v^#{1,6}.*$|^.+\n%(\-+|\=+)$'
   if a:visual
     normal! gv
   endif
   if a:forward
-    let direction = '/'
+    let motion = '/' . pattern
   else
-    let direction = '?'
+    let motion = '?' . pattern
   endif
-  execute 'silent normal! ' . direction . pattern . "\n"
+  while cnt > 0
+	  silent! execute motion
+	  let cnt = cnt - 1
+  endwhile
+  call histdel('/', -1)
+  let @/ = save
 endfunction
 
 function! s:Indent(indent)
@@ -96,10 +119,9 @@ function! s:Indent(indent)
     if a:indent
       normal >>
     else
-      call setline('.', substitute(getline('.'), '^\*\s*$', '', ''))
       normal <<
     endif
-    call setline('.', substitute(getline('.'), '\*\s*$', '* ', ''))
+    call setline('.', substitute(getline('.'), '\([-*+]\|\d\.\)\s*$', '\1 ', ''))
     normal $
   elseif getline('.') =~ '\v^\s*(\s?\>)+\s*$'
     if a:indent
@@ -130,8 +152,8 @@ command! -nargs=0 -range MarkdownEditBlock :<line1>,<line2>call markdown#EditBlo
 
 if g:markdown_enable_mappings
   " Jumping around
-  noremap <silent> <buffer> <script> ]] :call <SID>JumpToHeader(1, 0)<CR>
-  noremap <silent> <buffer> <script> [[ :call <SID>JumpToHeader(0, 0)<CR>
+  noremap <silent> <buffer> <script> ]] :<C-u>call <SID>JumpToHeader(1, 0)<CR>
+  noremap <silent> <buffer> <script> [[ :<C-u>call <SID>JumpToHeader(0, 0)<CR>
   vnoremap <silent> <buffer> <script> ]] :<C-u>call <SID>JumpToHeader(1, 1)<CR>
   vnoremap <silent> <buffer> <script> [[ :<C-u>call <SID>JumpToHeader(0, 1)<CR>
   noremap <silent> <buffer> <script> ][ <nop>
@@ -157,7 +179,7 @@ if g:markdown_enable_mappings
   endif
 
   " Switch status of things
-  nnoremap <silent> <buffer> <Space>     :call markdown#SwitchStatus()<CR>
+  execute 'nnoremap <silent> <buffer> ' . g:markdown_mapping_switch_status . ' :call markdown#SwitchStatus()<CR>'
 
   " Leader mappings
   nnoremap <buffer> <Leader>e :MarkdownEditBlock<CR>
