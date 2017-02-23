@@ -16,5 +16,6 @@ while read line; do
     fi
     git fetch origin --tags
     git checkout -qf $ref
+    git clean -dfq
   )
 done <${1:-SOURCES.txt}
