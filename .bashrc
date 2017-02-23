@@ -105,15 +105,15 @@ ec2_sqdn() {
 FQDN=$(hostname -f 2>/dev/null || hostname 2>/dev/null)
 PCOLOUR=$Magenta
 case $FQDN in
-    domU-*|ip-*) SQDN=$(ec2_sqdn) ;;
-    *.scrapinghub.com) SQDN=${FQDN/.scrapinghub.com} ;;
-    *)
-        if [[ -n $WINDOWID ]]; then
-            PCOLOUR=$Blue; SQDN=''
-        else
-            SQDN=${FQDN/.*}
-        fi
-        ;;
+  domU-*|ip-*) SQDN=$(ec2_sqdn) ;;
+  *.scrapinghub.com) SQDN=${FQDN/.scrapinghub.com} ;;
+  *)
+    if [[ -n $WINDOWID || -n $XPC_SERVICE_NAME ]]; then
+      PCOLOUR=$Blue; SQDN=''
+    else
+      SQDN=${FQDN/.*}
+    fi
+    ;;
 esac
 
 # mysql client prompt
@@ -233,6 +233,6 @@ type -p ruby >/dev/null && export GEM_HOME=$(ruby -e 'puts Gem.user_dir')
 [ -f ~/.gpg-agent-info ] && source ~/.gpg-agent-info
 if [ -S "${GPG_AGENT_INFO%%:*}" ]; then
   export GPG_AGENT_INFO
-else
+elif type -p gpg-agent >/dev/null; then
   eval $(gpg-agent --daemon --write-env-file ~/.gpg-agent-info )
 fi
