@@ -26,7 +26,7 @@ PLATFORMS
 
 DEPENDENCIES
   kramdown
-  nokogiri (~> 1.8.1)
+  nokogiri (~> 1.8.5)
   rspec
   vimrunner
 
