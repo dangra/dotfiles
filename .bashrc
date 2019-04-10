@@ -3,7 +3,10 @@
 OS=$(uname -s)
 case $OS in
   Darwin)
-    PATH=~/Library/Python/2.7/bin:~/.gem/ruby/2.0.0/bin:$(printf '%s:' /usr/local/opt/*/libexec/gnubin)/usr/local/sbin:$PATH
+    PATH=/usr/local/sbin:$PATH
+    PATH=$(printf '%s:' /usr/local/opt/*/libexec/gnubin)$PATH
+    PATH=$(printf '%s/bin:' ~/.gem/ruby/2.*.*)$PATH
+    PATH=~/Library/Python/2.7/bin:$PATH
     MANPATH=$(printf '%s:' /usr/local/opt/*/libexec/gnuman)$MAPATH
     ;;
   Linux)
@@ -144,10 +147,8 @@ _prompt_vcs() {
     if [[ $gitroot ]]; then
         gitbranch=$(git rev-parse --abbrev-ref HEAD)
         gitshortrev=$(git rev-parse --short HEAD)
-        gitstat=$(git status 2>/dev/null | grep '\(# Untracked\|# Changes\|# Changed but not updated:\)')
-        [[ $gitstat =~ 'Changes to be committed' ]] && gitstatus='!'
-        [[ $gitstat =~ 'Changed but not updated' || $gitstat =~ 'Untracked files' ]] && gitstatus='?'
-        echo "${Green}± ${gitroot##*/}${gitstatus:+${Red}${gitstatus}}${gitbranch:+ ${Yellow}${gitbranch}(${gitshortrev})}${ANSIReset}"
+        gitstatus=$(git status -s |awk '{print $1}' |uniq |xargs)
+        echo "${Green}± ${gitroot##*/}${gitstatus:+${Red} ${gitstatus}}${gitbranch:+ ${Yellow}${gitbranch}(${gitshortrev})}${ANSIReset}"
         return
     fi
 
@@ -189,6 +190,7 @@ export PIP_DOWNLOAD_CACHE=~/.pip_download_cache
 export VIRTUALENV_USE_DISTRIBUTE=1 VIRTUAL_ENV_DISABLE_PROMPT=1
 export WORKON_HOME=~/envs
 _virtualenv=$(type -p virtualenv2 || type -p virtualenv)
+venv() { python3 -m venv $WORKON_HOME/$1; workon $1; }
 if ! type -p mkvirtualenv >/dev/null; then
     mkvirtualenv() { $_virtualenv $WORKON_HOME/$1; workon $1; }
     workon () { source $WORKON_HOME/$1/bin/activate; }
@@ -230,9 +232,13 @@ type -p ruby >/dev/null && export GEM_HOME=$(ruby -e 'puts Gem.user_dir')
 [ -f /home/daniel/.travis/travis.sh ] && source /home/daniel/.travis/travis.sh
 
 # GPG agent 
-[ -f ~/.gpg-agent-info ] && source ~/.gpg-agent-info
-if [ -S "${GPG_AGENT_INFO%%:*}" ]; then
-  export GPG_AGENT_INFO
-elif type -p gpg-agent >/dev/null; then
-  eval $(gpg-agent --daemon --write-env-file ~/.gpg-agent-info )
-fi
+#[ -f ~/.gpg-agent-info ] && source ~/.gpg-agent-info
+#if [ -S "${GPG_AGENT_INFO%%:*}" ]; then
+#  export GPG_AGENT_INFO
+#elif type -p gpg-agent >/dev/null; then
+#  eval $(gpg-agent --daemon ~/.gpg-agent-info )
+#fi
+gpg-agent --daemon
+
+[[ -f /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc ]] && \
+  . /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc

@@ -89,6 +89,7 @@ set listchars=tab:\ \ ,trail:\  " Do not remove trailing whitespace on this line
 " Remove trailing spaces and tabs, and replace tabs with 4 spaces
 nmap sT :%s/\s\+$//<CR>
 nmap s4 :%s/\t/    /g<CR>
+nmap s2 :%s/\t/  /g<CR>
 " pylint
 map <leader>y :!python -m pylint.lint %<CR>
 " hg
