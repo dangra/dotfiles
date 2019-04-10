@@ -5,7 +5,7 @@ call pymode#tools#loclist#init()
 
 
 fun! pymode#lint#auto() "{{{
-    if ! pymode#save()
+    if !pymode#save()
         return 0
     endif
     PymodePython from pymode import auto
@@ -42,7 +42,7 @@ fun! pymode#lint#toggle() "{{{
         call pymode#wide_message("Code checking is enabled.")
     else
         call pymode#wide_message("Code checking is disabled.")
-    endif
+    end
 endfunction "}}}
 
 
@@ -61,9 +61,6 @@ fun! pymode#lint#check() "{{{
 
     if loclist.is_empty()
         call pymode#wide_message('Code checking is completed. No errors found.')
-        call g:PymodeSigns.refresh(loclist)
-        call loclist.show()
-        return
     endif
 
     call g:PymodeSigns.refresh(loclist)
@@ -71,7 +68,7 @@ fun! pymode#lint#check() "{{{
     call loclist.show()
 
     call pymode#lint#show_errormessage()
-    call pymode#wide_message('Found ' . loclist.num_errors() . ' error(s) and ' . loclist.num_warnings() . ' warning(s)')
+    call pymode#wide_message('Found errors and warnings: ' . len(loclist._loclist))
 
 endfunction " }}}
 

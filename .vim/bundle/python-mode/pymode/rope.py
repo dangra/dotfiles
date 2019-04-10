@@ -1,5 +1,4 @@
-"""Integration with Rope library."""
-
+""" Rope support in pymode. """
 from __future__ import absolute_import, print_function
 
 import os.path
@@ -7,7 +6,7 @@ import re
 import site
 import sys
 
-from rope.base import project, libutils, exceptions, change, worder, pycore
+from rope.base import project, libutils, exceptions, change, worder # noqa
 from rope.base.fscommands import FileSystemCommands # noqa
 from rope.base.taskhandle import TaskHandle # noqa
 from rope.contrib import autoimport as rope_autoimport, codeassist, findit, generate # noqa
@@ -17,7 +16,7 @@ from .environment import env
 
 
 def look_ropeproject(path):
-    """Search for ropeproject in current and parent dirs.
+    """ Search for ropeproject in current and parent dirs.
 
     :return str|None: A finded path
 
@@ -74,7 +73,7 @@ def complete(dot=False):
 
     cline = env.current.line[:col]
     env.debug('dot completion', cline)
-    if FROM_RE.match(cline) or cline.endswith('..') or cline.endswith('\.'):  # noqa
+    if FROM_RE.match(cline) or cline.endswith('..') or cline.endswith('\.'):
         return env.stop("")
 
     proposals = get_proporsals(source, offset, dot=dot)
@@ -94,8 +93,7 @@ def complete(dot=False):
     line = env.lines[row - 1]
     cline = line[:col] + p_prefix + line[col:]
     if cline != line:
-        if 'noinsert' not in env.var('&completeopt'):
-            env.curbuf[row - 1] = env.prepare_value(cline, dumps=False)
+        env.curbuf[row - 1] = env.prepare_value(cline, dumps=False)
     env.current.window.cursor = (row, col + len(p_prefix))
     env.run('complete', col - len(prefix) + len(p_prefix) + 1, proposals)
     return True
@@ -107,7 +105,7 @@ def get_proporsals(source, offset, base='', dot=False):
     :return str:
 
     """
-    with RopeContext() as ctx:  # noqa
+    with RopeContext() as ctx:
 
         try:
             proposals = codeassist.code_assist(
@@ -184,9 +182,8 @@ def find_it():
             filename=oc.resource.path,
             text=env.lines[oc.lineno - 1] if oc.resource.real_path == env.curbuf.name else "", # noqa
             lnum=oc.lineno,
-            type=''
         ))
-    env.run('g:PymodeLocList.current().extend', lst)
+    env.let('loclist._loclist', lst)
 
 
 def update_python_path(paths):
@@ -349,10 +346,7 @@ class RopeContext(object):
 
     """ A context manager to have a rope project context. """
 
-    projects = {}
-    resource = {}
-
-    def __init__(self, path=None, project_path=None):
+    def __init__(self, path, project_path):
         """ Init Rope context. """
         self.path = path
 
@@ -577,7 +571,7 @@ class ExtractMethodRefactoring(Refactoring):
         _, offset1 = env.get_offset_params(cursor1)
         _, offset2 = env.get_offset_params(cursor2)
         return extract.ExtractMethod(
-            ctx.project, ctx.resource, offset1, offset2 + 1)
+            ctx.project, ctx.resource, offset1, offset2)
 
 
 class ExtractVariableRefactoring(Refactoring):
@@ -601,7 +595,7 @@ class ExtractVariableRefactoring(Refactoring):
         _, offset1 = env.get_offset_params(cursor1)
         _, offset2 = env.get_offset_params(cursor2)
         return extract.ExtractVariable(
-            ctx.project, ctx.resource, offset1, offset2 + 1)
+            ctx.project, ctx.resource, offset1, offset2)
 
 
 class InlineRefactoring(Refactoring):
@@ -895,7 +889,7 @@ def _insert_import(name, module, ctx):
         return True
 
     pyobject = ctx.project.pycore.resource_to_pyobject(ctx.resource)
-    import_tools = importutils.ImportTools(ctx.project)
+    import_tools = importutils.ImportTools(ctx.project.pycore)
     module_imports = import_tools.module_imports(pyobject)
     new_import = importutils.FromImport(module, 0, [[name, None]])
     module_imports.add_import(new_import)
@@ -919,19 +913,3 @@ def _insert_import(name, module, ctx):
     progress = ProgressHandler('Apply changes ...')
     ctx.project.do(changes, task_handle=progress.handle)
     reload_changes(changes)
-
-
-# Monkey patch Rope
-def find_source_folders(self, folder):
-    """Look only python files an packages."""
-    for resource in folder.get_folders():
-        if self._is_package(resource):  # noqa
-            return [folder]
-
-    for resource in folder.get_files():
-        if resource.name.endswith('.py'):
-            return [folder]
-
-    return []
-
-pycore.PyCore._find_source_folders = find_source_folders  # noqa

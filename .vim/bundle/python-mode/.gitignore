@@ -15,5 +15,3 @@ test.py
 todo.txt
 vendor
 vim.py
-vim_session_*.vim
-__*/

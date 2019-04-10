@@ -59,7 +59,7 @@ class VimPymodeEnviroment(object):
         return [l.decode(self.options.get('encoding')) for l in self.curbuf]
 
     @staticmethod
-    def var(name, to_bool=False, silence=False, default=None):
+    def var(name, to_bool=False, silence=False):
         """Get vim variable.
 
         :return vimobj:
@@ -69,7 +69,7 @@ class VimPymodeEnviroment(object):
             value = vim.eval(name)
         except vim.error:
             if silence:
-                return default
+                return None
             raise
 
         if to_bool:
