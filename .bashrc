@@ -20,8 +20,10 @@ export MANPATH PATH
 [ -z "$PS1" ] && return
 
 # Brew installed bash
-if [ -f /usr/local/etc/bash_completion ]; then
+if [[ -f /usr/local/etc/bash_completion ]]; then
   . /usr/local/etc/bash_completion
+elif [[ -f /etc/bash_completion ]]; then
+  . /etc/bash_completion
 fi
 
 ### General
@@ -180,9 +182,11 @@ export DEBFULLNAME='Daniel Graña'
 export DEBEMAIL='dangra@gmail.com'
 
 # ssh session agnostic agent path
-if [ -n "$SSH_AUTH_SOCK" -a ! -L "$SSH_AUTH_SOCK" -a -S "$SSH_AUTH_SOCK" ]; then
-    ln -sf $SSH_AUTH_SOCK ~/.ssh_auth_sock
-    export SSH_AUTH_SOCK=~/.ssh_auth_sock
+if [[ -S /run/user/1000/gnupg/S.gpg-agent.ssh && ! -n "$SSH_AUTH_SOCK" ]]; then
+  export SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh
+elif [[ -n "$SSH_AUTH_SOCK" && ! -L "$SSH_AUTH_SOCK" && -S "$SSH_AUTH_SOCK" ]]; then
+  ln -sf $SSH_AUTH_SOCK ~/.ssh_auth_sock
+  export SSH_AUTH_SOCK=~/.ssh_auth_sock
 fi
 
 # virtualenv options and mini wrapper with completion support
@@ -203,11 +207,6 @@ if ! type -p mkvirtualenv >/dev/null; then
     }
 fi
 
-# load system completions if available
-[ -f /etc/bash_completion ] && {
-    source /etc/bash_completion
-    complete -F _ssh pk
-}
 
 [[ -s "$HOME/.pythonbrew/etc/bashrc" ]] && source "$HOME/.pythonbrew/etc/bashrc"
 
@@ -217,6 +216,8 @@ export PATH="/usr/local/heroku/bin:$PATH"
 ### GO lang
 export GOPATH=~/go PATH=$PATH:~/go/bin
 
+### Python Poetry
+export PATH="$HOME/.poetry/bin:$PATH"
 
 # SH
 hsapi () {
@@ -238,7 +239,7 @@ type -p ruby >/dev/null && export GEM_HOME=$(ruby -e 'puts Gem.user_dir')
 #elif type -p gpg-agent >/dev/null; then
 #  eval $(gpg-agent --daemon ~/.gpg-agent-info )
 #fi
-gpg-agent --daemon
+#gpg-agent --daemon
 
 [[ -f /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc ]] && \
   . /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
