@@ -1,0 +1,36 @@
+https://github.com/sheerun/vim-polyglot/
+https://github.com/tpope/vim-commentary
+https://github.com/saltstack/salt-vim
+https://github.com/tpope/vim-sensible
+https://github.com/tpope/vim-fugitive
+https://github.com/tpope/vim-dispatch
+https://github.com/tpope/vim-git
+https://github.com/tpope/vim-apathy
+https://github.com/tpope/vim-speeddating
+https://github.com/tpope/vim-repeat
+https://github.com/tpope/vim-unimpaired
+https://github.com/tpope/vim-jdaddy
+https://github.com/tpope/vim-vividchalk
+https://github.com/tpope/vim-flagship
+
+# Pinned
+https://github.com/mattn/gist-vim.git 4a21031
+https://github.com/mattn/webapi-vim.git 6f5ffb6
+
+# For backward compatibility with VIM < 8.0
+https://github.com/tpope/vim-pathogen.git 
+
+
+# https://github.com/altercation/vim-colors-solarized
+# https://github.com/ekalinin/Dockerfile.vim.git
+# https://github.com/gabrielelana/vim-markdown.git
+# https://github.com/kchmck/vim-coffee-script.git
+# https://github.com/raymond-w-ko/vim-lua-indent
+# https://github.com/kylef/apiblueprint.vim.git
+# 
+# https://github.com/scrooloose/nerdtree.git 5.0.0
+# https://github.com/klen/python-mode fd70ac2
+# https://github.com/xolox/vim-lua-ftplugin 0.8
+# https://github.com/xolox/vim-misc 1.17.6
+# https://github.com/fatih/vim-go v1.11
+
