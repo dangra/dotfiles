@@ -59,7 +59,7 @@ alias enabledocker='eval $(docker-machine env default)'
 # dotfiles git wrapper
 alias dotfiles="GIT_DIR=~/.dotfiles.git GIT_WORK_TREE=~ git"
 alias dottig="GIT_DIR=~/.dotfiles.git GIT_WORK_TREE=~ tig"
-complete -o bashdefault -o default -o nospace -F _git dotfiles
+eval "$(complete -p |grep -we 'git$' |sed -e 's/git$/dotfiles/')"
 dotsync (){
     (
         cd ~
@@ -212,6 +212,9 @@ fi
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+### Android Studio
+export ANDROID_SDK_ROOT=/home/daniel/Android/Sdk
 
 ### GO lang
 export GOPATH=~/go PATH=$PATH:~/go/bin
