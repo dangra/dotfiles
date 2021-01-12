@@ -1,4 +1,6 @@
 #!/bin/bash
+PLUGINSDIR=$(dirname $(readlink -f $0))
+cd $PLUGINSDIR
 
 while read line; do
   row=($line)
@@ -8,7 +10,7 @@ while read line; do
   remote=${row[0]}
   gitref=${row[1]:-origin/master}
   clonedir=sources/$(basename $remote .git)
-  echo "> $remote ($gitref) into $clonedir"
+  echo "=> $remote ($gitref)"
 
   mkdir -p $clonedir
   (
@@ -21,4 +23,7 @@ while read line; do
     git checkout -qf $gitref
     git clean -dfq
   )
+  ln -sf ../$clonedir start/
+  GIT_DIR=~/.dotfiles.git GIT_WORK_TREE=~ \
+    git submodule add -f $remote $clonedir
 done <${1:-SOURCES.txt}

@@ -1,8 +1,13 @@
 " VIM configuration file
+"
+set nocompatible
 call pathogen#infect()
 call pathogen#helptags()
 
-colorscheme molokai
+let g:airline_theme='monokai_tasty'
+let g:vim_monokai_tasty_italic = 1
+let g:airline_powerline_fonts = 1
+colorscheme vim-monokai-tasty
 
 " Status line options from https://github.com/tpope/vim-flagship
 set laststatus=2
