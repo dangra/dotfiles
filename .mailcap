@@ -1,1 +1,0 @@
-application/rar; /usr/bin/file-roller '%s'; test=test -n "$DISPLAY"
