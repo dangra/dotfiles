@@ -1,17 +1,45 @@
 #!/bin/bash
 set -e
+
+case $1 in
+    -e)
+        COMMAND=shellenv
+        shift
+        ;;
+    -h)
+        COMMAND=download
+        shift
+        ;;
+    *)
+        COMMAND=bootstrap
+        ;;
+esac
 export GIT_WORK_TREE=${1:-~}
 export GIT_DIR=$GIT_WORK_TREE/.dotfiles.git
 
-if [[ $1 = '-h' || -z $1 && -d $GIT_DIR ]]; then
-    echo "curl -Lfs http://git.io/bVXE |bash"
-    echo "wget -qO- http://git.io/bVXE |bash"
-    exit
-fi
 
-set -x
-git clone --bare https://github.com/dangra/dotfiles $GIT_DIR
-git config --add remote.origin.pushurl git@github.com:dangra/dotfiles
-echo '*' >>$GIT_DIR/info/exclude
-git reset --hard
-#(cd $GIT_WORK_TREE; PATH=~/bin:$PATH git dotmodule update --init)
+main () {
+    if [[ $COMMAND = shellenv ]]; then
+        echo "export GIT_DIR='$GIT_DIR' GIT_WORK_TREE='$GIT_WORK_TREE'"
+        exit
+    elif [[ $COMMAND = download || -d $GIT_DIR ]]; then
+        echo "curl -Lfs http://git.io/bVXE |bash"
+        echo "wget -qO- http://git.io/bVXE |bash"
+        exit
+    else
+        bootstrap_dotfiles
+    fi
+}
+
+
+bootstrap_dotfiles () {
+    set -x
+    git clone --bare https://github.com/dangra/dotfiles $GIT_DIR
+    git config --add remote.origin.pushurl git@github.com:dangra/dotfiles
+    echo '*' >>$GIT_DIR/info/exclude
+    git reset --hard
+    git config core.bare false
+    git -C $GIT_WORK_TREE submodule update --init --depth 1
+}
+
+main "$@"
