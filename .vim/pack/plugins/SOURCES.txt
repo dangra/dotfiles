@@ -13,6 +13,7 @@ https://github.com/tpope/vim-jdaddy
 https://github.com/dense-analysis/ale
 https://github.com/vim-airline/vim-airline
 https://github.com/patstockwell/vim-monokai-tasty
+https://github.com/fatih/vim-go
 
 # Pinned
 https://github.com/mattn/gist-vim.git 4a21031

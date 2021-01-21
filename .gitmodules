@@ -52,3 +52,6 @@
 [submodule ".vim/pack/plugins/sources/vim-monokai-tasty"]
 	path = .vim/pack/plugins/sources/vim-monokai-tasty
 	url = https://github.com/patstockwell/vim-monokai-tasty
+[submodule ".vim/pack/plugins/sources/vim-go"]
+	path = .vim/pack/plugins/sources/vim-go
+	url = https://github.com/fatih/vim-go
