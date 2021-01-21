@@ -7,6 +7,7 @@ call pathogen#helptags()
 let g:airline_theme='monokai_tasty'
 let g:vim_monokai_tasty_italic = 1
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
 colorscheme vim-monokai-tasty
 
 " Status line options from https://github.com/tpope/vim-flagship
