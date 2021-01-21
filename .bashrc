@@ -26,6 +26,9 @@ elif [[ -f /etc/bash_completion ]]; then
   . /etc/bash_completion
 fi
 
+[[ -f /usr/share/fzf/key-bindings.bash ]] && . /usr/share/fzf/key-bindings.bash
+[[ -f /usr/share/fzf/key-bindings.bash ]] && . /usr/share/fzf/completion.bash
+
 ### General
 shopt -s checkwinsize extglob
 export EDITOR=vi
