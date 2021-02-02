@@ -14,3 +14,10 @@ colorscheme vim-monokai-tasty
 set laststatus=2
 set showtabline=2
 set guioptions-=e
+
+" Toggle line numbers
+map <leader>n :set number!<CR>
+
+" Tabbed windows
+nmap sn :tabnew<CR>
+nmap se :tabedit<SPACE>
