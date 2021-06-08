@@ -33,7 +33,7 @@ fi
 shopt -s checkwinsize extglob
 export EDITOR=vi
 export VISUAL=vi
-export LESS=-FRSXQ
+export LESS="-FRSXQ -x2"
 export HISTCONTROL=erasedups
 export ACK_COLOR_FILENAME=magenta
 export ACK_COLOR_MATCH=red
@@ -150,11 +150,13 @@ _prompt_vcs() {
 
     gitroot=$(git rev-parse --show-toplevel 2>/dev/null)
     if [[ $gitroot ]]; then
+      if [[ -f $gitroot/.git/logs/HEAD ]]; then
         gitbranch=$(git rev-parse --abbrev-ref HEAD)
         gitshortrev=$(git rev-parse --short HEAD)
-        gitstatus=$(git status -s |awk '{print $1}' |uniq |xargs)
-        echo "${Green}± ${gitroot##*/}${gitstatus:+${Red} ${gitstatus}}${gitbranch:+ ${Yellow}${gitbranch}(${gitshortrev})}${ANSIReset}"
-        return
+      fi
+      gitstatus=$(git status -s |awk '{print $1}' |uniq |xargs)
+      echo "${Green}± ${gitroot##*/}${gitstatus:+${Red} ${gitstatus}}${gitbranch:+ ${Yellow}${gitbranch}(${gitshortrev})}${ANSIReset}"
+      return
     fi
 
     HGPROMPT="${Green}☿ <root|basename><${Yellow}#<branch|quiet>><${Yellow}#<bookmark>><${Red}<status>><update>< ${Yellow}<patch>>${ANSIReset}"
@@ -222,6 +224,9 @@ export ANDROID_SDK_ROOT=/home/daniel/Android/Sdk
 ### GO lang
 export GOPATH=~/go PATH=$PATH:~/go/bin
 
+### Rust binaries
+export PATH=$PATH:~/.cargo/bin
+
 ### Python Poetry
 export PATH="$HOME/.poetry/bin:$PATH"
 
@@ -230,7 +235,7 @@ hsapi () {
     curl -sn http://storage.scrapinghub.com/$1
 }
 
-[ -d ~/.pyenv ] && eval "$(pyenv init -)"
+#[ -d ~/.pyenv ] && eval "$(pyenv init -)"
 
 # ruby bundle
 type -p ruby >/dev/null && export GEM_HOME=$(ruby -e 'puts Gem.user_dir')
