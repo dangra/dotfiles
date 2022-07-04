@@ -1,0 +1,136 @@
+live_config_reload: true
+
+shell:
+  program: /bin/sh
+  args:
+    - -lc
+    - "exec tmux new"
+  # - "tmux attach -t S0 || exec tmux new -s S0"
+
+# FF g
+font:
+  size: 15.0 #18
+  use_thin_strokes: true
+  normal:
+    #family: Hack Nerd Font
+    family: Inconsolata Nerd Font
+    #family: JetBrainsMonoMedium Nerd Font
+
+draw_bold_text_with_bright_colors: false
+
+window:
+  decorations: buttonless
+  opacity: .95
+
+selection:
+  save_to_clipboard: true
+
+mouse_bindings:
+  - { mouse: Middle, action: PasteSelection }
+
+key_bindings:
+  - { key: Return, mods: Command, action: ToggleSimpleFullscreen }
+  - { key: D,        mods: Command,       chars: "\x01\x22" } 
+  - { key: D,        mods: Command|Shift, chars: "\x01\x25" }
+  - { key: W,        mods: Command,       chars: "\x01\x78" }
+  - { key: H,        mods: Command,       chars: "\x01\x68" }
+  - { key: J,        mods: Command,       chars: "\x01\x6a" }
+  - { key: K,        mods: Command,       chars: "\x01\x6b" }
+  - { key: L,        mods: Command,       chars: "\x01\x6c" }
+  - { key: T,        mods: Command,       chars: "\x01\x63" }
+  - { key: RBracket, mods: Command|Shift, chars: "\x01\x6e" }
+  - { key: LBracket, mods: Command|Shift, chars: "\x01\x70" }
+  - { key: Return,   mods: Command|Shift, chars: "\x01\x7a" }
+  - { key: Key1,     mods: Command,       chars: "\x01\x31" }
+  - { key: Key2,     mods: Command,       chars: "\x01\x32" }
+  - { key: Key3,     mods: Command,       chars: "\x01\x33" }
+  - { key: Key4,     mods: Command,       chars: "\x01\x34" }
+  - { key: Key5,     mods: Command,       chars: "\x01\x35" }
+  - { key: Key6,     mods: Command,       chars: "\x01\x36" }
+  - { key: Key7,     mods: Command,       chars: "\x01\x37" }
+  - { key: Key8,     mods: Command,       chars: "\x01\x38" }
+  - { key: Key9,     mods: Command,       chars: "\x01\x39" }
+  - { key: Left,     mods: Command,       chars: "\x01\x48" }
+  - { key: Down,     mods: Command,       chars: "\x01\x4a" }
+  - { key: Up,       mods: Command,       chars: "\x01\x4b" }
+  - { key: Right,    mods: Command,       chars: "\x01\x4c" }
+
+# https://github.com/dodaithach/monokai-pro-alacritty
+colors:
+  # Default colors
+  primary:
+    background: '0x2c2525'
+    foreground: '0xfff1f3'
+
+  # Normal colors
+  normal:
+    black:   '0x2c2525'
+    red:     '0xfd6883'
+    green:   '0xadda78'
+    yellow:  '0xf9cc6c'
+    blue:    '0xf38d70'
+    magenta: '0xa8a9eb'
+    cyan:    '0x85dacc'
+    white:   '0xfff1f3'
+
+  # Bright colors
+  bright:
+    black:   '0x72696a'
+    red:     '0xfd6883'
+    green:   '0xadda78'
+    yellow:  '0xf9cc6c'
+    blue:    '0xf38d70'
+    magenta: '0xa8a9eb'
+    cyan:    '0x85dacc'
+    white:   '0xfff1f3'
+
+# Project:    Nord Alacritty
+# Repository: https://github.com/arcticicestudio/nord-alacritty
+# colors:
+#   primary:
+#     background: '#2e3440'
+#     foreground: '#d8dee9'
+#     dim_foreground: '#a5abb6'
+#   cursor:
+#     text: '#2e3440'
+#     cursor: '#d8dee9'
+#   vi_mode_cursor:
+#     text: '#2e3440'
+#     cursor: '#d8dee9'
+#   selection:
+#     text: CellForeground
+#     background: '#4c566a'
+#   search:
+#     matches:
+#       foreground: CellBackground
+#       background: '#88c0d0'
+#     bar:
+#       background: '#434c5e'
+#       foreground: '#d8dee9'
+#   normal:
+#     black: '#3b4252'
+#     red: '#bf616a'
+#     green: '#a3be8c'
+#     yellow: '#ebcb8b'
+#     blue: '#81a1c1'
+#     magenta: '#b48ead'
+#     cyan: '#88c0d0'
+#     white: '#e5e9f0'
+#   bright:
+#     black: '#4c566a'
+#     red: '#bf616a'
+#     green: '#a3be8c'
+#     yellow: '#ebcb8b'
+#     blue: '#81a1c1'
+#     magenta: '#b48ead'
+#     cyan: '#8fbcbb'
+#     white: '#eceff4'
+#   dim:
+#     black: '#373e4d'
+#     red: '#94545d'
+#     green: '#809575'
+#     yellow: '#b29e75'
+#     blue: '#68809a'
+#     magenta: '#8c738c'
+#     cyan: '#6d96a5'
+#     white: '#aeb3bb'

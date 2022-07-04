@@ -1,0 +1,10 @@
+#!/bin/sh
+# Simulates hitting a key on OS X
+# http://apple.stackexchange.com/a/63899/72339
+
+osascript <<EOF
+repeat while true
+	tell application "System Events" to keystroke "k"
+	delay 2
+end repeat
+EOF
