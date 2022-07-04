@@ -55,3 +55,63 @@
 [submodule ".vim/pack/plugins/sources/vim-go"]
 	path = .vim/pack/plugins/sources/vim-go
 	url = https://github.com/fatih/vim-go
+[submodule ".vim/pack/plugins/sources/fzf.vim"]
+	path = .vim/pack/plugins/sources/fzf.vim
+	url = https://github.com/junegunn/fzf.vim
+[submodule ".vim/pack/plugins/sources/fzf"]
+	path = .vim/pack/plugins/sources/fzf
+	url = https://github.com/junegunn/fzf
+[submodule ".config/nvim/pack/plugins/sources/vim-polyglot"]
+	path = .config/nvim/pack/plugins/sources/vim-polyglot
+	url = https://github.com/sheerun/vim-polyglot/
+[submodule ".config/nvim/pack/plugins/sources/vim-airline"]
+	path = .config/nvim/pack/plugins/sources/vim-airline
+	url = https://github.com/vim-airline/vim-airline
+[submodule ".config/nvim/pack/plugins/sources/vim-monokai-tasty"]
+	path = .config/nvim/pack/plugins/sources/vim-monokai-tasty
+	url = https://github.com/patstockwell/vim-monokai-tasty
+[submodule ".config/nvim/pack/plugins/sources/vim-go"]
+	path = .config/nvim/pack/plugins/sources/vim-go
+	url = https://github.com/fatih/vim-go
+[submodule ".config/nvim/pack/plugins/sources/coc.nvim"]
+	path = .config/nvim/pack/plugins/sources/coc.nvim
+	url = https://github.com/neoclide/coc.nvim
+[submodule ".config/nvim/pack/plugins/sources/gruvbox"]
+	path = .config/nvim/pack/plugins/sources/gruvbox
+	url = https://github.com/morhetz/gruvbox
+[submodule ".config/nvim/pack/plugins/sources/fzf"]
+	path = .config/nvim/pack/plugins/sources/fzf
+	url = https://github.com/junegunn/fzf
+[submodule ".config/nvim/pack/plugins/sources/fzf.vim"]
+	path = .config/nvim/pack/plugins/sources/fzf.vim
+	url = https://github.com/junegunn/fzf.vim
+[submodule ".vim/pack/plugins/sources/coc.nvim"]
+	path = .vim/pack/plugins/sources/coc.nvim
+	url = https://github.com/neoclide/coc.nvim
+[submodule ".vim/pack/plugins/sources/gruvbox"]
+	path = .vim/pack/plugins/sources/gruvbox
+	url = https://github.com/morhetz/gruvbox
+[submodule ".vim/pack/plugins/sources/vim-airline-themes"]
+	path = .vim/pack/plugins/sources/vim-airline-themes
+	url = https://github.com/vim-airline/vim-airline-themes
+[submodule ".vim/pack/plugins/sources/nord-vim"]
+	path = .vim/pack/plugins/sources/nord-vim
+	url = https://github.com/arcticicestudio/nord-vim
+[submodule ".vim/pack/plugins/sources/nerdtree"]
+	path = .vim/pack/plugins/sources/nerdtree
+	url = https://github.com/preservim/nerdtree
+[submodule ".vim/pack/plugins/sources/nerdtree-git-plugin"]
+	path = .vim/pack/plugins/sources/nerdtree-git-plugin
+	url = https://github.com/Xuyuanp/nerdtree-git-plugin
+[submodule ".vim/pack/plugins/sources/vim-devicons"]
+	path = .vim/pack/plugins/sources/vim-devicons
+	url = https://github.com/ryanoasis/vim-devicons
+[submodule ".vim/pack/plugins/sources/rust.vim"]
+	path = .vim/pack/plugins/sources/rust.vim
+	url = https://github.com/rust-lang/rust.vim
+[submodule ".vim/pack/plugins/sources/syntastic"]
+	path = .vim/pack/plugins/sources/syntastic
+	url = https://github.com/vim-syntastic/syntastic
+[submodule ".vim/pack/plugins/sources/vim-rhubarb"]
+	path = .vim/pack/plugins/sources/vim-rhubarb
+	url = https://github.com/tpope/vim-rhubarb

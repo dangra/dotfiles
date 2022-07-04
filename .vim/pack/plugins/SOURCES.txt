@@ -1,19 +1,35 @@
+https://github.com/preservim/nerdtree
+https://github.com/Xuyuanp/nerdtree-git-plugin
+https://github.com/ryanoasis/vim-devicons
+
+https://github.com/neoclide/coc.nvim release
+https://github.com/morhetz/gruvbox
 https://github.com/sheerun/vim-polyglot/
-https://github.com/tpope/vim-commentary
 https://github.com/saltstack/salt-vim
+https://github.com/tpope/vim-commentary
 https://github.com/tpope/vim-sensible
 https://github.com/tpope/vim-fugitive
 https://github.com/tpope/vim-dispatch
 https://github.com/tpope/vim-git
+https://github.com/tpope/vim-rhubarb
 https://github.com/tpope/vim-apathy
 https://github.com/tpope/vim-speeddating
 https://github.com/tpope/vim-repeat
 https://github.com/tpope/vim-unimpaired
 https://github.com/tpope/vim-jdaddy
-https://github.com/dense-analysis/ale
 https://github.com/vim-airline/vim-airline
-https://github.com/patstockwell/vim-monokai-tasty
 https://github.com/fatih/vim-go
+https://github.com/junegunn/fzf
+https://github.com/junegunn/fzf.vim
+
+https://github.com/rust-lang/rust.vim
+https://github.com/vim-syntastic/syntastic
+
+# Themes
+https://github.com/arcticicestudio/nord-vim
+#https://github.com/patstockwell/vim-monokai-tasty
+
+#https://github.com/dense-analysis/ale
 
 # Pinned
 https://github.com/mattn/gist-vim.git 4a21031

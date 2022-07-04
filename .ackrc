@@ -4,11 +4,17 @@ pig=.pig
 --type-set
 sls=.sls
 --type-set
+json=.json
+--type-set
+tmpl=.tmpl
+--type-set
 rst=.rst
 --type-set
 spec=.spec
 --type-set
 scala=.scala
+--type-set
+cs=.cs
 --type-set
 tac=.tac
 --ignore-dir

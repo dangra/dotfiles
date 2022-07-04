@@ -19,15 +19,13 @@ export MANPATH PATH
 # No-op if running interactively
 [ -z "$PS1" ] && return
 
-# Brew installed bash
-if [[ -f /usr/local/etc/bash_completion ]]; then
-  . /usr/local/etc/bash_completion
-elif [[ -f /etc/bash_completion ]]; then
-  . /etc/bash_completion
+# Setup FZF completion and key bindings
+if [[ -f ~/.fzf.bash ]]; then
+  . ~/.fzf.bash
+elif [[ -d /usr/share/fzf/ ]]; then
+  . /usr/share/fzf/key-bindings.bash
+  . /usr/share/fzf/completion.bash
 fi
-
-[[ -f /usr/share/fzf/key-bindings.bash ]] && . /usr/share/fzf/key-bindings.bash
-[[ -f /usr/share/fzf/key-bindings.bash ]] && . /usr/share/fzf/completion.bash
 
 ### General
 shopt -s checkwinsize extglob
@@ -44,8 +42,12 @@ export ACK_COLOR_MATCH=red
 
 ### Aliases
 [ "$TERM" != "dumb" ] && {
+  if type -p vivid >/dev/null; then
+    export LS_COLORS=$(vivid generate molokai)
+  else
     eval "$(dircolors -b ~/.dircolors)"
-    alias ls='ls --color=auto' 
+  fi
+  alias ls='ls --color=auto' 
 }
 alias ll='ls -l'
 alias grep='grep --color'
@@ -180,6 +182,7 @@ _prompt_command() {
     [[ $WINDOW ]] && echo -ne "\ek${shortpwd}\e\\" # update screen status line
 }
 export PS1 PROMPT_COMMAND=_prompt_command
+#eval "$(starship init bash)"
 
 ### Others
 # debian packaging
@@ -254,3 +257,5 @@ type -p ruby >/dev/null && export GEM_HOME=$(ruby -e 'puts Gem.user_dir')
 
 [[ -f /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc ]] && \
   . /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
+
+. "$HOME/.cargo/env"
