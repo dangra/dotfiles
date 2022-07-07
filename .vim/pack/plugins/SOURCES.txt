@@ -1,6 +1,7 @@
 https://github.com/preservim/nerdtree
 https://github.com/Xuyuanp/nerdtree-git-plugin
 https://github.com/ryanoasis/vim-devicons
+https://github.com/edkolev/tmuxline.vim
 
 https://github.com/neoclide/coc.nvim release
 https://github.com/morhetz/gruvbox

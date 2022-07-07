@@ -1,10 +1,8 @@
 live_config_reload: true
 
 shell:
-  program: /bin/sh
-  args:
-    - -lc
-    - "exec tmux new"
+  program: /usr/local/bin/bash
+  args: [-lc, "exec tmux new"]
   # - "tmux attach -t S0 || exec tmux new -s S0"
 
 # FF g

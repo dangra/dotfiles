@@ -115,3 +115,6 @@
 [submodule ".vim/pack/plugins/sources/vim-rhubarb"]
 	path = .vim/pack/plugins/sources/vim-rhubarb
 	url = https://github.com/tpope/vim-rhubarb
+[submodule ".vim/pack/plugins/sources/tmuxline.vim"]
+	path = .vim/pack/plugins/sources/tmuxline.vim
+	url = https://github.com/edkolev/tmuxline.vim
