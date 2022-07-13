@@ -2,8 +2,9 @@ https://github.com/preservim/nerdtree
 https://github.com/Xuyuanp/nerdtree-git-plugin
 https://github.com/ryanoasis/vim-devicons
 https://github.com/edkolev/tmuxline.vim
+https://github.com/cespare/vim-toml origin/main
 
-https://github.com/neoclide/coc.nvim release
+https://github.com/neoclide/coc.nvim origin/release
 https://github.com/morhetz/gruvbox
 https://github.com/sheerun/vim-polyglot/
 https://github.com/saltstack/salt-vim

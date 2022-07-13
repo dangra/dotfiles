@@ -36,7 +36,7 @@ key_bindings:
   - { key: J,        mods: Command|Shift, chars: "\x01\x4a" }
   - { key: K,        mods: Command|Shift, chars: "\x01\x4b" }
   - { key: L,        mods: Command|Shift, chars: "\x01\x4c" }
-  - { key: T,        mods: Command|Shift, chars: "\x01\x63" }
+  - { key: T,        mods: Command,       chars: "\x01\x63" }
   - { key: RBracket, mods: Command|Shift, chars: "\x01\x6e" }
   - { key: LBracket, mods: Command|Shift, chars: "\x01\x70" }
   - { key: Return,   mods: Command|Shift, chars: "\x01\x7a" }

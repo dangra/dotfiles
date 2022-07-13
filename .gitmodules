@@ -118,3 +118,6 @@
 [submodule ".vim/pack/plugins/sources/tmuxline.vim"]
 	path = .vim/pack/plugins/sources/tmuxline.vim
 	url = https://github.com/edkolev/tmuxline.vim
+[submodule ".vim/pack/plugins/sources/vim-toml"]
+	path = .vim/pack/plugins/sources/vim-toml
+	url = https://github.com/cespare/vim-toml
