@@ -20,12 +20,7 @@ export MANPATH PATH
 [ -z "$PS1" ] && return
 
 # Setup FZF completion and key bindings
-if [[ -f ~/.fzf.bash ]]; then
-  . ~/.fzf.bash
-elif [[ -d /usr/share/fzf/ ]]; then
-  . /usr/share/fzf/key-bindings.bash
-  . /usr/share/fzf/completion.bash
-fi
+. ~/.fzf.bash
 
 ### General
 shopt -s checkwinsize extglob
@@ -33,8 +28,6 @@ export EDITOR=vi
 export VISUAL=vi
 export LESS="-FRSXQ -x2"
 export HISTCONTROL=erasedups
-export ACK_COLOR_FILENAME=magenta
-export ACK_COLOR_MATCH=red
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 [ "$TERM" == "rxvt-unicode" ] && [ ! -r /usr/share/terminfo/r/rxvt-unicode ] && {
     export TERM=rxvt
@@ -51,15 +44,6 @@ export ACK_COLOR_MATCH=red
 }
 alias ll='ls -l'
 alias grep='grep --color'
-alias mq='hg -R $(hg root)/.hg/patches'
-alias egg="python setup.py bdist_egg"
-alias enabledocker='eval $(docker-machine env default)'
-
-# be virtualenv friendly
-#alias pylint="env python -m pylint.lint"
-#alias nosetests="env python -m nose.core"
-#alias trial="env python /usr/bin/trial"
-#alias twistd="env python /usr/bin/twistd"
 
 # dotfiles git wrapper
 alias dotfiles="GIT_DIR=~/.dotfiles.git GIT_WORK_TREE=~ git"
@@ -126,13 +110,6 @@ case $FQDN in
     ;;
 esac
 
-# mysql client prompt
-export MYSQL_PS1="${SQDN%%.*} \u@\h \d> "
-
-# Teleport
-export TELEPORT_LOGIN=root
-
-
 _oneletter_pwd() {
     local DIRS=() ODIRS=() MAX=0 SHORTEDPATH=''
     IFS=/ read -d '' -a DIRS <<<"${PWD/#$HOME/\~}"
@@ -188,11 +165,6 @@ _prompt_command() {
 export PS1 PROMPT_COMMAND=_prompt_command
 #eval "$(starship init bash)"
 
-### Others
-# debian packaging
-export DEBFULLNAME='Daniel Graña'
-export DEBEMAIL='dangra@gmail.com'
-
 # ssh session agnostic agent path
 if [[ -S /run/user/1000/gnupg/S.gpg-agent.ssh && ! -n "$SSH_AUTH_SOCK" ]]; then
   export SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh
@@ -219,47 +191,22 @@ if ! type -p mkvirtualenv >/dev/null; then
     }
 fi
 
-
-[[ -s "$HOME/.pythonbrew/etc/bashrc" ]] && source "$HOME/.pythonbrew/etc/bashrc"
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
+### Others
+# debian packaging
+export DEBFULLNAME='Daniel Graña'
+export DEBEMAIL='dangra@gmail.com'
+# mysql client prompt
+export MYSQL_PS1="${SQDN%%.*} \u@\h \d> "
+# Teleport
+export TELEPORT_LOGIN=root
 ### Android Studio
 export ANDROID_SDK_ROOT=/home/daniel/Android/Sdk
-
 ### GO lang
 export GOPATH=~/go PATH=$PATH:~/go/bin
-
-### Rust binaries
-export PATH=$PATH:~/.cargo/bin
-
 ### Python Poetry
 export PATH="$HOME/.poetry/bin:$PATH"
-
-# SH
-hsapi () {
-    curl -sn http://storage.scrapinghub.com/$1
-}
-
-#[ -d ~/.pyenv ] && eval "$(pyenv init -)"
-
 # ruby bundle
 type -p ruby >/dev/null && export GEM_HOME=$(ruby -e 'puts Gem.user_dir')
-
-# added by travis gem
-[ -f /home/daniel/.travis/travis.sh ] && source /home/daniel/.travis/travis.sh
-
-# GPG agent 
-#[ -f ~/.gpg-agent-info ] && source ~/.gpg-agent-info
-#if [ -S "${GPG_AGENT_INFO%%:*}" ]; then
-#  export GPG_AGENT_INFO
-#elif type -p gpg-agent >/dev/null; then
-#  eval $(gpg-agent --daemon ~/.gpg-agent-info )
-#fi
-#gpg-agent --daemon
-
+# Google Cloud SDK
 [[ -f /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc ]] && \
   . /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
-
-. "$HOME/.cargo/env"
