@@ -129,6 +129,10 @@ esac
 # mysql client prompt
 export MYSQL_PS1="${SQDN%%.*} \u@\h \d> "
 
+# Teleport
+export TELEPORT_LOGIN=root
+
+
 _oneletter_pwd() {
     local DIRS=() ODIRS=() MAX=0 SHORTEDPATH=''
     IFS=/ read -d '' -a DIRS <<<"${PWD/#$HOME/\~}"

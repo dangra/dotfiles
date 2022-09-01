@@ -21,7 +21,7 @@ let g:go_metalinter_enabled = []
 " don't jump to errors after metalinter is invoked
 let g:go_jump_to_error = 0
 " run go imports on file save
-let g:go_fmt_command = "goimports"
+let g:go_fmt_command = "gofumpt"
 " Others
 let g:go_auto_sameids = 0
 let g:go_highlight_types = 1
@@ -56,6 +56,9 @@ set foldmethod=syntax
 set foldnestmax=1
 set nofoldenable
 let mapleader = ","
+
+" https://jameschambers.co.uk/vim-typescript-slow
+set re=0
 
 " Show line numbers by default
 set number
