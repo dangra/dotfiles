@@ -263,3 +263,5 @@ type -p ruby >/dev/null && export GEM_HOME=$(ruby -e 'puts Gem.user_dir')
   . /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
 
 . "$HOME/.cargo/env"
+
+. "$HOME/.bashrc-local"
