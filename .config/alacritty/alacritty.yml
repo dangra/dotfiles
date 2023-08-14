@@ -6,9 +6,10 @@ shell:
 
 # FF g
 font:
-  size: 15.0 #18
+  size: 16.0 #18
   normal:
     family: Inconsolata Nerd Font
+      #family: Inter
 
 draw_bold_text_with_bright_colors: false
 
