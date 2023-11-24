@@ -13,7 +13,7 @@ case $OS in
     PATH=~/.gem/ruby/2.2.0/bin:/sbin:/usr/sbin:$PATH
     ;;
 esac
-PATH=~/bin/$OS:~/bin:$PATH
+PATH=~/bin/$OS:~/bin:~/.local/bin:$PATH
 export MANPATH PATH
 
 # No-op if running interactively
@@ -23,6 +23,7 @@ export MANPATH PATH
 . ~/.fzf.bash
 
 ### General
+bind 'set mark-symlinked-directories on'
 shopt -s checkwinsize extglob
 export EDITOR=vi
 export VISUAL=vi
@@ -60,7 +61,7 @@ dotsync (){
 }
 
 # find vim or vi
-VI=`type -p vim || type -p vi`
+VI=`type -p nvim || type -p vim || type -p vi`
 [[ -n $VI ]]&& alias vi=$VI vim=$VI
 
 ### Used terminal colours
@@ -210,3 +211,5 @@ type -p ruby >/dev/null && export GEM_HOME=$(ruby -e 'puts Gem.user_dir')
 # Google Cloud SDK
 [[ -f /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc ]] && \
   . /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
+
+[[ -r ~/.bash_aliases ]] && . ~/.bash_aliases

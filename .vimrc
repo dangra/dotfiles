@@ -34,6 +34,9 @@ let g:go_highlight_build_constraints = 1
 let g:go_highlight_generate_tags = 1
 let g:go_fmt_experimental=1
 
+"" Rust
+let g:rustfmt_autosave = 1
+
 " Theme
 colorscheme nord
 " autocmd ColorScheme * highlight CocErrorFloat guifg=#ffffff
