@@ -1,0 +1,64 @@
+[user]
+	name = Daniel Graña
+	email = dangra@gmail.com
+	signingkey = F86A39E8
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	showbranch = auto
+	grep = true
+[format]
+	signoff = true
+[color "diff"]
+	#func = magenta  # not supported by git <1.6
+	meta = yellow
+[core]
+  excludesfile = ~/.cvsignore
+  #autocrlf = input
+  #s:fecrlf = true
+	editor = vim
+[github]
+	user = dangra
+[sendemail]
+	smtpencryption = tls
+	smtpserver = smtp.gmail.com
+	smtpuser = dangra@gmail.com
+	smtpserverport = 587
+[push]
+	default = current
+	autoSetupRemote = true
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+[alias]
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+[pull]
+	ff = only
+[init]
+	defaultBranch = master
+
+[includeIf "gitdir:~/src/flinks/"]
+	path = ./.gitconfig-flinks
+
+[pager]
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    features = side-by-side line-numbers decorations Nord
+    whitespace-error-style = 22 reverse
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
+
+[fetch]
+	prune = true
