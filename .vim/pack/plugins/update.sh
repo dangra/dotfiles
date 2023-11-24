@@ -28,7 +28,7 @@ while read line; do
   #   git clean -dfq
   # )
   ln -sf ../$clonedir start/
-  dotgit submodule add -f ${gitref:+--branch $gitref} -- $remote $clonedir
+  dotgit submodule add -f -- $remote $clonedir
   #dotgit submodule init -- $clonedir
-  dotgit submodule update --rebase -- $clonedir
+  dotgit submodule update --remote -- $clonedir
 done <${1:-SOURCES.txt}
