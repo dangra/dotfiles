@@ -1,0 +1,5 @@
+*.pyc
+*egg-info
+.ropeproject
+.DS_store
+.pytest_cache
