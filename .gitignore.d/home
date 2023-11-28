@@ -1,1 +1,6 @@
 .Trash
+.cache
+.bash_sessions
+.cargo
+.config/vcsh/repo.d
+.rustup
