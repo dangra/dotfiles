@@ -1,0 +1,16 @@
+#!/bin/bash
+: ${development_host:=hako}
+
+ssh \
+	-L 14222:192.168.56.10:4222 `# NATS` \
+	-L 14280:192.168.56.10:4280 `# Flaps` \
+	-L 18200:192.168.56.10:8200 `# Vault` \
+	-L 18500:192.168.56.10:8500 `# Consul` \
+	-L 19000:192.168.56.10:9000 `# Minio` \
+	-L 19001:192.168.56.10:9001 `# Minio Console` \
+	-L 18787:192.168.56.10:8787 `# Corrosion2 API` \
+	-L 15487:192.168.56.10:5487 `# Corrosion2 PG` \
+	-L 13010:localhost:3010 `# Web` \
+	-L 4001:localhost:4001 `# Admin` \
+	-L 14000:localhost:4000 \
+	$development_host "${@}"
