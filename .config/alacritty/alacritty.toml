@@ -1,0 +1,194 @@
+live_config_reload = true
+
+[colors]
+draw_bold_text_with_bright_colors = false
+
+[colors.bright]
+black = "0x72696a"
+blue = "0xf38d70"
+cyan = "0x85dacc"
+green = "0xadda78"
+magenta = "0xa8a9eb"
+red = "0xfd6883"
+white = "0xfff1f3"
+yellow = "0xf9cc6c"
+
+[colors.normal]
+black = "0x2c2525"
+blue = "0xf38d70"
+cyan = "0x85dacc"
+green = "0xadda78"
+magenta = "0xa8a9eb"
+red = "0xfd6883"
+white = "0xfff1f3"
+yellow = "0xf9cc6c"
+
+[colors.primary]
+background = "0x2c2525"
+foreground = "0xfff1f3"
+
+[font]
+size = 16.0
+
+[font.normal]
+family = "Inconsolata Nerd Font"
+
+[[keyboard.bindings]]
+action = "ToggleSimpleFullscreen"
+key = "Return"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0001\""
+key = "D"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0001%"
+key = "D"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+chars = "\u0001x"
+key = "W"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0001h"
+key = "H"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0001j"
+key = "J"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0001k"
+key = "K"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0001l"
+key = "L"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0001H"
+key = "H"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+chars = "\u0001J"
+key = "J"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+chars = "\u0001K"
+key = "K"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+chars = "\u0001L"
+key = "L"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+chars = "\u0001c"
+key = "T"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0001n"
+key = "RBracket"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+chars = "\u0001p"
+key = "LBracket"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+chars = "\u0001z"
+key = "Return"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+chars = "\u00011"
+key = "Key1"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00012"
+key = "Key2"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00013"
+key = "Key3"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00014"
+key = "Key4"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00015"
+key = "Key5"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00016"
+key = "Key6"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00017"
+key = "Key7"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00018"
+key = "Key8"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00019"
+key = "Key9"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0001H"
+key = "Left"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0001J"
+key = "Down"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0001K"
+key = "Up"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0001L"
+key = "Right"
+mods = "Command"
+
+[[mouse.bindings]]
+action = "PasteSelection"
+mouse = "Middle"
+
+[selection]
+save_to_clipboard = true
+
+[shell]
+args = ["-lc", "exec tmux new"]
+program = "bash"
+
+[window]
+decorations = "buttonless"
+opacity = 0.95
