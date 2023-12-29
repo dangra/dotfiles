@@ -8,8 +8,8 @@ add_newline = true
 disabled = true
 
 [hostname]
-disabled = true
+ssh_only = false
+detect_env_vars = [ '!TMUX', 'SSH_CONNECTION' ]
 
 [vcsh]
 format = '[🆅 $repo](bold blue) '
-

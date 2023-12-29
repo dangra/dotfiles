@@ -6,9 +6,10 @@
 
 lvim.keys.normal_mode["<C-n>"] = ":bn<CR>"
 lvim.keys.normal_mode["<C-p>"] = ":bp<CR>"
-lvim.keys.normal_mode["se"] = ":tabedit "
+lvim.keys.normal_mode["se"] = ":tabedit <CR>"
 lvim.keys.normal_mode["sb"] = ":Telescope buffers<CR>"
 lvim.keys.normal_mode["sf"] = ":Telescope fd<CR>"
+lvim.keys.normal_mode["sr"] = ":Telescope live_grep<CR>"
 
 lvim.plugins = {
   {
@@ -36,5 +37,3 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
   group = format_sync_grp,
 })
-
-
