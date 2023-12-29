@@ -2,7 +2,10 @@
 case $(uname -s) in
   Darwin)
     PATH=/usr/local/sbin:$PATH
+    PATH="/opt/homebrew/opt/go@1.20/bin:$PATH"
+    PATH=$(printf '%s:' /opt/homebrew/bin)$PATH
     PATH=$(printf '%s:' /usr/local/opt/*/libexec/gnubin)$PATH
+    PATH=$(printf '%s:' /opt/homebrew/opt/*/libexec/gnubin)$PATH
     PATH=$(printf '%s/bin:' ~/.gem/ruby/2.*.*)$PATH
     PATH=~/Library/Python/2.7/bin:$PATH
     MANPATH=$(printf '%s:' /usr/local/opt/*/libexec/gnuman)$MAPATH
