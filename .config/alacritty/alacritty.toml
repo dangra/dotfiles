@@ -32,6 +32,7 @@ size = 16.0
 
 [font.normal]
 family = "Inconsolata Nerd Font"
+#family = "Iosevka Nerd Font"
 
 [[keyboard.bindings]]
 action = "ToggleSimpleFullscreen"
@@ -101,12 +102,12 @@ mods = "Command"
 [[keyboard.bindings]]
 chars = "\u0001n"
 key = "RBracket"
-mods = "Command|Shift"
+mods = "Command"
 
 [[keyboard.bindings]]
 chars = "\u0001p"
 key = "LBracket"
-mods = "Command|Shift"
+mods = "Command"
 
 [[keyboard.bindings]]
 chars = "\u0001z"
