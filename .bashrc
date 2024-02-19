@@ -11,7 +11,7 @@ case $(uname -s) in
     MANPATH=$(printf '%s:' /usr/local/opt/*/libexec/gnuman)$MAPATH
     ;;
   Linux)
-    #PATH=~/.gem/ruby/2.2.0/bin:/sbin:/usr/sbin:$PATH
+    PATH=$(printf '%s/bin:' ~/.local/share/gem/ruby/*):$PATH
     ;;
 esac
 PATH=~/.local/bin:$PATH
