@@ -83,4 +83,5 @@ export PATH="$HOME/.poetry/bin:$PATH"
 [[ -f /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc ]] && \
   . /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
 
+[[ -r ~/.cargo/env ]] && . ~/.cargo/env
 [[ -r ~/.bash_aliases ]] && . ~/.bash_aliases
