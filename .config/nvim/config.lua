@@ -37,3 +37,18 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
   group = format_sync_grp,
 })
+
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldnestmax = 2
+vim.treesitter.query.set("go", "folds", [[
+  [
+    (import_declaration)
+    (function_declaration)
+    (method_declaration)
+    (type_declaration)
+  ] @fold
+]])
+
+--vim.cmd([[ set nofoldenable]])
+--require'lspconfig'.biome.setup{}
