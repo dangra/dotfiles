@@ -1,2 +1,3 @@
 #!/bin/bash
-ssh hako-initrd -l root systemd-tty-ask-password-agent
+ssh hako-initrd -tl root systemd-tty-ask-password-agent --query
+ping hako-initrd
