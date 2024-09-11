@@ -26,6 +26,15 @@ lvim.plugins = {
     ft = {"go", 'gomod'},
     build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
   },
+  { "rose-pine/neovim", name = "rose-pine" },
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "VeryLazy",
+    opts = {},
+    config = function(_, opts)
+      require'lsp_signature'.setup(opts)
+    end
+  }
 }
 
 -- Run gofmt + goimport on save
@@ -49,6 +58,8 @@ vim.treesitter.query.set("go", "folds", [[
     (type_declaration)
   ] @fold
 ]])
+
+vim.cmd("colorscheme rose-pine-dawn")
 
 --vim.cmd([[ set nofoldenable]])
 --require'lspconfig'.biome.setup{}
