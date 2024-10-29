@@ -1,14 +1,9 @@
-live_config_reload = true
-
-import = [
-    "~/.config/alacritty/themes/rose-pine.toml"
-]
 
 [font]
 size = 16.0
 
 [font.normal]
-family = "Inconsolata Nerd Font"
+family = "Inconsolata Nerd Font Propo"
 #family = "Iosevka Nerd Font"
 
 [[keyboard.bindings]]
@@ -163,10 +158,19 @@ mouse = "Middle"
 [selection]
 save_to_clipboard = true
 
-[shell]
+[terminal.shell]
 args = ["-lc", "exec tmux new"]
 program = "bash"
 
 [window]
 decorations = "buttonless"
 opacity = 0.95
+
+[general]
+live_config_reload = true
+
+import = [
+    "~/.config/alacritty/themes/rose-pine.toml"
+]
+
+[terminal]
