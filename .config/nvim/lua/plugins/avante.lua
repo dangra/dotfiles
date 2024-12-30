@@ -15,21 +15,14 @@ return {
         provider_opts = {},
       },
     },
+  },
 
-    dependencies = {
-      {
-        "MeanderingProgrammer/render-markdown.nvim",
-        ft = function(_, ft)
-          vim.list_extend(ft, { "Avante" })
-        end,
-      },
-      {
-        "folke/which-key.nvim",
-        opts = {
-          spec = {
-            { "<leader>a", group = "ai" },
-          },
-        },
+  {
+    "folke/which-key.nvim",
+    optional = true,
+    opts = {
+      spec = {
+        { "<leader>a", group = "ai" },
       },
     },
   },
@@ -37,30 +30,35 @@ return {
   {
     "stevearc/dressing.nvim",
     lazy = true,
-    opts = function(_, opts)
-      opts.input.enabled = false
-      opts.select.enabled = false
-    end,
+    -- disable to use vim.ui.input and vim.ui.select from Snacks.input
+    opts = { input = { enabled = false }, select = { enabled = false } },
   },
 
   {
-    "saghen/blink.compat",
-    lazy = true,
-    opts = {},
-    config = function()
-      -- monkeypatch cmp.ConfirmBehavior for Avante
-      require("cmp").ConfirmBehavior = {
-        Insert = "insert",
-        Replace = "replace",
-      }
+    "MeanderingProgrammer/render-markdown.nvim",
+    optional = true,
+    ft = function(_, ft)
+      vim.list_extend(ft, { "Avante" })
     end,
   },
+
+  -- nvim-cmp compatibility layer for Avante
   {
     "saghen/blink.cmp",
     lazy = true,
-    opts = function(_, opts)
-      opts.sources.compat =
-        vim.list_extend(opts.sources.compat, { "avante_commands", "avante_mentions", "avante_files" })
-    end,
+    opts = {
+      sources = {
+        compat = { "avante_commands", "avante_mentions", "avante_files" },
+      },
+    },
+    dependencies = {
+      {
+        "saghen/blink.compat",
+        opts = {},
+        config = function()
+          require("cmp").ConfirmBehavior = { Insert = "insert", Replace = "replace" }
+        end,
+      },
+    },
   },
 }
