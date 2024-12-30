@@ -3,3 +3,5 @@
 .ropeproject
 .DS_store
 .pytest_cache
+.aider*
+.env
