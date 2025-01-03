@@ -1,7 +1,7 @@
 return {
   {
     "yetone/avante.nvim",
-    lazy = true,
+    --lazy = true,
     event = "VeryLazy",
     build = "make",
 
@@ -51,14 +51,13 @@ return {
         compat = { "avante_commands", "avante_mentions", "avante_files" },
       },
     },
-    dependencies = {
-      {
-        "saghen/blink.compat",
-        opts = {},
-        config = function()
-          require("cmp").ConfirmBehavior = { Insert = "insert", Replace = "replace" }
-        end,
-      },
-    },
+  },
+  {
+    "saghen/blink.compat",
+    opts = {},
+    lazy = true,
+    config = function()
+      require("cmp").ConfirmBehavior = { Insert = "insert", Replace = "replace" }
+    end,
   },
 }
