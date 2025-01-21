@@ -3,4 +3,3 @@
 -- Add any additional options here
 --
 vim.g.snacks_animate = false
---vim.opt.completeopt = "menu,menuone,noselect,noinsert,popup"

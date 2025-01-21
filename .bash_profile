@@ -8,3 +8,6 @@
 [[ -x /opt/homebrew//bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
+
+# Added by `rbenv init` on Thu Jan 16 06:17:24 PM -03 2025
+eval "$(rbenv init - --no-rehash bash)"
