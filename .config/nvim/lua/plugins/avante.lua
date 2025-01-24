@@ -10,7 +10,7 @@ return {
       copilot = { model = "claude-3.5-sonnet" },
       hints = { enabled = false },
       file_selector = {
-        provider = "fzf",
+        provider = "snacks",
         provider_opts = {},
       },
     },
