@@ -1,8 +1,9 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   opts = function(_, opts)
-    -- add caddyfile support
-    require("nvim-treesitter.parsers").get_parser_configs().caddy = {
+    -- add Caddyfile support
+    local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
+    parser_configs["caddy"] = {
       install_info = {
         url = "https://github.com/Samonitari/tree-sitter-caddy",
         files = { "src/parser.c", "src/scanner.c" },
