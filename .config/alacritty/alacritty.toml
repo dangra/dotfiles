@@ -1,176 +1,175 @@
 
 [font]
-size = 16.0
+  size = 16.0
 
-[font.normal]
-family = "Inconsolata Nerd Font Propo"
-#family = "Iosevka Nerd Font"
-
-[[keyboard.bindings]]
-action = "ToggleSimpleFullscreen"
-key = "Return"
-mods = "Command"
+  [font.normal]
+    family = "Inconsolata Nerd Font"
+    #family = "Menlo"
+    #family = "Iosevka Nerd Font"
 
 [[keyboard.bindings]]
-chars = "\u0001\""
-key = "D"
-mods = "Command"
+  action = "ToggleSimpleFullscreen"
+  key = "Return"
+  mods = "Command"
 
 [[keyboard.bindings]]
-chars = "\u0001%"
-key = "D"
-mods = "Command|Shift"
+  chars = "\u0001\""
+  key = "D"
+  mods = "Command"
 
 [[keyboard.bindings]]
-chars = "\u0001x"
-key = "W"
-mods = "Command"
+  chars = "\u0001%"
+  key = "D"
+  mods = "Command|Shift"
 
 [[keyboard.bindings]]
-chars = "\u0001h"
-key = "H"
-mods = "Command"
+  chars = "\u0001x"
+  key = "W"
+  mods = "Command"
 
 [[keyboard.bindings]]
-chars = "\u0001j"
-key = "J"
-mods = "Command"
+  chars = "\u0001h"
+  key = "H"
+  mods = "Command"
 
 [[keyboard.bindings]]
-chars = "\u0001k"
-key = "K"
-mods = "Command"
+  chars = "\u0001j"
+  key = "J"
+  mods = "Command"
 
 [[keyboard.bindings]]
-chars = "\u0001l"
-key = "L"
-mods = "Command"
+  chars = "\u0001k"
+  key = "K"
+  mods = "Command"
 
 [[keyboard.bindings]]
-chars = "\u0001H"
-key = "H"
-mods = "Command|Shift"
+  chars = "\u0001l"
+  key = "L"
+  mods = "Command"
 
 [[keyboard.bindings]]
-chars = "\u0001J"
-key = "J"
-mods = "Command|Shift"
+  chars = "\u0001H"
+  key = "H"
+  mods = "Command|Shift"
 
 [[keyboard.bindings]]
-chars = "\u0001K"
-key = "K"
-mods = "Command|Shift"
+  chars = "\u0001J"
+  key = "J"
+  mods = "Command|Shift"
 
 [[keyboard.bindings]]
-chars = "\u0001L"
-key = "L"
-mods = "Command|Shift"
+  chars = "\u0001K"
+  key = "K"
+  mods = "Command|Shift"
 
 [[keyboard.bindings]]
-chars = "\u0001c"
-key = "T"
-mods = "Command"
+  chars = "\u0001L"
+  key = "L"
+  mods = "Command|Shift"
 
 [[keyboard.bindings]]
-chars = "\u0001n"
-key = "RBracket"
-mods = "Command"
+  chars = "\u0001c"
+  key = "T"
+  mods = "Command"
 
 [[keyboard.bindings]]
-chars = "\u0001p"
-key = "LBracket"
-mods = "Command"
+  chars = "\u0001n"
+  key = "RBracket"
+  mods = "Command"
 
 [[keyboard.bindings]]
-chars = "\u0001z"
-key = "Return"
-mods = "Command|Shift"
+  chars = "\u0001p"
+  key = "LBracket"
+  mods = "Command"
 
 [[keyboard.bindings]]
-chars = "\u00011"
-key = "Key1"
-mods = "Command"
+  chars = "\u0001z"
+  key = "Return"
+  mods = "Command|Shift"
 
 [[keyboard.bindings]]
-chars = "\u00012"
-key = "Key2"
-mods = "Command"
+  chars = "\u00011"
+  key = "Key1"
+  mods = "Command"
 
 [[keyboard.bindings]]
-chars = "\u00013"
-key = "Key3"
-mods = "Command"
+  chars = "\u00012"
+  key = "Key2"
+  mods = "Command"
 
 [[keyboard.bindings]]
-chars = "\u00014"
-key = "Key4"
-mods = "Command"
+  chars = "\u00013"
+  key = "Key3"
+  mods = "Command"
 
 [[keyboard.bindings]]
-chars = "\u00015"
-key = "Key5"
-mods = "Command"
+  chars = "\u00014"
+  key = "Key4"
+  mods = "Command"
 
 [[keyboard.bindings]]
-chars = "\u00016"
-key = "Key6"
-mods = "Command"
+  chars = "\u00015"
+  key = "Key5"
+  mods = "Command"
 
 [[keyboard.bindings]]
-chars = "\u00017"
-key = "Key7"
-mods = "Command"
+  chars = "\u00016"
+  key = "Key6"
+  mods = "Command"
 
 [[keyboard.bindings]]
-chars = "\u00018"
-key = "Key8"
-mods = "Command"
+  chars = "\u00017"
+  key = "Key7"
+  mods = "Command"
 
 [[keyboard.bindings]]
-chars = "\u00019"
-key = "Key9"
-mods = "Command"
+  chars = "\u00018"
+  key = "Key8"
+  mods = "Command"
 
 [[keyboard.bindings]]
-chars = "\u0001H"
-key = "Left"
-mods = "Command"
+  chars = "\u00019"
+  key = "Key9"
+  mods = "Command"
 
 [[keyboard.bindings]]
-chars = "\u0001J"
-key = "Down"
-mods = "Command"
+  chars = "\u0001H"
+  key = "Left"
+  mods = "Command"
 
 [[keyboard.bindings]]
-chars = "\u0001K"
-key = "Up"
-mods = "Command"
+  chars = "\u0001J"
+  key = "Down"
+  mods = "Command"
 
 [[keyboard.bindings]]
-chars = "\u0001L"
-key = "Right"
-mods = "Command"
+  chars = "\u0001K"
+  key = "Up"
+  mods = "Command"
+
+[[keyboard.bindings]]
+  chars = "\u0001L"
+  key = "Right"
+  mods = "Command"
 
 [[mouse.bindings]]
-action = "PasteSelection"
-mouse = "Middle"
+  action = "PasteSelection"
+  mouse = "Middle"
 
 [selection]
-save_to_clipboard = true
+  save_to_clipboard = true
 
 [terminal.shell]
-args = ["-lc", "exec tmux new"]
-program = "bash"
+  args = ["-lc", "exec tmux new"]
+  program = "bash"
 
 [window]
-decorations = "buttonless"
-opacity = 0.95
+  decorations = "buttonless"
+  opacity = 0.95
 
 [general]
-live_config_reload = true
+  live_config_reload = true
 
-import = [
-    "~/.config/alacritty/themes/rose-pine.toml"
-]
+  import = ["~/.config/alacritty/themes/rose-pine.toml"]
 
 [terminal]
