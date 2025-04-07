@@ -1,18 +1,18 @@
 # vi:ft=sh
 case $(uname -s) in
-  Darwin)
-    PATH=/usr/local/sbin:$PATH
-    PATH="/opt/homebrew/opt/go@1.20/bin:$PATH"
-    PATH=$(printf '%s:' /opt/homebrew/bin)$PATH
-    PATH=$(printf '%s:' /usr/local/opt/*/libexec/gnubin)$PATH
-    PATH=$(printf '%s:' /opt/homebrew/opt/*/libexec/gnubin)$PATH
-    PATH=$(printf '%s/bin:' ~/.gem/ruby/2.*.*)$PATH
-    PATH=~/Library/Python/2.7/bin:$PATH
-    MANPATH=$(printf '%s:' /usr/local/opt/*/libexec/gnuman)$MAPATH
-    ;;
-  Linux)
-    PATH=$(printf '%s/bin:' ~/.local/share/gem/ruby/*):$PATH
-    ;;
+Darwin)
+  PATH=/usr/local/sbin:$PATH
+  PATH="/opt/homebrew/opt/go@1.20/bin:$PATH"
+  PATH=$(printf '%s:' /opt/homebrew/bin)$PATH
+  PATH=$(printf '%s:' /usr/local/opt/*/libexec/gnubin)$PATH
+  PATH=$(printf '%s:' /opt/homebrew/opt/*/libexec/gnubin)$PATH
+  PATH=$(printf '%s/bin:' ~/.gem/ruby/2.*.*)$PATH
+  PATH=~/Library/Python/2.7/bin:$PATH
+  MANPATH=$(printf '%s:' /usr/local/opt/*/libexec/gnuman)$MAPATH
+  ;;
+Linux)
+  PATH=$(printf '%s/bin:' ~/.local/share/gem/ruby/*):$PATH
+  ;;
 esac
 PATH=~/.local/bin:$PATH
 export MANPATH PATH
@@ -30,7 +30,7 @@ export EDITOR=vi VISUAL=vi LESS="-FRSXQ -x2" HISTCONTROL=erasedups
 
 [[ -x /usr/bin/lesspipe ]] && eval "$(lesspipe)"
 [ "$TERM" == "rxvt-unicode" ] && [ ! -r /usr/share/terminfo/r/rxvt-unicode ] && {
-    export TERM=rxvt
+  export TERM=rxvt
 }
 
 # Colors
@@ -46,7 +46,6 @@ fi
 alias ls='ls --color=auto'
 alias ll='ls -l'
 alias ip='ip -color=auto'
-
 
 # find nvim, vim or vi
 _VI=$(type -p nvim || type -p vim || type -p vi)
@@ -80,8 +79,9 @@ export PATH="$HOME/.poetry/bin:$PATH"
 # ruby bundle
 #type -p ruby >/dev/null && export GEM_HOME=$(ruby -e 'puts Gem.user_dir')
 # Google Cloud SDK
-[[ -f /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc ]] && \
+[[ -f /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc ]] &&
   . /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
 
 [[ -r ~/.cargo/env ]] && . ~/.cargo/env
 [[ -r ~/.bash_aliases ]] && . ~/.bash_aliases
+[[ -r ~/.bashrc-local ]] && . ~/.bashrc-local
