@@ -169,7 +169,6 @@
 
 [general]
   live_config_reload = true
-
-  import = ["~/.config/alacritty/themes/rose-pine.toml"]
+  import = ["~/.config/alacritty/themes/tokyonight-night.toml"]
 
 [terminal]
