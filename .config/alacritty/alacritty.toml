@@ -169,6 +169,7 @@
 
 [general]
   live_config_reload = true
-  import = ["~/.config/alacritty/themes/tokyonight-night.toml"]
+  #import = ["~/.config/alacritty/themes/tokyonight-night.toml"]
+  import = ["~/.config/alacritty/themes/monokai_pro.toml"]
 
 [terminal]
