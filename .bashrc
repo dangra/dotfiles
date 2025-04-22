@@ -49,7 +49,10 @@ alias ip='ip -color=auto'
 
 # find nvim, vim or vi
 _VI=$(type -p nvim || type -p vim || type -p vi)
-[[ -n $_VI ]] && alias vi=$_VI vim=$_VI
+if [[ -n $_VI ]]; then
+  export EDITOR=$_VI VISUAL=$_VI GIT_EDITOR=$_VI
+  alias vi=$_VI vim=$_VI
+fi
 unset _VI
 
 # prompt
