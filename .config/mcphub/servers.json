@@ -1,8 +1,9 @@
 {
   "mcpServers": {
     "flyio": {
-      "command": "/Users/daniel/.local/bin/fly",
+      "command": "/usr/bin/env",
       "args": [
+        "fly",
         "mcp",
         "server"
       ],
@@ -11,9 +12,7 @@
   },
   "nativeMCPServers": {
     "neovim": {
-      "disabled_tools": [
-        
-      ]
+      "disabled_tools": []
     }
   }
 }
