@@ -5,3 +5,9 @@
 vim.g.snacks_animate = false
 vim.o.clipboard = "unnamed,unnamedplus"
 vim.g.ai_cmp = false
+
+vim.filetype.add({
+  pattern = {
+    ["Caddyfile"] = "caddy",
+  },
+})
