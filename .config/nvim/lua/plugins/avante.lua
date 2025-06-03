@@ -7,9 +7,12 @@ return {
 
     opts = {
       provider = "copilot",
-      --copilot = { model = "claude-3.5-sonnet" },
-      copilot = { model = "claude-3.7-sonnet" },
-      --copilot = { model = "claude-3.7-sonnet-thought" },
+      providers = {
+        copilot = {
+          --model = "claude-3.7-sonnet-thought"
+          model = "claude-3.7-sonnet",
+        },
+      },
       hints = { enabled = false },
       file_selector = {
         provider = "snacks",
