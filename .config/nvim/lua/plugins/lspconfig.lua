@@ -27,6 +27,7 @@ return {
                 SpellCheck = false,
                 LongSentences = false,
                 SentenceCapitalization = false,
+                ToDoHyphen = false,
               },
             },
           },
