@@ -1,0 +1,16 @@
+# vim:ft=dosini
+[sqlfluff]
+dialect = sqlite
+max_line_length = 180
+
+[sqlfluff:indentation]
+tab_space_size = 2
+
+[sqlfluff:rules:aliasing.table]
+aliasing = implicit
+
+[sqlfluff:rules:aliasing.column]
+aliasing = implicit
+
+[sqlfluff:rules:references.qualification]
+ignore_words_regex = ^\d$
