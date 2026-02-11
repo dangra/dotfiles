@@ -1,9 +1,11 @@
 
 [font]
-  size = 16.0
+  size = 14.0
 
   [font.normal]
-    family = "Inconsolata Nerd Font"
+    #family = "Inconsolata Nerd Font"
+    #family = "Iosevka Nerd Font"
+    family = "FiraCode Nerd Font"
     #family = "Menlo"
     #family = "Iosevka Nerd Font"
 

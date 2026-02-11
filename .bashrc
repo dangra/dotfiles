@@ -58,6 +58,70 @@ unset _VI
 # prompt
 type -p starship >/dev/null && eval "$(starship init bash)"
 
+_oneletter_pwd() {
+  local DIRS=() ODIRS=() MAX=0 SHORTEDPATH=''
+  IFS=/ read -d '' -a DIRS <<<"${PWD/#$HOME/\~}"
+  MAX=$((${#DIRS[@]} - 2)) # show 2 complete names at the end of pwd
+
+  for i in ${!DIRS[@]}; do
+    if [[ $i -lt $MAX ]]; then
+      ODIRS[$i]=${DIRS[$i]:0:1}
+    else
+      ODIRS[$i]=${DIRS[$i]}
+    fi
+  done
+
+  for i in ${!ODIRS[@]}; do
+    SHORTEDPATH+=/${ODIRS[$i]}
+  done
+
+  echo "${SHORTEDPATH:1}"
+}
+
+_tmux_git_rename() {
+  # Only run inside tmux
+  [ -z "$TMUX" ] && return
+
+  local repo branch short_repo short_branch title
+
+  # Helper: shorten names by acronym if > 10 chars
+  _shorten() {
+    local s="$1"
+    if [ "${#s}" -gt 10 ]; then
+      echo "$s" |
+        tr '[:punct:]' ' ' |
+        tr '[:space:]' ' ' |
+        awk '{
+          out="";
+          for (i=1; i<=NF; i++) out = out substr($i,1,1);
+          print out
+        }'
+    else
+      echo "$s"
+    fi
+  }
+
+  # Try to detect git repo
+  repo=$(git rev-parse --show-toplevel 2>/dev/null | xargs basename)
+
+  if [ -n "$repo" ]; then
+    short_repo="$(_shorten "$repo")"
+
+    # Get branch (or detached)
+    branch=$(git symbolic-ref --short HEAD 2>/dev/null || echo "detached")
+    short_branch="$(_shorten "$branch")"
+
+    title="${short_repo}:${short_branch}"
+  else
+    # Fallback: your custom one-letter path
+    title=$(_oneletter_pwd)
+  fi
+
+  tmux rename-window "$title"
+}
+
+PROMPT_COMMAND="_tmux_git_rename; $PROMPT_COMMAND"
+
 # ssh session agnostic agent path
 if [[ -z "$SSH_AUTH_SOCK" && -S "/run/user/$(id -u)/gnupg/S.gpg-agent.ssh" ]]; then
   export SSH_AUTH_SOCK="/run/user/$(id -u)/gnupg/S.gpg-agent.ssh"

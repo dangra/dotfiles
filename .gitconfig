@@ -1,7 +1,7 @@
 [user]
 	name = Daniel Graña
 	email = dangra@gmail.com
-	signingkey = F86A39E8
+  signingkey = F86A39E8
 [color]
 	diff = auto
 	status = auto
@@ -9,7 +9,7 @@
 	showbranch = auto
 	grep = true
 [format]
-	signoff = true
+  signoff = true
 [color "diff"]
 	#func = magenta  # not supported by git <1.6
 	meta = yellow
@@ -29,9 +29,10 @@
 	default = current
 	autoSetupRemote = true
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
 	required = true
+	process = git-lfs filter-process
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	head = !git rev-parse \"$@\" HEAD
@@ -64,4 +65,4 @@
 [fetch]
 	prune = true
 [commit]
-	gpgsign = false
+  #gpgsign = true

@@ -4,3 +4,4 @@
 .cargo
 .config/vcsh/repo.d
 .rustup
+.claude

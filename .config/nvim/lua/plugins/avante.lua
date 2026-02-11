@@ -14,7 +14,7 @@ return {
       providers = {
         copilot = {
           --model = "claude-3.7-sonnet-thought"
-          model = "claude-3.7-sonnet",
+          --model = "claude-3.7-sonnet",
           --model = "gemini-2.5-pro",
           --model = "gpt-4.1",
           --model = "claude-sonnet-4",
