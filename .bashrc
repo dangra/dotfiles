@@ -102,7 +102,7 @@ _tmux_git_rename() {
   }
 
   # Try to detect git repo
-  repo=$(git rev-parse --show-toplevel 2>/dev/null | xargs basename)
+  repo=$(git rev-parse --show-toplevel 2>/dev/null | xargs -rL1 basename)
 
   if [ -n "$repo" ]; then
     short_repo="$(_shorten "$repo")"
