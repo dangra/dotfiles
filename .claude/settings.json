@@ -10,7 +10,7 @@
       "Bash(grep:*)",
       "Bash(make:*)",
       "Bash(prek:*)",
-      "Bash(rg:*)",
+      "Bash(rg:*)"
     ]
   }
 }
