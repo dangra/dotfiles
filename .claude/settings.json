@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(cat:*)",
+      "Bash(fly:*)",
+      "Bash(gh pr:*)",
+      "Bash(git:*)",
+      "Bash(go:*)",
+      "Bash(grep:*)",
+      "Bash(make:*)",
+      "Bash(prek:*)",
+      "Bash(rg:*)",
+    ]
+  }
+}
