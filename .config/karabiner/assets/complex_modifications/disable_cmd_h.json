@@ -1,0 +1,38 @@
+{
+  "title": "Custom Rules",
+  "rules": [
+    {
+      "description": "Disable accidental Cmd+H",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "h",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": []
+        }
+      ]
+    },
+    {
+      "description": "Map Caps Lock to Control",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "caps_lock"
+          },
+          "to": [
+            {
+              "key_code": "left_control"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

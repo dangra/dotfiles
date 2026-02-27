@@ -55,6 +55,43 @@ if [[ -n $_VI ]]; then
 fi
 unset _VI
 
+vim() {
+  local args=()
+
+  for arg in "$@"; do
+    # file:line:column
+    if [[ "$arg" =~ ^(.+):([0-9]+):([0-9]+)$ ]]; then
+      local file="${BASH_REMATCH[1]}"
+      local line="${BASH_REMATCH[2]}"
+      local col="${BASH_REMATCH[3]}"
+
+      args+=("$file" "+call cursor($line,$col)" "+normal! zz")
+
+    # file:line-start:end (range)
+    elif [[ "$arg" =~ ^(.+):([0-9]+)-([0-9]+)$ ]]; then
+      local file="${BASH_REMATCH[1]}"
+      local start="${BASH_REMATCH[2]}"
+      local end="${BASH_REMATCH[3]}"
+
+      args+=("$file" "+$start" "+normal! V$((end - start))j" "+normal! zz")
+
+    # file:line
+    elif [[ "$arg" =~ ^(.+):([0-9]+)$ ]]; then
+      local file="${BASH_REMATCH[1]}"
+      local line="${BASH_REMATCH[2]}"
+
+      args+=("$file" "+$line" "+normal! zz")
+
+    else
+      args+=("$arg")
+    fi
+  done
+
+  command nvim "${args[@]}"
+}
+
+nvim() { vim "$@"; }
+
 # prompt
 type -p starship >/dev/null && eval "$(starship init bash)"
 
