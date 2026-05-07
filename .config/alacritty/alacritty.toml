@@ -162,16 +162,18 @@
   save_to_clipboard = true
 
 [terminal.shell]
-  args = ["-lc", "exec tmux new"]
+  #args = ["-lc", "exec tmux new"]
   program = "bash"
 
 [window]
+  padding = { x = 2, y = 2 }
   decorations = "buttonless"
-  opacity = 0.95
+  opacity = 0.9
+  blur = true
 
 [general]
+  ipc_socket = true
   live_config_reload = true
-  #import = ["~/.config/alacritty/themes/tokyonight-night.toml"]
   import = ["~/.config/alacritty/themes/monokai_pro.toml"]
 
 [terminal]

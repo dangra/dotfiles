@@ -180,6 +180,8 @@ export ANDROID_SDK_ROOT=/home/daniel/Android/Sdk
 export GOPATH=~/go PATH=$PATH:~/go/bin
 ### Python Poetry
 export PATH="$HOME/.poetry/bin:$PATH"
+### ASDF version manager
+export PATH="${HOME}/.asdf/shims:$PATH"
 # ruby bundle
 #type -p ruby >/dev/null && export GEM_HOME=$(ruby -e 'puts Gem.user_dir')
 # Google Cloud SDK

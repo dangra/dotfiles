@@ -1,32 +1,26 @@
 return {
   {
     "olimorris/codecompanion.nvim",
+    version = "^19.0.0",
+    opts = {},
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
     },
+  },
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    ft = { "markdown", "codecompanion" },
+  },
+  {
+    "HakonHarnes/img-clip.nvim",
     opts = {
-      extensions = {
-        mcphub = {
-          callback = "mcphub.extensions.codecompanion",
-          opts = {
-            show_result_in_chat = true, -- Show mcp tool results in chat
-            make_vars = true, -- Convert resources to #variables
-            make_slash_commands = true, -- Add prompts as /slash commands
-          },
+      filetypes = {
+        codecompanion = {
+          prompt_for_file_name = false,
+          template = "[Image]($FILE_PATH)",
+          use_absolute_path = true,
         },
-      },
-      adapters = {
-        copilot = function()
-          return require("codecompanion.adapters").extend("copilot", {
-            name = "copilot",
-            schema = {
-              model = {
-                default = "claude-3.7-sonnet",
-              },
-            },
-          })
-        end,
       },
     },
   },

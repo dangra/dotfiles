@@ -14,11 +14,11 @@ return {
       servers = {
         ruby_lsp = {
           mason = false,
-          cmd = { vim.fn.expand("~/.rbenv/shims/ruby-lsp") },
+          --cmd = { vim.fn.expand("~/.rbenv/shims/ruby-lsp") },
         },
         rubocop = {
           mason = false,
-          cmd = { vim.fn.expand("~/.rbenv/shims/rubocop") },
+          --cmd = { vim.fn.expand("~/.rbenv/shims/rubocop") },
         },
         harper_ls = {
           settings = {

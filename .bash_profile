@@ -9,8 +9,7 @@
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-# Added by `rbenv init` on Thu Jan 16 06:17:24 PM -03 2025
-eval "$(rbenv init - --no-rehash bash)"
+type -p rbenv >/dev/null && eval "$(rbenv init - --no-rehash bash)"
 
-# Added by Antigravity
-export PATH="/Users/daniel/.antigravity/antigravity/bin:$PATH"
+[[ -d ~/.antigravity/antigravity/bin ]] && export PATH="~/.antigravity/antigravity/bin:$PATH"
+[[ -d ~/.bun ]] && export BUN_INSTALL="$HOME/.bun" PATH="~/.bun/bin:$PATH"

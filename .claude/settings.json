@@ -12,5 +12,8 @@
       "Bash(prek:*)",
       "Bash(rg:*)"
     ]
+  },
+  "enabledPlugins": {
+    "gopls-lsp@claude-plugins-official": true
   }
 }
